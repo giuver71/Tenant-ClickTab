@@ -1,0 +1,12 @@
+<div class="csv-import-export" *ngIf="entityTypeName">
+
+  <button [disabled]="isDisabled" [ngClass]="{'btn mat-raised-button btn-primary': showRaisedButton == true }" 
+          mat-button matTooltip="{{ mainTooltip }}" [matMenuTriggerFor]="menu"><mat-icon>cloud</mat-icon>{{ mainLabel }}</button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="csvDownload()"><mat-icon>cloud_download</mat-icon><span>{{ exportLabel }}</span></button>
+    <button mat-menu-item (click)="CSVfileInput.click()"><mat-icon>cloud_upload</mat-icon><span>{{ importLabel }}</span></button>
+  </mat-menu>    
+
+  <input type="file" name="fileToImport" id="fileToImport" accept=".csv,.xls,.xlsx" (change)="csvImport($event)" [style.display]="'none'" #CSVfileInput>
+
+</div>

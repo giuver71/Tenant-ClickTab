@@ -1,0 +1,12 @@
+{
+  "Tenants": {
+    "cliente1": {
+      "ConnectionString": "Data Source=w81;Initial Catalog=ClickTABDev1;User ID=sa;Password=71c12d086;MultipleActiveResultSets=true;Connection Timeout=600",
+      "Provider": "1"
+    },
+    "cliente2": {
+      "ConnectionString": "Data Source=w81;Initial Catalog=ClickTABDev2;User ID=sa;Password=71c12d086;MultipleActiveResultSets=true;Connection Timeout=600",
+      "Provider": "1"
+    }
+  }
+}

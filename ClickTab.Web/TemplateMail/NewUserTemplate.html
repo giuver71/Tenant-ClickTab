@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="it" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        body {
+            font-family: sans-serif;
+            font-size: 12pt;
+            text-align: center;
+        }
+
+        .pb-3 {
+            padding-bottom: 3em
+        }
+
+        .footer {
+            background: #2e2e6b;
+            text-align: center;
+            color: white;
+            padding: 2em
+        }
+
+        img {
+            width: 300px;
+            height: 300px;
+            padding-bottom: 1em;
+        }
+    </style>
+</head>
+<body>
+    <!-- Si consiglia di usare immagini rettangolari con altezza di 300px -->
+    <img src="cid:##IMAGE_URL##" height="300">
+
+    <p>
+        Gentile <b>##USER_NAME## ##USER_SURNAME##</b>,<br />
+        benvenuto sul portale <a href="##PORTAL_URL##">##PORTAL_NAME##</a>.
+    </p>
+
+    <p>
+        Può accedere al sistema usando le seguenti credenziali che le sono state riservate:<br /><br />
+        <b>Email:</b> ##USER_EMAIL##<br />
+        <b>Password:</b> ##USER_PASSWORD##<br />
+    </p>
+
+    <small>
+        <em>Attenzione: non rispondere a questa e-mail. Il messaggio è stato generato automaticamente.</em>
+    </small>
+
+    <p class="footer">
+        <span>##PORTAL_NAME## © 2021 | </span>
+        <span>Powered by EqProject</span>
+    </p>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!--LOGIN-->
+<div class="login">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 mx-auto">
+        <div class="card-group">
+          <div class="card p-4">
+            <div class="card-body">
+              <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+
+                  <!--ILLUSTRAZIONE BACKGROUND-->
+                  <div class="col-md-6 d-flex pr-4">
+                    <img class="full-width" style="display:table-cell"
+                      src="../../../assets/img/backgrounds/LogoClickTab.jpg" />
+                  </div>
+
+                  <div class="col-md-6">
+                    <!--LOGO E TITOLO-->
+                    <div class="logo text-center">
+                      <!--<img src="../../../assets/img/brand/logo.svg" alt="logo">-->
+                      <h4><b>Ciao!</b></h4>
+                      <p>Accedi per continuare.</p>
+                    </div>
+
+                    <mat-form-field>
+                      <mat-label>Tenant</mat-label>
+                      <input id="tenant" type="tenant" required matInput formControlName="tenant"
+                      >
+                      <i matPrefix class="fa fa-disk"></i>
+                    </mat-form-field>
+
+
+                    <!--E-MAIL-->
+                    <mat-form-field>
+                      <mat-label>E-mail</mat-label>
+                      <input id="email" type="email" required matInput formControlName="email"
+                        [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                      <i matPrefix class="fa fa-user"></i>
+                    </mat-form-field>
+                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                      <div *ngIf="f.email.errors.required">Inserici l'e-mail</div>
+                    </div>
+
+                    <!--PASSWORD-->
+                    <mat-form-field>
+                      <mat-label>Password</mat-label>
+                      <input id="password" type="password" required matInput formControlName="password"
+                        [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+                      <i matPrefix class="fa fa-lock"></i>
+                    </mat-form-field>
+                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                      <div *ngIf="f.password.errors.required">Inserisci la password</div>
+                    </div>
+
+                    <!--RICORDAMI-->
+                    <div class="text-left">
+                      <mat-checkbox [color]="'primary'" name="remember" formControlName="remember"></mat-checkbox>
+                      <span style="color: black;">Ricordami</span>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-12 mt-2">
+                        <!--ACCEDI-->
+                        <button type="submit" class="btn btn-primary btn-block px-4" [disabled]="loginForm.invalid">
+                          Login
+                        </button>
+
+                        <!--PASSWORD DIMENTICATA-->
+                        <div class="text-right">
+                          <button type="button" [routerLink]="['/forgot']" class="btn btn-link px-0">Password
+                            dimenticata?</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

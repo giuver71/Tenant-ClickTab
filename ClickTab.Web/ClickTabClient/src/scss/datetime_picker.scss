@@ -1,0 +1,58 @@
+////////////
+//// Gestione DatePicker e DataTimePicker
+////////////
+
+
+// Gestione Custom DatePicker (per renderlo simile al Datepicker di Material)
+.customPicker {
+    /*TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
+    .mat-form-field-infix {
+      display: flex;
+      padding-top: 0;
+      padding-bottom: 4px;
+      top: 1px;
+    }
+    .mat-icon {
+      cursor: pointer;
+    }
+  }
+
+  // Gestione Custome TimePicker (per renderlo simile al Template di HSE)
+
+  .timepickerClass {
+    .timepicker__header {
+      background-color: $primary-color !important;
+    }
+    .clock-face__number > span.active  {
+      background-color: $primary-color !important;
+    }
+    .clock-face__clock-hand {
+      background-color: $primary-color !important;
+    }
+    .timepicker-dial__control_editable:focus {
+      color: $primary-color !important;
+      outline: $primary-color !important;
+    }
+
+    /* Non è stato possibile definire una variabile per il colore: inserendo $primary-color davanti a prorietà con --
+    questa non viene tradotta nel codice colore */
+
+    --clock-hand-color: #7665b8 !important;
+
+    .btn {
+      margin-right: 10px;
+      .mat-icon {
+        position: relative;
+        top: -3px;
+        left: -2px;
+        &.icon-cancel {
+          color: $primary-color;
+          font-size: 31px !important;
+        }
+        &.icon-ok {
+          color: $primary-color;
+          font-size: 31px !important;
+        }
+      }
+    }
+  }

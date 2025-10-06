@@ -1,0 +1,23 @@
+<form [formGroup]="formGroupInput">
+    <mat-form-field [floatLabel]="mlPlaceholderType">
+        <mat-label >{{ labelTranslateKey | translate }}</mat-label>
+        <input  matInput *ngIf="isTextArea == false"
+                [formControlName]="formControlNameInput"  
+                [(ngModel)]="ngModelInput" 
+                [required]="isRequired" 
+                [readonly]="isReadonly" 
+                [disabled]="isDisabled" 
+                [placeholder]="mlPlaceholder"
+                (change)="inputChanged($event)">
+
+
+        <textarea *ngIf="isTextArea == true"
+                [(ngModel)]="ngModelInput" rows="3" matInput
+                [placeholder]="mlPlaceholder"
+                [required]="isRequired" 
+                [readonly]="isReadonly" 
+                [disabled]="isDisabled" 
+                (change)="inputChanged($event)"
+                [formControlName]="formControlNameInput"></textarea>
+    </mat-form-field>
+</form>

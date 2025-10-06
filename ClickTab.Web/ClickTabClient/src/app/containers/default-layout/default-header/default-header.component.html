@@ -1,0 +1,111 @@
+<ng-container>
+  <eqp-container [fluid]="true">
+    <button toggle="visible" class="ps-1 header-toggler" [eqpSidebarToggle]="sidebarId">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list"
+        viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+          d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+      </svg>
+    </button>
+    <div class="d-none d-lg-flex me-auto">
+    </div>
+
+    <div class="d-lg-flex">
+      <ng-container *ngTemplateOutlet="notificationDropdown"></ng-container>
+    </div>
+    <div class="ms-3">
+      <ng-container *ngTemplateOutlet="userDropdown"></ng-container>
+    </div>
+
+  </eqp-container>
+  <div class="header-divider"></div>
+  <eqp-container [fluid]="true">
+    <eqp-breadcrumb-router class="ms-2"></eqp-breadcrumb-router>
+  </eqp-container>
+</ng-container>
+
+<ng-template #userDropdown>
+  <a style="text-decoration:none" matMenuTrigger [matMenuTriggerFor]="userMenu">
+    <ngx-avatars class="my-avatar pointer p-0" [size]="40" name="{{ currentUser?.Name + ' ' + currentUser?.Surname }}"
+      [round]="true" cornerRadius="30"></ngx-avatars>
+  </a>
+
+  <mat-menu #userMenu="matMenu">
+    <ng-container>
+      <div class="dropdown-header text-center"><strong>Impostazioni</strong></div>
+      <button mat-menu-item (click)="viewProfile()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person"
+          viewBox="0 0 16 16">
+          <path
+            d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004eqp-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10eqp-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664z" />
+        </svg>
+        Profilo
+      </button>
+      <button mat-menu-item (click)="logout()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock"
+          viewBox="0 0 16 16">
+          <path
+            d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2m3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2M5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1" />
+        </svg>
+        Logout
+      </button>
+    </ng-container>
+  </mat-menu>
+</ng-template>
+
+<ng-template #notificationDropdown>
+  <a style="cursor: pointer;" matMenuTrigger [matMenuTriggerFor]="notificationMenu">
+    <i style="font-size: 25px;" class="far fa-bell"></i>
+    <span class="notificationBadge badge badge-info" *ngIf="notificationCount > 0">{{ notificationCount }}</span>
+  </a>
+  <mat-menu class="notification-dropdown" #notificationMenu="matMenu">
+    <button class="text-center" mat-menu-item disabled>
+      <strong>Elenco notifiche</strong>
+      <!-- <strong>{{ 'MAIN.NOTIFICATIONS' | translate }}</strong> -->
+    </button>
+    <button mat-menu-item *ngFor="let notification of notificationList"
+      (click)="$event.stopPropagation(); readNotification(notification)">
+      <mat-icon class="notification-icon" *ngIf="!notification.ReadDate">lens</mat-icon>
+      <span>
+        {{ notification.Notification.Title }}
+        <!-- {{ notification.Notification.TitleTranslationKey | translate }} -->
+      </span>
+    </button>
+    <button class="text-center" mat-menu-item (click)="goToNotificationList()">
+      <strong>Mostra tutto...</strong>
+      <!-- <strong>{{ 'GENERIC_LABEL.SHOW_ALL' | translate }}</strong> -->
+    </button>
+  </mat-menu>
+</ng-template>
+
+<!-- DIALOG VISUALIZZAZIONE NOTIFICA -->
+<ng-template #dialogViewNotification>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12 col-md-8">
+        <div class="header-title-standard">
+          {{ selectedNotification.Notification.Title }}
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-4 text-right">
+        {{ selectedNotification.SendDate | date:'dd/MM/yyyy'}}
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-sm-12">
+        <div
+          [innerHTML]="selectedNotification.Notification.CompleteMessage || selectedNotification.Notification.Message">
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-sm-12 text-right">
+        <button class="btn btn-primary mat-raised-button" mat-dialog-close>
+          Esci
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-template>

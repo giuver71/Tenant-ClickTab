@@ -1,0 +1,8 @@
+{
+  "configProperties": {
+    "ConnectionConfig": {
+      "MySQL": "",
+      "MSSQL": "Data Source=w81;Initial Catalog=ClickTabDev;User ID=sa;Password=71c12d086;MultipleActiveResultSets=true;Connection Timeout=600"
+    }
+  }
+}

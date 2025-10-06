@@ -1,0 +1,28 @@
+.login {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .card {
+    box-shadow: 6px 7px 10px rgba(0, 0, 0, 0.3);
+    border: 0px solid #c8ced3;
+    border-radius: 1.25rem;
+  }
+
+  .logo img {
+    width: 50%;
+  }
+}
+
+.mat-mdc-form-field {
+  margin-left: 0 !important;
+}
+
+:host {
+  #select-language ::ng-deep {
+    .mat-mdc-form-field {
+      margin-left: 0 !important;
+    }
+  }
+}

@@ -1,0 +1,25 @@
+<!--ERROR 404-->
+<div id="error" class="app flex-row align-items-center">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="clearfix text-center">
+
+          <!--TITOLO-->
+          <h4><b>404 Message</b></h4>
+          <p>La pagina che stai cercando non è stata trovata.<br />Ritorna alla Dashboard.</p>
+
+          <!--TORNA ALLA DASHBOARD-->
+          <button [routerLink]="'/'" type="submit" class="btn btn-primary px-4">
+            Dashboard
+          </button>
+
+          <!--ILLUSTRAZIONE BACKGROUND-->
+          <div class="mt-5">
+            <img class="full-width" src="../../../assets/img/backgrounds/error404.svg" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

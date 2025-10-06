@@ -1,0 +1,49 @@
+<mat-card appearance="outlined">
+    <mat-card-header>
+        <div class="col-md-9">
+            <div class="header-title-standard text-nowrap">
+                Elenco notifiche ricevute
+            </div>
+        </div>
+        <div class="col-md-3 text-right">
+            <button class="btn btn-primary mr-4" type="button" (click)="allNotifiesAsRead()">Segna tutte come lette</button>
+        </div>
+    </mat-card-header>
+
+    <mat-card-content>
+        <eqp-table style="width:100%" [createMatCard]="false" #table [createMatCardHeader]="false" [columns]="columns"
+            [data]="notificationList" emptyTableMessage="Nessun record presente" class="notification-table">
+        </eqp-table>
+    </mat-card-content>
+</mat-card>
+
+
+<!-- DIALOG VISUALIZZAZIONE NOTIFICA -->
+<ng-template #dialogViewNotification>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-md-8">
+                <div class="header-title-standard">
+                    {{ selectedNotification.Notification.Title }}
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4 text-right">
+                {{ selectedNotification.SendDate | date:'dd/MM/yyyy' }}
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-sm-12">
+                <p [innerHTML]="selectedNotification.Notification.CompleteMessage"></p>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-sm-12 text-right">
+                <button class="btn btn-primary mat-raised-button" mat-dialog-close>
+                    Esci
+                </button>
+            </div>
+        </div>
+    </div>
+</ng-template>

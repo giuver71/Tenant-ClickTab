@@ -1,0 +1,166 @@
+@import "../scss/_fixtemplate.scss";
+// @import "@fortawesome/fontawesome-free/css/all.min.css";
+@import "@ng-select/ng-select/themes/material.theme.css";
+@import "../scss/datetime_picker.scss";
+@import "../scss/mat-table.scss";
+
+// Import bootstrap e ngx-toastr
+@import "bootstrap/scss/_functions";
+@import "bootstrap/scss/_variables";
+@import "bootstrap/scss/_mixins";
+@import "ngx-toastr/toastr-bs5-alert";
+
+.notificationBadge {
+  background-color: red;
+  color: white;
+  position: absolute;
+  font-size: 10px;
+  bottom: 25px;
+  left: 15px;
+  width: 24px;
+  margin: 0 auto;
+  height: 14px;
+}
+
+ngx-masonry .grid-item {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.timepicker-backdrop-overlay {
+  z-index: 1001 !important;
+}
+
+.lookup-add-button {
+  cursor: pointer !important;
+  padding-left: 5px !important;
+  align-self: flex-end !important;
+  position: relative !important;
+  bottom: 6px !important;
+}
+
+// Here you can add other styles
+.pointer {
+  cursor: pointer;
+}
+
+.full-width {
+  width: 100%;
+}
+
+// Per Hyperlink breadcrumb
+a {
+  color: $mat-primary-color;
+}
+
+//Classi con le variabili legate ai colori principali del tema
+.background-color-primary {
+  background-color: $mat-primary-color;
+}
+
+.background-color-secondary {
+  background-color: $mat-secondary-color;
+}
+
+.color-primary {
+  color: $mat-primary-color;
+}
+
+.btn-primary {
+  color: #fff !important;
+  background-color: $mat-primary-color !important;
+  border-color: $mat-primary-color !important;
+}
+
+.btn-link {
+  color: $primary-color;
+}
+
+.notification-icon {
+  color: red !important;
+}
+
+//Definizione dello standard del testo nel mat header title
+.header-title-standard {
+  font-weight: bold;
+  font-size: 19px;
+  line-height: 24px;
+  margin-bottom: auto;
+}
+
+/* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version.*/
+mat-card-footer {
+  padding: 10px;
+}
+
+//Rewrap globale del colore e grandezza per le icone di fontawesome
+.fa {
+  color: $mat-primary-color;
+  font-size: 19px !important;
+}
+
+/* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version.*/
+mat-card {
+  margin-bottom: 1.5rem;
+  // min-height: 500px;
+}
+
+.mat-mdc-raised-button.mat-accent:focus {
+  outline: transparent;
+}
+
+.warning-color {
+  color: $warning-color !important;
+}
+
+.error-color {
+  color: $error-color !important;
+}
+
+.success-color {
+  color: $success-color !important;
+}
+
+.mat-tree-node:hover {
+  background-color: #e4e5e6 !important;
+  border-radius: 5px !important;
+}
+
+.mat-tree button:focus {
+  outline: 0px auto -webkit-focus-ring-color;
+}
+
+/*INIZIO STILE LOOKUP*/
+mat-form-field {
+  width: 100%;
+  margin: 10px 0px;
+  letter-spacing: 0px !important;
+}
+
+.ng-select.mat-mdc-form-field {
+  width: 100%;
+  letter-spacing: 0px;
+  padding-top: 0px !important;
+}
+
+.ng-select .ng-select-container {
+  min-height: 49px !important;
+}
+
+.ng-select.ng-select-single .ng-select-container .ng-value-container,
+.ng-select.ng-select-single .ng-select-container .ng-value-container .ng-value {
+  overflow: visible !important;
+}
+
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
+.mat-form-field-prefix,
+.mat-form-field-suffix {
+  margin: 5px !important;
+}
+
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
+.mat-form-field-appearance-legacy .mat-form-field-infix {
+  padding: 0.3em 0 !important;
+}
+
+/*FINE STILE LOOKUP*/

@@ -1,0 +1,50 @@
+<form *ngIf="formGroupInput && formControlNameInput" [formGroup]="formGroupInput">
+        <mat-form-field>
+            <div class="toggle-example">
+              <!-- TODO: era presente i nell'input name -->
+                <input matInput placeholder="{{placeholder}}"
+                    [name]="''"
+                    [required]="isRequired"
+                    [readonly]="isDisabled == true || isReadonly == true"
+                    [disableClick]="isDisabled == true"
+                    [disabled]="isDisabled == true"
+                    [(ngModel)]="ngModelInput"
+                    [formControlName]="formControlNameInput"
+                    [ngxTimepicker]="timePicker"
+                    [min]="min"
+                    [format]="format" readonly>
+                <ngx-material-timepicker (timeSet)="timePickerSelectionChanged($event)" #timePicker [enableKeyboardInput]="true" [timepickerClass]="'timepickerClass'"
+                                         [cancelBtnTmpl]="cancelBtnTmpl" [confirmBtnTmpl]="confirmBtnTmpl">
+                </ngx-material-timepicker>
+            </div>
+        </mat-form-field>
+</form>
+
+<mat-form-field *ngIf="!formGroupInput && !formControlNameInput">
+    <div class="toggle-example">
+        <input matInput placeholder="{{placeholder}}"
+            [required]="isRequired"
+            [readonly]="isReadonly"
+            [disableClick]="isDisabled == true"
+            [disabled]="isDisabled == true"
+            [readonly]="isDisabled == true || isReadonly == true"
+            [(ngModel)]="ngModelInput"
+            [ngxTimepicker]="timePicker"
+            [min]="min"
+            [format]="format" readonly>
+        <ngx-material-timepicker #timePicker (timeSet)="timePickerSelectionChanged($event)" [enableKeyboardInput]="true" [timepickerClass]="'timepickerClass'"
+                                 [cancelBtnTmpl]="cancelBtnTmpl" [confirmBtnTmpl]="confirmBtnTmpl">
+        </ngx-material-timepicker>
+    </div>
+</mat-form-field>
+
+<ng-template #cancelBtnTmpl>
+    <button class="btn mb-4" mat-raised-button type="button">
+        <mat-icon class="icon-cancel">cancel_presentation</mat-icon>
+    </button>
+</ng-template>
+<ng-template #confirmBtnTmpl>
+    <button class="btn mb-4" mat-raised-button type="button">
+        <mat-icon class="icon-ok">check_circle</mat-icon>
+    </button>
+</ng-template>

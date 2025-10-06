@@ -1,0 +1,118 @@
+  /*
+  Allineamento EQP-Lookup con altri elementi della pagina
+  */
+
+  ng-select .ng-placeholder {
+    top: 25px;
+  }
+  
+  ng-select .ng-select-container.ng-has-value .ng-placeholder {
+    top: 30px;
+  }
+  
+  ng-select .ng-select-container.ng-has-value .ng-value-container .ng-value {
+    top: 9px;
+    position: relative;
+  }
+  
+  eqp-lookup {
+    margin-top: 2px;
+  }
+  
+  app-header button:last-child {
+    display: none !important;
+  }
+  
+  /*
+  Fix EQP-Lookup sulle Mat-Tab
+  */
+  
+  /*
+  TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version.
+  */
+  mat-tab-group.contains-lookup .mat-tab-body-wrapper, .mat-tab-body-content {
+    overflow: visible !important;
+  }
+  
+  /*
+  TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version.
+  */
+  mat-tab-group.contains-lookup .mat-mdc-tab-body {
+    overflow: hidden !important;
+  }
+  
+  /*
+  TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version.
+  */
+  mat-tab-group.contains-lookup .mat-tab-body-active {
+    overflow: visible !important;
+  }
+  
+  /*
+  TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version.
+  */
+  mat-tab-group.contains-lookup .overflow-hidden {
+    overflow: hidden !important;
+  }
+  
+  /*
+  Fix EQP-Lookup sulle Mat-DataTable
+  */
+  
+  mat-cell.contains-lookup {
+    overflow: visible !important;
+  }
+  
+  /*
+  Fix EQP-Lookup sulle Mat-Card
+  */
+  
+  /*
+  TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version.
+  */
+  mat-card.contains-lookup {
+    overflow: visible !important;
+  }
+  
+  /*
+  Fix EQP-Lookup sulle Mat-Dialog
+  */
+  
+  .contains-lookup mat-dialog-container {
+    overflow: visible !important;
+  }
+  
+  @media (max-width: 991px) {
+  
+    /*
+    Fix Navbar su Resize
+    */
+  
+    app-header a img.navbar-brand-full {
+      display: none !important;
+    }
+    .brand-minimized .app-header .navbar-brand .navbar-brand-minimized {
+      display: block !important;
+    }  
+    .header-fixed .app-header {
+      position: fixed !important;
+      z-index: 1020 !important;
+      width: 100% !important;
+    }  
+    .app-header {
+      flex-flow: row-reverse;
+    }
+    .app-header a.navbar-brand {
+      position: initial;
+      top: initial;
+      left: initial;
+      margin-left: initial;
+      width: 50px !important;
+      background-color: transparent !important;
+      order: 2;
+    }    
+    .app-header button.navbar-toggler {
+      order: 1;
+    }   
+  }
+  

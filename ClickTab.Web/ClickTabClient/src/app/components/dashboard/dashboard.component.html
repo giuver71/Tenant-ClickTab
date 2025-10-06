@@ -1,0 +1,16 @@
+<div class="row" style="margin-top: 20px;">
+  <div class="col-11" style="margin: auto;">
+    <eqp-dynamic-filters [filtersConfig]="filters" [saveFilter]="false" [useInitialValueOnReset]="true"
+      [saveFilterID]="'provaFiltri'" (filtersSelected)="filtersSelected($event)" [usingMode]="1" [resultType]="2"
+      [applyOnInit]="true"></eqp-dynamic-filters>
+  </div>
+</div>
+
+<eqp-dashboard [configs]="chartConfigs" hideTooltipLabel="Nascondi" showTooltipLabel="Mostra"
+  resizeTooltipLabel="Ridimensiona widget" showAllHiddenItemsLabel="Mostra tutti gli elementi nascosti"
+  showListHiddenItemsLabel="Mostra elenco elementi nascosti" [showSpinnerLabel]="false" settingsLabel="Impostazioni"
+  smallLabel="Piccolo" mediumLabel="Medio" LargeLabel="Grande" hiddenWidgetModalTitle="Elenco elementi nascosti"
+  dashboardSettingsLabel="Impostazioni Dashboard" RechargeLabel="Ricarica"></eqp-dashboard>
+
+
+<eqp-lookup [entityType]="'User'" [genericAddComponent]="{ componentSelector: testComponent, disableRedirectAfterSave: true}"></eqp-lookup>

@@ -1,0 +1,22 @@
+<div class="container">
+  <eqp-table [createMatCardHeader]="true" headerTitle="Utenti" [columns]="columns" [data]="data">
+  </eqp-table>
+
+  <form [formGroup]="formGroupExample">
+    <eqp-select #select [formControlNameInput]="'select2'" [formGroupInput]="formGroupExample"
+      [arrayData]="companyTypes" [arrayKeyProperty]="'id'" [arrayValueProperty]="'login'"
+      [(ngModelInput)]="currentCompany2" [isRequired]="false" [placeholder]="'Mat Select Test'" [isDisabled]="true">
+    </eqp-select>
+    <eqp-select [enumData]="genderEnum" [(ngModelInput)]="currentCompany2" [placeholder]="'Mat Select Test'">
+    </eqp-select>
+    <button [disabled]="formGroupExample.invalid" type="submit">Submit</button>
+  </form>
+
+
+  <div class="row mt-5">
+    <div class="col-md-3">
+      <!-- <eqp-datetimerangepicker [disabled]="false" [isRequired]="false" [type]="pickerModeEnum.TIME"
+        [showSpinners]="true" [timeType]="timeTypeEnum.DATE" [(ngModelInput)]="selectedTime" [showButtons]="true"
+        [showSeconds]="true"></eqp-datetimerangepicker> -->
+    </div>
+  </div>

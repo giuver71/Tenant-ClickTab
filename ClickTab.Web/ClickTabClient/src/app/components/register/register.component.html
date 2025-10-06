@@ -1,0 +1,68 @@
+<div class="register bg-success">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <div class="card mx-4">
+          <div class="card-body p-4">
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+              <!--LOGO-->
+              <div class="logo text-center">
+                <img src="../../../assets/img/brand/logo.svg" alt="">
+                <!-- <img src="../../../assets/img/brand/logo.png" alt=""> -->
+              </div>
+
+              <!--NOME-->
+              <div class="input-group mb-3 mt-5">
+                <input type="text" class="form-control" placeholder="Nome" id="name" formControlName="name" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+                <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                  <div *ngIf="f.name.errors.required">Inserici il nome</div>
+                </div>
+              </div>
+
+              <!--COGNOME-->
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Cognome" id="surname" formControlName="surname" [ngClass]="{ 'is-invalid': submitted && f.surname.errors }">
+                <div *ngIf="submitted && f.surname.errors" class="invalid-feedback">
+                  <div *ngIf="f.surname.errors.required">Inserici il cognome</div>
+                </div>
+              </div>
+
+              <!--EMAIL-->
+              <div class="input-group mb-3">
+                <input type="email" class="form-control" placeholder="Email" id="email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                  <div *ngIf="f.email.errors.required">Inserici l'e-mail</div>
+                </div>
+              </div>
+
+              <!--PASSWORD-->
+              <div class="input-group mb-3">
+                <input type="password" class="form-control" placeholder="Password" id="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                  <div *ngIf="f.password.errors.required">Inserici la password</div>
+                </div>
+              </div>
+
+              <!--RIPETI PASSWORD-->
+              <div class="input-group mb-4">
+                <input type="password" class="form-control" placeholder="Ripeti password" id="repeatPassword" formControlName="repeatPassword"
+                [ngClass]="{ 'is-invalid': submitted && f.repeatPassword.errors }">
+                  <div *ngIf="submitted && f.repeatPassword.errors" class="invalid-feedback">
+                    <div *ngIf="f.repeatPassword.errors.required">Inserici la password</div>
+                  </div>
+              </div>
+
+              <!--CREA ACCOUNT-->
+              <button type="submit" class="btn btn-block btn-success text-uppercase mt-5">Crea Account</button>
+              
+              <!--ACCEDI-->
+              <div class="text-center">
+                <button [routerLink]="['/login']" type="button" class="btn btn-link">Hai già un account? Accedi</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

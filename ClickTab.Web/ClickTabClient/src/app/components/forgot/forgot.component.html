@@ -1,0 +1,58 @@
+<!--PASSWORD DIMENTICATA-->
+<div class="forgot-password">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 mx-auto">
+        <div class="card-group">
+          <div class="card p-4">
+            <div class="card-body">
+              <form [formGroup]="forgotForm" (ngSubmit)="onSubmit()">
+
+                <div class="row">
+                  <div class="col-md-6 d-flex pr-4">
+                    <!--ILLUSTRAZIONE BACKGROUND-->
+                    <img class="full-width" style="display:table-cell" src="../../../assets/img/backgrounds/forgot-password.svg" />
+                  </div>
+
+                  <div class="col-md-6">
+                    <!--LOGO-->
+                    <div class="logo text-center">
+                      <!--<img src="../../../assets/img/brand/logo.svg" alt="logo">-->
+                      <h4><b>EQP</b></h4>
+                      <p>Inserisci la tua e-mail per recuperare la password.</p>
+                    </div>
+
+                    <!--EMAIL PER RECUPERARE LA PASSWORD-->
+                    <mat-form-field>
+                      <mat-label>E-mail</mat-label>
+                      <input id="email" type="email" required matInput formControlName="email"
+                             [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                      <i matPrefix class="fa fa-envelope"></i>
+                    </mat-form-field>
+                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                      <div *ngIf="f.email.errors.required">Inserici l'e-mail</div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-12 mt-4">
+                        <!--INVIA PASSWORD-->
+                        <button type="submit" class="btn btn-primary btn-block px-4">
+                          Continua
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!--TORNA INDIETRO-->
+                  <div class="col-md-12 mt-5">
+                    <p>Torna indietro e <a [routerLink]="'/login'">Accedi</a>.</p>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
