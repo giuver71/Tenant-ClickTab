@@ -3,6 +3,7 @@ using ClickTab.Core.DAL.Context.EntityConfigurations.NotificationCenter;
 using ClickTab.Core.DAL.Models.Generics;
 using ClickTab.Core.DAL.Models.NotificationCenter;
 using ClickTab.Core.HelperService;
+using ClickTab.Core.DAL.Models.Generics;
 using EQP.EFRepository.Core.Interface;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -60,8 +61,12 @@ namespace ClickTab.Core.DAL.Context
 
         #region DBSET
         // <ewz:dbset>
+        #region GENERICS
         public DbSet<User> Users { get; set; }
         public DbSet<UrlToken> UrlTokens { get; set; }
+        public DbSet<Menu> Menu { get; set; }
+        public DbSet<UpdateXls> UpdateXls { get; set; }
+        #endregion
 
         #region NotificationCenter
         public DbSet<Notification> Notifications { get; set; }
@@ -120,9 +125,12 @@ namespace ClickTab.Core.DAL.Context
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            #region GENERICS
             modelBuilder.ApplyConfiguration(new UserConfigurations());
             modelBuilder.ApplyConfiguration(new UrlTokenConfigurations());
+            modelBuilder.ApplyConfiguration(new MenuConfigurations());
+            modelBuilder.ApplyConfiguration(new UpdateXlsConfigurations());
+            #endregion
 
             #region FluentAPI per entità NotificationCenter
             modelBuilder.ApplyConfiguration(new NotificationConfigurations());

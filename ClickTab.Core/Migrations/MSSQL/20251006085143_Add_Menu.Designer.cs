@@ -4,6 +4,7 @@ using ClickTab.Core.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClickTab.Core.Migrations.MSSQL
 {
     [DbContext(typeof(MSSQL_DbContext))]
-    partial class MSSQL_DbContextModelSnapshot : ModelSnapshot
+    [Migration("20251006085143_Add_Menu")]
+    partial class Add_Menu
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,109 +24,6 @@ namespace ClickTab.Core.Migrations.MSSQL
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("ClickTab.Core.DAL.Models.Generics.Menu", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<string>("ClientCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("FK_DeletedUser")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FK_InsertUser")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("FK_Parent")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FK_UpdateUser")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Icon")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("InsertDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Label")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Order")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SystemRole")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("UpdateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Url")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("isExternalPage")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("normallyHaveChildren")
-                        .HasColumnType("bit");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("FK_Parent");
-
-                    b.ToTable("Menu");
-                });
-
-            modelBuilder.Entity("ClickTab.Core.DAL.Models.Generics.UpdateXls", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<int>("FK_InsertUser")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FK_UpdateUser")
-                        .HasColumnType("int");
-
-                    b.Property<string>("FileName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Hash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("InsertDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("LastUpdate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("UpdateDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("FileName")
-                        .IsUnique();
-
-                    b.ToTable("UpdateXls");
-                });
 
             modelBuilder.Entity("ClickTab.Core.DAL.Models.Generics.UrlToken", b =>
                 {
@@ -267,12 +167,67 @@ namespace ClickTab.Core.Migrations.MSSQL
 
             modelBuilder.Entity("ClickTab.Core.DAL.Models.Generics.Menu", b =>
                 {
-                    b.HasOne("ClickTab.Core.DAL.Models.Generics.Menu", "Parent")
-                        .WithMany("Children")
-                        .HasForeignKey("FK_Parent")
-                        .OnDelete(DeleteBehavior.ClientCascade);
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Navigation("Parent");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<string>("ClientCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("FK_DeletedUser")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FK_InsertUser")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("FK_Parent")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FK_UpdateUser")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Icon")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("InsertDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Label")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SystemRole")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("isExternalPage")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("normallyHaveChildren")
+                        .HasColumnType("bit");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("FK_Parent");
+
+                    b.ToTable("Menu");
                 });
 
             modelBuilder.Entity("ClickTab.Core.DAL.Models.Generics.UrlToken", b =>
@@ -306,12 +261,22 @@ namespace ClickTab.Core.Migrations.MSSQL
 
             modelBuilder.Entity("ClickTab.Core.DAL.Models.Generics.Menu", b =>
                 {
-                    b.Navigation("Children");
+                    b.HasOne("ClickTab.Core.DAL.Models.Generics.Menu", "Parent")
+                        .WithMany("Children")
+                        .HasForeignKey("FK_Parent")
+                        .OnDelete(DeleteBehavior.ClientCascade);
+
+                    b.Navigation("Parent");
                 });
 
             modelBuilder.Entity("ClickTab.Core.DAL.Models.NotificationCenter.Notification", b =>
                 {
                     b.Navigation("NotificationDetails");
+                });
+
+            modelBuilder.Entity("ClickTab.Core.DAL.Models.Generics.Menu", b =>
+                {
+                    b.Navigation("Children");
                 });
 #pragma warning restore 612, 618
         }

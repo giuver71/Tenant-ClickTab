@@ -1,11 +1,13 @@
 using ClickTab.Core.DAL.Context;
 using ClickTab.Core.EntityService.Generics;
+using ClickTab.Core.HelperService.XLSUpdateHelper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -14,10 +16,15 @@ namespace ClickTab.Core.HelperService
     public class DatabaseService
     {
         private UserService _userService;
+        private FileService _fileService;
+        private ConfigurationService _configService;
+        private DatabaseContext _ctx;
 
-        public DatabaseService(UserService userService)
+        public DatabaseService(UserService userService,FileService fileService,ConfigurationService configService,DatabaseContext ctx)
         {
             _userService = userService;
+            _fileService = fileService;
+            _ctx = ctx;
         }
 
         private DbContext ResolveMigrationContext(DbProvider provider, string connectionString)
@@ -60,11 +67,30 @@ namespace ClickTab.Core.HelperService
             }
 
             //Se è stata richiesta la sincronizzazione dei dati di default per il DB allora richiama la funzione che dovrà occuparsi di predisporre i dati di default
-            //Alla funzione viene anche passato un parametro che permette di sapere se il DB è stato creato per la prima volta oppure no
-            if (syncDefaultData.HasValue && syncDefaultData.Value == true)
-                CreateDatabaseDefaultData(!dbExists);
+            //Alla funzione viene anche passato un parametro che permette di sapere se il DB è stato
+            //
+            AutoUpdate();
         }
-
+        private void AutoUpdate()
+        {
+            // Recupero le info dei Files Excel  presenti nella cartella Resources
+            List<FileInfo> infos = _fileService.GetInfoFilesByFolder("Resources");
+            foreach (FileInfo info in infos)
+            {
+                // Se i file no nha un estensione valida Excel lo skippo
+                if (!Path.GetExtension(info.Name).Contains(".xls"))
+                {
+                    continue;
+                }
+                string fileWithOutExstension = Path.GetFileNameWithoutExtension(info.Name);
+                // Invoco il servizio di aggiornamento tramite il nome file senza estensione
+                IXlsUpdate pv = FileXlsImportProviderFactory.ActivatorServiceSyncroToXls(fileWithOutExstension);
+                if (pv != null)
+                {
+                    pv.Sync(_fileService, _configService, _ctx, info);
+                }
+            }
+        }
         //private DbContext ResolveMigrationContext(DbProvider provider, string connectionString)
         //{
         //    DbContext context = null;

@@ -16,6 +16,7 @@ namespace ClickTab.Core.HelperService
         public string BaseDomainClient { get; set; }
         public string BaseDomainServer { get; set; }
         public string[] AdditionalCorsOrigins { get; set; }
+        public string ContentRootPath { get; set; }
 
         #region Proprietà per configurazione domini app mobile (se presenti)
 

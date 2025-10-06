@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.IO.Compression;
+using System.Reflection;
 using System.Text;
 
 namespace ClickTab.Core.HelperService
@@ -14,8 +15,8 @@ namespace ClickTab.Core.HelperService
     public class FileService
     {
         private ConfigurationService _configService;
-        public static readonly string PROJECT_FOLDER_BASE_PATH = "EqpFiles";
-        public static readonly string PROJECT_FOLDER_SUB_PATH = "EqpDocuments";
+        public static readonly string PROJECT_FOLDER_BASE_PATH = "ClickTabFiles";
+        public static readonly string PROJECT_FOLDER_SUB_PATH = "ClickTabDocuments";
 
         public FileService(ConfigurationService configService)
         {
@@ -193,5 +194,60 @@ namespace ClickTab.Core.HelperService
 
             return mailMessage;
         }
+
+        /// <summary>
+        /// Restituisce il file di testo contenuto nell'assembly corrente
+        /// </summary>
+        /// <param name="fileName">Nome completo della risorsa. Il nome è composto dal namespace dell'assembly più il percorso completo del file all'interno dello stesso</param>
+        /// <param name="sourceAssembly">Assembly che contiene il file da recuperare. Se viene omesso, allora viene considerato l'assembly corrente</param>
+        /// <remarks>
+        /// Per poter essere correttamente recuperato, il file deve essere compilato come <c>Embedded Resource</c>
+        /// </remarks>
+        /// <returns></returns>
+        public string GetFileFromResources(string fileName, Assembly sourceAssembly = null)
+        {
+            string returnValue = string.Empty;
+            using (StreamReader reader = new StreamReader(GetFileStreamFromResources(fileName, sourceAssembly)))
+            {
+                returnValue = reader.ReadToEnd();
+                reader.Close();
+            }
+            return returnValue;
+        }
+
+        public Stream GetFileStreamFromResources(string fileName, Assembly sourceAssembly = null)
+        {
+            Assembly currentAssembly;
+            if (sourceAssembly == null)
+                currentAssembly = Assembly.GetExecutingAssembly();
+            else
+                currentAssembly = sourceAssembly;
+            string resourceFullName = $"{currentAssembly.GetName().Name}.{fileName}";
+
+            Stream result = currentAssembly.GetManifestResourceStream(resourceFullName);
+
+            return result;
+        }
+
+        /// <summary>
+        /// recupera l'elenco dei files di una cartella
+        /// </summary>
+        /// <param name="folderPath"></param>
+        /// <returns></returns>
+        public List<FileInfo> GetInfoFilesByFolder(string folderPath)
+        {
+            List<FileInfo> infos = new List<FileInfo>();
+            string[] files = Directory.GetFiles(folderPath);
+
+            foreach (string file in files)
+            {
+                // Ottieni info sul file
+                FileInfo info = new FileInfo(file);
+                infos.Add(info);
+
+            }
+            return infos;
+        }
+
     }
 }
