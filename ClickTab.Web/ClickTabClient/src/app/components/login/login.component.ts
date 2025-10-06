@@ -84,7 +84,7 @@ export class LoginComponent implements OnInit {
       localStorage.removeItem(LOCAL_STORAGE_CREDENTIAL);
 
     localStorage.setItem('tenant',this.f.tenant.value)
-
+    alert(this.f.tenant.value);
     this.authenticationService.login(this.f.email.value, this.f.password.value)
       .then((token) => {
         this.authenticationService.setCurrentToken(token);

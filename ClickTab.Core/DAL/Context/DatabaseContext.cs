@@ -67,7 +67,9 @@ namespace ClickTab.Core.DAL.Context
         public DbSet<Menu> Menu { get; set; }
         public DbSet<UpdateXls> UpdateXls { get; set; }
         public DbSet<Role> Roles { get; set; }
-        public DbSet<UserRole> UserARoles { get; set; }
+        public DbSet<UserRole> UserRoles { get; set; }
+        public DbSet<Rule> Rules { get; set; }
+        public DbSet<RoleRule> RoleRules { get; set; }
         #endregion
 
         #region NotificationCenter

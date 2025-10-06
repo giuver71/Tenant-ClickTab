@@ -13,7 +13,7 @@ namespace ClickTab.Core.DAL.Context.EntityConfigurations.Generics
     {
         public void Configure(EntityTypeBuilder<Rule> builder)
         {
-            builder.Property(u => u.DescriptionEnum).IsRequired();
+            builder.Property(u => u.Description).IsRequired();
         }
     }
 }
