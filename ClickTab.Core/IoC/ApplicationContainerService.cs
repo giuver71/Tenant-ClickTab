@@ -106,6 +106,11 @@ namespace ClickTab.Core.IoC
             builder.RegisterType<UserService>().AsSelf();
             builder.RegisterType<UrlTokenService>().AsSelf();
 
+            #region Generics
+            builder.RegisterType<MenuService>().AsSelf();
+            builder.RegisterType<RoleService>().AsSelf();
+            #endregion
+
             #region Servizi per entità NotificationCenter
             builder.RegisterType<NotificationService>().AsSelf();
             builder.RegisterType<NotificationDetailService>().AsSelf();

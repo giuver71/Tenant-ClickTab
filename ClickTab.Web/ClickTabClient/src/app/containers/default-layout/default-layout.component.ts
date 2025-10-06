@@ -13,6 +13,7 @@ import { NotificationService } from "./../../services/notification.service";
 
 import { MatMenuTrigger } from "@angular/material/menu";
 import { navItems } from "./_nav";
+import { MenuService } from "../../services/generics/menu.service";
 
 @Component({
   selector: "app-dashboard",
@@ -20,31 +21,32 @@ import { navItems } from "./_nav";
 })
 export class DefaultLayoutComponent {
   public navItems = navItems;
-  currentUser: UserDTO;
+  currentUser!: UserDTO;
   enableNotificationSystem: boolean = environment.enableNotificationSystem;
   notificationCount: number = 0;
   notificationList: Array<NotificationDetailDTO> = new Array<NotificationDetailDTO>();
-  notificationReadSubscription: Subscription;
+  notificationReadSubscription!: Subscription;
   socketReloadCounter: number = 0;
-  private hubConnection: signalR.HubConnection;
-  @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
+  private hubConnection!: signalR.HubConnection;
+  @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
 
   // Dialog per la visualizzazione di una notifica
-  dialogViewNotificationRef: MatDialogRef<TemplateRef<any>>;
-  @ViewChild("dialogViewNotification", { static: false }) dialogViewNotification: TemplateRef<any>;
-  selectedNotification: NotificationDetailDTO;
+  dialogViewNotificationRef!: MatDialogRef<TemplateRef<any>>;
+  @ViewChild("dialogViewNotification", { static: false }) dialogViewNotification!: TemplateRef<any>;
+  selectedNotification!: NotificationDetailDTO;
 
   public perfectScrollbarConfig = {
     suppressScrollX: true
   };
 
   constructor(
+    private menuService:MenuService,
     private authService: AuthService,
     private eventHandlerService: EventHandlerService,
     private router: Router,
     private dialog: MatDialog,
     private notificationService: NotificationService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
   ) {
     this.resetRouteReuseStrategy();
   }
@@ -72,6 +74,7 @@ export class DefaultLayoutComponent {
       //TODO: Decommentare a fine refactoring
       // this.initializeSocketNotificationConnection();
     }
+    this.getMenu();
   }
 
   //#region Gestione Hub notifiche SignalR
@@ -230,4 +233,14 @@ export class DefaultLayoutComponent {
   }
 
   //#endregion
+
+  getMenu(){
+    this.menuService.getAll().then((res=>{
+
+    })).catch((err)=>{
+        DialogService.Error(err.message);
+        console.log("getMenu",err);
+
+    })
+  }
 }

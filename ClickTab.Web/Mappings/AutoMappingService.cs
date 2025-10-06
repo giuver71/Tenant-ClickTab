@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ClickTab.Web.Mappings.Profiles.Generics;
 
 namespace ClickTab.Web.Mappings
 {
@@ -105,6 +106,12 @@ namespace ClickTab.Web.Mappings
                 #region Importazione profili di mapping
 
                 cfg.AddProfile<UserProfile>();
+
+
+                #region GENERICS
+                cfg.AddProfile<MenuProfile>();
+                cfg.AddProfile<RoleProfile>();
+                #endregion
 
                 #endregion
             });

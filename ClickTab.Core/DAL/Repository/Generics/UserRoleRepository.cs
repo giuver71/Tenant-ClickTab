@@ -9,11 +9,8 @@ using System.Threading.Tasks;
 
 namespace ClickTab.Core.DAL.Repository.Generics
 {
-    public class MenuRepository : IdentityRepository<Menu>
+    public class UserRoleRepository : IdentityRepository<UserRole>
     {
-        public MenuRepository(DatabaseContext context) : base(context)
-        {
-
-        }
+        public UserRoleRepository(DatabaseContext context) : base(context) { }
     }
 }

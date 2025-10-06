@@ -11,3 +11,9 @@ export class UserDTO {
   SubscriptionDate: Date;
 }
 
+export enum SystemRole {
+  ADMIN = 1,
+  USER = 2
+}
+
+
