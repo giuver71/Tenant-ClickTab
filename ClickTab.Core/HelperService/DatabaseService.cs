@@ -69,10 +69,11 @@ namespace ClickTab.Core.HelperService
             //Se è stata richiesta la sincronizzazione dei dati di default per il DB allora richiama la funzione che dovrà occuparsi di predisporre i dati di default
             //Alla funzione viene anche passato un parametro che permette di sapere se il DB è stato
             //
-            AutoUpdate();
         }
-        private void AutoUpdate()
+        public void AutoUpdate(DbProvider provider, string connectionString)
         {
+            DatabaseContext ctx =(DatabaseContext) ResolveMigrationContext(provider, connectionString);
+
             // Recupero le info dei Files Excel  presenti nella cartella Resources
             List<FileInfo> infos = _fileService.GetInfoFilesByFolder("Resources");
             foreach (FileInfo info in infos)
@@ -87,7 +88,7 @@ namespace ClickTab.Core.HelperService
                 IXlsUpdate pv = FileXlsImportProviderFactory.ActivatorServiceSyncroToXls(fileWithOutExstension);
                 if (pv != null)
                 {
-                    pv.Sync(_fileService, _configService, _ctx, info);
+                    pv.Sync(_fileService, _configService, ctx, info);
                 }
             }
         }

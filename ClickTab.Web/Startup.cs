@@ -125,6 +125,7 @@ namespace ClickTab.Web
                 var provider = tenantConnectionService.GetDbProvider(tenant);
 
                 dbService.ApplyMigrations(provider, connectionString, configService.SyncDefaultData);
+                dbService.AutoUpdate(provider, connectionString);
             }
 
             app.UseStaticFiles();

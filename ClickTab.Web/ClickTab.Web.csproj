@@ -43,10 +43,14 @@
 
   <ItemGroup>
     <None Remove="Resources\Menu.xlsx" />
+    <None Remove="Resources\Roles.xlsx" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Resources\Menu.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Roles.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>

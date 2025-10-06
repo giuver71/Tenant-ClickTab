@@ -23,6 +23,8 @@ namespace ClickTab.Core.DAL.Models.Generics
 
         public DateTime SubscriptionDate { get; set; }
 
+        public List<UserRole> UserRoles { get; set; }
+
         // <ewz:navigationArea>
 
         // <ewz:Interfaces area>

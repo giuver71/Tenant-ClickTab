@@ -66,6 +66,8 @@ namespace ClickTab.Core.DAL.Context
         public DbSet<UrlToken> UrlTokens { get; set; }
         public DbSet<Menu> Menu { get; set; }
         public DbSet<UpdateXls> UpdateXls { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<UserRole> UserARoles { get; set; }
         #endregion
 
         #region NotificationCenter
@@ -130,6 +132,8 @@ namespace ClickTab.Core.DAL.Context
             modelBuilder.ApplyConfiguration(new UrlTokenConfigurations());
             modelBuilder.ApplyConfiguration(new MenuConfigurations());
             modelBuilder.ApplyConfiguration(new UpdateXlsConfigurations());
+            modelBuilder.ApplyConfiguration(new RoleConfigurations());
+            modelBuilder.ApplyConfiguration(new UserRoleConfigurations());
             #endregion
 
             #region FluentAPI per entità NotificationCenter
