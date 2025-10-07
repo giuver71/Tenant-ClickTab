@@ -14,13 +14,16 @@ import { NotificationService } from "./../../services/notification.service";
 import { MatMenuTrigger } from "@angular/material/menu";
 import { navItems } from "./_nav";
 import { MenuService } from "../../services/generics/menu.service";
+import { RoleDTO } from "../../models/generics/role.model";
+import { RoleService } from "../../services/generics/role.services";
+import { INavData } from "@eqproject/eqp-ui";
 
 @Component({
   selector: "app-dashboard",
   templateUrl: "./default-layout.component.html"
 })
 export class DefaultLayoutComponent {
-  public navItems = navItems;
+  public navItems! :any;
   currentUser!: UserDTO;
   enableNotificationSystem: boolean = environment.enableNotificationSystem;
   notificationCount: number = 0;
@@ -34,10 +37,12 @@ export class DefaultLayoutComponent {
   dialogViewNotificationRef!: MatDialogRef<TemplateRef<any>>;
   @ViewChild("dialogViewNotification", { static: false }) dialogViewNotification!: TemplateRef<any>;
   selectedNotification!: NotificationDetailDTO;
-
+  
   public perfectScrollbarConfig = {
     suppressScrollX: true
   };
+
+ 
 
   constructor(
     private menuService:MenuService,
@@ -47,6 +52,7 @@ export class DefaultLayoutComponent {
     private dialog: MatDialog,
     private notificationService: NotificationService,
     private activatedRoute: ActivatedRoute,
+    private roleService:RoleService
   ) {
     this.resetRouteReuseStrategy();
   }
@@ -64,6 +70,7 @@ export class DefaultLayoutComponent {
   }
 
   ngOnInit() {
+    console.log("User",this.authService.getCurrentUser());
     //Se si vuole avviare il sistema di notifiche ed è presente l'utente autenticato
     //allora avvia i servizi per la ricezione delle notifiche push
     if (
@@ -76,6 +83,9 @@ export class DefaultLayoutComponent {
     }
     this.getMenu();
   }
+
+ 
+
 
   //#region Gestione Hub notifiche SignalR
 
@@ -235,8 +245,10 @@ export class DefaultLayoutComponent {
   //#endregion
 
   getMenu(){
-    this.menuService.getMenuByRole(SystemRole.USER,1).then((res=>{
-
+    let currentRole:RoleDTO=this.authService.getCurrentRole();
+    this.menuService.getMenuByRole(currentRole.ID).then((res=>{
+        this.navItems=res;
+        console.log("menu",res);
     })).catch((err)=>{
         DialogService.Error(err.message);
         console.log("getMenu",err);

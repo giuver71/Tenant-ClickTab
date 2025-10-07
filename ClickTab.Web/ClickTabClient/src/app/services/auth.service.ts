@@ -5,6 +5,8 @@ import { HttpClient } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserDTO } from '../models/generics/user.model';
 import { environment } from './../../environments/environment';
+import { RoleDTO } from '../models/generics/role.model';
+import { LS_CURRENT_ROLE_ID } from '../helpers/global-consts';
 
 const helper = new JwtHelperService();
 const CURRENT_TOKEN_NAME: string = "eqpToken";
@@ -109,4 +111,30 @@ export class AuthService {
     return token != undefined && token != null;
   }
 
+  getCurrentRole(): RoleDTO {
+
+    const hashedRole = localStorage.getItem(LS_CURRENT_ROLE_ID);
+    if(hashedRole != null && hashedRole != "null"){
+      const currentRoleUnhashed = helper.decodeToken(hashedRole);
+      // console.log("getCurrentRole", currentRoleUnhashed.Role)
+      return currentRoleUnhashed.Role;
+      // return JSON.parse(currentRoleID).Role;
+    }else {
+        console.log("getCurrentRole null")
+        return null;
+    }
+  }
+
+   setCurrentRole(roleDTO: string) {
+    localStorage.setItem(LS_CURRENT_ROLE_ID, roleDTO);
+   
+    // aggiorna userAttachpointRole
+    // this.ruleService.updateAttachpointUserRole(activeUserRoleRules);
+    // regole sulle compunicazioni
+    // this.ruleService.updateCommunicationUserRole(activeUserRoleRules);
+  }
+
+   decodeToken(item){
+    return helper.decodeToken(item);
+  }
 }

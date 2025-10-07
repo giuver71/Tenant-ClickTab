@@ -5,6 +5,7 @@ import { AuthService } from '../auth.service';
 import { MenuDTO } from '../../models/generics/menu.model';
 import { environment } from '../../../environments/environment';
 import { SystemRole } from '../../models/generics/user.model';
+import { INavData } from '@eqproject/eqp-ui';
 // import { RoleDimensionEnum } from '../models/enums/roleDimensioEnum';
 
 
@@ -28,12 +29,8 @@ export class MenuService {
     return this.http.get<Array<MenuDTO>>(environment.apiFullUrl + '/Menu/GetAll/').toPromise();
   }
 
-  getMenuByRole(systemRole: SystemRole, roleId?: number): Promise<Array<MenuDTO>> {
-    if (roleId != null) {
-      return this.http.get<Array<MenuDTO>>(environment.apiFullUrl + '/Menu/GetMenuByRole/' + systemRole + '/' + roleId).toPromise();
-    } else {
-      return this.http.get<Array<MenuDTO>>(environment.apiFullUrl + '/Menu/GetMenuByRole/' + systemRole).toPromise();
-    }
+  getMenuByRole(roleId: number): Promise<Array<any>> {
+      return this.http.get<Array<any>>(environment.apiFullUrl + '/Menu/GetMenuByRole/' + roleId).toPromise();
   }
 
 

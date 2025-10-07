@@ -111,6 +111,8 @@ namespace ClickTab.Web.Mappings
                 #region GENERICS
                 cfg.AddProfile<MenuProfile>();
                 cfg.AddProfile<RoleProfile>();
+                cfg.AddProfile<RuleProfile>();
+                cfg.AddProfile<RoleRuleProfile>();
                 #endregion
 
                 #endregion

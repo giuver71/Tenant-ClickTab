@@ -63,10 +63,10 @@ namespace ClickTab.Web.Controllers.Generics
         //    return Ok(menuDTO);
         //}
 
-        [HttpGet, Route("/api/[controller]/GetMenuByRole/{systemRole}/{roleId?}")]
+        [HttpGet, Route("/api/[controller]/GetMenuByRole/{roleId?}")]
         public async Task<IActionResult> GetMenuByRole(SystemRole systemRole, int? roleId = null)
         {
-            List<Menu> menu = _menuService.GetMenuHierarchy(systemRole, roleId);
+            List<Menu> menu = _menuService.GetMenuHierarchy(roleId);
             List<MenuDTO> menuDTO = _autoMappingService.CurrentMapper.Map<List<MenuDTO>>(menu);
             List<NavItem> navitems = _autoMappingService.CurrentMapper.Map<List<NavItem>>(menu);
 

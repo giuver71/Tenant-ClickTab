@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ClickTab.Core.HelperService;
 using Autofac.Core;
+using ClickTab.Web.Mappings.ModelsDTO.Generics;
 
 namespace ClickTab.Web.Controllers
 {
@@ -27,14 +28,21 @@ namespace ClickTab.Web.Controllers
         private AutoMappingService _autoMappingService;
         private UrlTokenService _urlTokenService;
         private EmailService _emailService;
+        private UserRoleService _userRoleService;
+        private JwtService _jwtService;
+
+
 
         public UserController(UserService userService, AutoMappingService autoMappingService, UrlTokenService urlTokenService,
-            EmailService emailService)
+            EmailService emailService,UserRoleService userRoleService, JwtService jwtService)
         {
             _userService = userService;
             _autoMappingService = autoMappingService;
             _urlTokenService = urlTokenService;
             _emailService = emailService;
+            _jwtService = jwtService;
+            _userRoleService = userRoleService;
+
         }
 
 
@@ -243,6 +251,26 @@ namespace ClickTab.Web.Controllers
             {
                 throw new EntityValidationException("Si è verificato un errore, riprovare più tardi");
             }
+        }
+
+
+        [HttpGet("/api/[controller]/getAllRolesUserFacilityHashed/{FK_User}")]
+        public async Task<IActionResult> GetAllRolesUserFacilityHashed(int FK_User)
+        {
+            List<string> hashedUserRoleList = new List<string>();
+
+            List<UserRole> userRoles = _userRoleService.GetFullRoles(FK_User);
+            List<Role> Roles = userRoles.Select(x => x.Role).ToList();
+            List<RoleDTO> RolesDTO = _autoMappingService.CurrentMapper.Map<List<RoleDTO>>(Roles);
+            foreach (var role in RolesDTO)
+            {
+                Dictionary<string, object> payload = new Dictionary<string, object>();
+                // il PAYLOAD_ROLE_KEY è il nome dell'oggetto json che si legge quando si decodifica lato client
+                payload.Add(AuthService.PAYLOAD_ROLE_KEY, role);
+                string tokenrole = _jwtService.PayloadToToken(payload);
+                hashedUserRoleList.Add(tokenrole);
+            }
+            return Ok(hashedUserRoleList);
         }
 
 

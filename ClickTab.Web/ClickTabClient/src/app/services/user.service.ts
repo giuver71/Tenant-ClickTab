@@ -51,4 +51,10 @@ export class UserService {
   resetPassword(data: any): Promise<any> {
     return this.http.post<any>(environment.apiFullUrl + "/User/ResetPassword", data).toPromise();
   }
+
+   getAllRolesUserFacilityHashed(id: number): Promise<string[]> {
+    return this.http.get<string[]>(`${environment.apiFullUrl}/User/getAllRolesUserFacilityHashed/${id}`)
+      .toPromise()
+      .then(response => response ?? []);
+  }
 }

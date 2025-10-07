@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using ClickTab.Core.DAL.Models.Generics;
+using System.Collections.Generic;
 
 namespace ClickTab.Web.Mappings.ModelsDTO.Generics
 {
@@ -12,7 +13,7 @@ namespace ClickTab.Web.Mappings.ModelsDTO.Generics
         public string Icon { get; set; }
         public int Order { get; set; }
         public bool normallyHaveChildren { get; set; }
-        public bool isExternalPage { get; set; }
+        public ExternalActionEnum isExternalPage { get; set; }
         public List<MenuDTO> children { get; set; }
     }
 }

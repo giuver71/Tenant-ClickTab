@@ -1,0 +1,40 @@
+.role-wrapper {
+  line-height: 1;
+}
+
+.role-label {
+  font-size: 11px;
+  font-weight: 400;
+  color: #6c757d; /* grigio discreto */
+  margin-bottom: 2px;
+}
+
+.role-inline-select {
+  font-weight: 500;
+  font-size: 13px;
+  min-width: 180px;
+  max-width: 200px;
+  color: #1e2a55;
+  line-height: 28px;
+  height: 28px;
+  padding: 0 4px;
+}
+
+.role-inline-select .mat-mdc-select-trigger {
+  padding: 0 4px;
+}
+
+.role-inline-select .mat-mdc-select-arrow {
+  color: #1e2a55;
+}
+
+.role-inline-select.mat-mdc-select {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.my-avatar {
+  vertical-align: middle;
+  cursor: pointer;
+}

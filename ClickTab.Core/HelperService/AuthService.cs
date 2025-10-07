@@ -13,6 +13,7 @@ namespace ClickTab.Core.HelperService
         private UserService _userService;
         private PasswordService _passwordService;
         public static readonly string PAYLOAD_USER_KEY = "User";
+        public static readonly string PAYLOAD_ROLE_KEY = "Role";
 
         public AuthService(UserService userService, PasswordService passwordService)
         {

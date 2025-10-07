@@ -21,9 +21,10 @@
 
 <!--main-->
 <div class="wrapper d-flex flex-column min-vh-100 bg-light dark:bg-transparent">
+   
   <!--app-header-->
   <!-- Workaround Andrea: Di Default, il tema ha impostato lo z-index a 1029, abbasso a 999 così che non vada in conflitto con Material(default 1000) -->
-  <app-default-header class="mb-4 d-print-none header header-sticky" position="sticky" sidebarId="sidebar"
+  <app-default-header  class="mb-4 d-print-none header header-sticky" position="sticky" sidebarId="sidebar"
     [currentUser]="currentUser" [notificationList]="notificationList" [notificationCount]="notificationCount"
     (readNotificationEvent)="readNotification($event)" (goToNotificationListEvent)="goToNotificationList()">
   </app-default-header>

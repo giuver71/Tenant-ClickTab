@@ -84,18 +84,18 @@ export class LoginComponent implements OnInit {
       localStorage.removeItem(LOCAL_STORAGE_CREDENTIAL);
 
     localStorage.setItem('tenant',this.f.tenant.value)
-    alert(this.f.tenant.value);
+    
     this.authenticationService.login(this.f.email.value, this.f.password.value)
       .then((token) => {
         this.authenticationService.setCurrentToken(token);
         this.authenticationService.loggedIn.next(true);
-
+        this.authenticationService.setCurrentRole(null);
         //Decommentare il blocco sottostante se si vuole gestire il redirect
         //al cambio password quando l'utente accede per la prima volta
         //if (this.authenticationService.getCurrentUser().ChangedPassword != true) {
         //  this.router.navigate(['/changePassword']);
         //} else {
-          this.router.navigate(['/']);
+          this.router.navigate(['/dashboard']);
         //}
       })
       .catch((err) => {

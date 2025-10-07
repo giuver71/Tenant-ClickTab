@@ -48,7 +48,7 @@ namespace ClickTab.Core.EntityService.Generics
         /// <param name="SystemRole">Valore del ruolo di sistema per cui recuperare le voci di menu</param>
         /// <param name="FK_Role">ID del ruolo utente (opzionale)</param>
         /// <returns></returns>
-        public List<Menu> GetMenuHierarchy(SystemRole SystemRole, int? FK_Role = null)
+        public List<Menu> GetMenuHierarchy(int? FK_Role = null)
         {
             List<Menu> allMenuItems = new List<Menu>();
 
@@ -74,19 +74,19 @@ namespace ClickTab.Core.EntityService.Generics
             //         E quelli contenuti nel campo delle regole associate oppure quelli con SisytemRole ADMIN
             //        Per ciascuna voce di menù parent recuperata include anche le eventuali voci figlie (cioè i Children)
 
-            allMenuItems = GetBy(m => m.FK_Parent == null && (m.SystemRole == null || m.SystemRole.Value.HasFlag(SystemRole) && (canUrls.Contains(m.Url) || SystemRole == SystemRole.ADMIN)), p => p.Children);
+            allMenuItems = GetBy(m => m.FK_Parent == null && canUrls.Contains(m.Url), p => p.Children);
 
 
             Action<Menu> CheckMenuRole = null;
             CheckMenuRole = menuItem =>
             {
                 //Filtra le voci di menù figlie in base al SystemRole
-                menuItem.Children = menuItem.Children.Where(c => c.SystemRole == null || c.SystemRole.Value.HasFlag(SystemRole)).ToList();
+                //menuItem.Children = menuItem.Children.Where(c => c.SystemRole == null || c.SystemRole.Value.HasFlag(SystemRole)).ToList();
 
                 //Se SystemRole è diverso da ADMIN allora filtra ulteriormente le voci di menù figlie per
                 //eliminare eventuali voci che non risultano associate alla dimensione del ruolo avente ID uguale al parametro FK_Role
-                if (SystemRole != SystemRole.ADMIN)
-                {
+                //if (SystemRole != SystemRole.ADMIN)
+                //{
                     //Elimina eventuali voci di menù figlie che non risultano associate alla RoleDimension del ruolo applicativo avente ID uguale
                     //al parametro FK_Role passato
                     //menuItem.Children = menuItem.Children.Where(c => c.RoleDimension == null || c.RoleDimension.Value.HasFlag(fullRole.RoleDimension)).ToList();
@@ -97,7 +97,7 @@ namespace ClickTab.Core.EntityService.Generics
                     // ******** Workaround regole 
                     // Elimina eventuali voci di menu che il cui url non risulta associato alla regola abbinata al ruolo
                     menuItem.Children = menuItem.Children.Where(p => canUrls.Contains(p.Url)).OrderBy(c => c.Order).ToList();
-                }
+                //}
 
                 //Ordina l'elenco dei figli in base alla proprietà Order
                 menuItem.Children = menuItem.Children.OrderBy(c => c.Order).ToList();
