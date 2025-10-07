@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ClickTab.Core.Migrations.MSSQL
 {
     /// <inheritdoc />
-    public partial class Add_Role : Migration
+    public partial class Add_Role_and_Rule : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -29,21 +29,21 @@ namespace ClickTab.Core.Migrations.MSSQL
                 });
 
             migrationBuilder.CreateTable(
-                name: "Rule",
+                name: "Rules",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DescriptionEnum = table.Column<int>(type: "int", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UrlRoutes = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Rule", x => x.ID);
+                    table.PrimaryKey("PK_Rules", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserARoles",
+                name: "UserRoles",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
@@ -57,15 +57,15 @@ namespace ClickTab.Core.Migrations.MSSQL
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserARoles", x => x.ID);
+                    table.PrimaryKey("PK_UserRoles", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_UserARoles_Roles_FK_Role",
+                        name: "FK_UserRoles_Roles_FK_Role",
                         column: x => x.FK_Role,
                         principalTable: "Roles",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserARoles_Users_FK_User",
+                        name: "FK_UserRoles_Users_FK_User",
                         column: x => x.FK_User,
                         principalTable: "Users",
                         principalColumn: "ID",
@@ -73,52 +73,52 @@ namespace ClickTab.Core.Migrations.MSSQL
                 });
 
             migrationBuilder.CreateTable(
-                name: "RoleRule",
+                name: "RoleRules",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FK_Role = table.Column<int>(type: "int", nullable: false),
-                    RoleID = table.Column<int>(type: "int", nullable: true),
                     FK_Rule = table.Column<int>(type: "int", nullable: false),
-                    RuleID = table.Column<int>(type: "int", nullable: true),
                     CanCreate = table.Column<bool>(type: "bit", nullable: false),
                     CanEdit = table.Column<bool>(type: "bit", nullable: false),
                     CanDelete = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RoleRule", x => x.ID);
+                    table.PrimaryKey("PK_RoleRules", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_RoleRule_Roles_RoleID",
-                        column: x => x.RoleID,
+                        name: "FK_RoleRules_Roles_FK_Role",
+                        column: x => x.FK_Role,
                         principalTable: "Roles",
-                        principalColumn: "ID");
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_RoleRule_Rule_RuleID",
-                        column: x => x.RuleID,
-                        principalTable: "Rule",
-                        principalColumn: "ID");
+                        name: "FK_RoleRules_Rules_FK_Rule",
+                        column: x => x.FK_Rule,
+                        principalTable: "Rules",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_RoleRule_RoleID",
-                table: "RoleRule",
-                column: "RoleID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_RoleRule_RuleID",
-                table: "RoleRule",
-                column: "RuleID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserARoles_FK_Role",
-                table: "UserARoles",
+                name: "IX_RoleRules_FK_Role",
+                table: "RoleRules",
                 column: "FK_Role");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserARoles_FK_User",
-                table: "UserARoles",
+                name: "IX_RoleRules_FK_Rule",
+                table: "RoleRules",
+                column: "FK_Rule");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserRoles_FK_Role",
+                table: "UserRoles",
+                column: "FK_Role");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserRoles_FK_User",
+                table: "UserRoles",
                 column: "FK_User");
         }
 
@@ -126,13 +126,13 @@ namespace ClickTab.Core.Migrations.MSSQL
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "RoleRule");
+                name: "RoleRules");
 
             migrationBuilder.DropTable(
-                name: "UserARoles");
+                name: "UserRoles");
 
             migrationBuilder.DropTable(
-                name: "Rule");
+                name: "Rules");
 
             migrationBuilder.DropTable(
                 name: "Roles");

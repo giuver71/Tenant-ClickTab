@@ -135,6 +135,7 @@ namespace ClickTab.Core.DAL.Context
             modelBuilder.ApplyConfiguration(new MenuConfigurations());
             modelBuilder.ApplyConfiguration(new UpdateXlsConfigurations());
             modelBuilder.ApplyConfiguration(new RoleConfigurations());
+            modelBuilder.ApplyConfiguration(new RoleRuleConfigurations());
             modelBuilder.ApplyConfiguration(new UserRoleConfigurations());
             #endregion
 

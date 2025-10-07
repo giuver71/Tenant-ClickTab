@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ClickTab.Core.DAL.Enums;
+using ClickTab.Core.HelperClass;
 
 namespace ClickTab.Web.Controllers.Generics
 {
@@ -67,7 +68,9 @@ namespace ClickTab.Web.Controllers.Generics
         {
             List<Menu> menu = _menuService.GetMenuHierarchy(systemRole, roleId);
             List<MenuDTO> menuDTO = _autoMappingService.CurrentMapper.Map<List<MenuDTO>>(menu);
-            return Ok(menuDTO);
+            List<NavItem> navitems = _autoMappingService.CurrentMapper.Map<List<NavItem>>(menu);
+
+            return Ok(navitems);
         }
 
         /// <summary>

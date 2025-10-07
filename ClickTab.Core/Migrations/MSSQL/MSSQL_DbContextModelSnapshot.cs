@@ -139,17 +139,11 @@ namespace ClickTab.Core.Migrations.MSSQL
                     b.Property<int>("FK_Rule")
                         .HasColumnType("int");
 
-                    b.Property<int?>("RoleID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("RuleID")
-                        .HasColumnType("int");
-
                     b.HasKey("ID");
 
-                    b.HasIndex("RoleID");
+                    b.HasIndex("FK_Role");
 
-                    b.HasIndex("RuleID");
+                    b.HasIndex("FK_Rule");
 
                     b.ToTable("RoleRules");
                 });
@@ -400,11 +394,15 @@ namespace ClickTab.Core.Migrations.MSSQL
                 {
                     b.HasOne("ClickTab.Core.DAL.Models.Generics.Role", "Role")
                         .WithMany("RoleRules")
-                        .HasForeignKey("RoleID");
+                        .HasForeignKey("FK_Role")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("ClickTab.Core.DAL.Models.Generics.Rule", "Rule")
                         .WithMany("RoleRules")
-                        .HasForeignKey("RuleID");
+                        .HasForeignKey("FK_Rule")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Role");
 

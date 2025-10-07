@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import * as signalR from "@microsoft/signalr";
 import { Subscription } from "rxjs";
 import { environment } from "./../../../environments/environment";
-import { UserDTO } from "./../../models/generics/user.model";
+import { SystemRole, UserDTO } from "./../../models/generics/user.model";
 import { NotificationDetailDTO } from "./../../models/notification-center/notificationDetail.model";
 import { AuthService } from "./../../services/auth.service";
 import { DialogService } from "./../../services/dialog.service";
@@ -235,7 +235,7 @@ export class DefaultLayoutComponent {
   //#endregion
 
   getMenu(){
-    this.menuService.getAll().then((res=>{
+    this.menuService.getMenuByRole(SystemRole.USER,1).then((res=>{
 
     })).catch((err)=>{
         DialogService.Error(err.message);

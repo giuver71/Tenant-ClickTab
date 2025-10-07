@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClickTab.Core.Migrations.MSSQL
 {
     [DbContext(typeof(MSSQL_DbContext))]
-    [Migration("20251006104305_Add_Role")]
-    partial class Add_Role
+    [Migration("20251007081236_Add_Role_and_Rule")]
+    partial class Add_Role_and_Rule
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -142,19 +142,13 @@ namespace ClickTab.Core.Migrations.MSSQL
                     b.Property<int>("FK_Rule")
                         .HasColumnType("int");
 
-                    b.Property<int?>("RoleID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("RuleID")
-                        .HasColumnType("int");
-
                     b.HasKey("ID");
 
-                    b.HasIndex("RoleID");
+                    b.HasIndex("FK_Role");
 
-                    b.HasIndex("RuleID");
+                    b.HasIndex("FK_Rule");
 
-                    b.ToTable("RoleRule");
+                    b.ToTable("RoleRules");
                 });
 
             modelBuilder.Entity("ClickTab.Core.DAL.Models.Generics.Rule", b =>
@@ -165,15 +159,15 @@ namespace ClickTab.Core.Migrations.MSSQL
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<int>("DescriptionEnum")
-                        .HasColumnType("int");
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UrlRoutes")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
 
-                    b.ToTable("Rule");
+                    b.ToTable("Rules");
                 });
 
             modelBuilder.Entity("ClickTab.Core.DAL.Models.Generics.UpdateXls", b =>
@@ -324,7 +318,7 @@ namespace ClickTab.Core.Migrations.MSSQL
 
                     b.HasIndex("FK_User");
 
-                    b.ToTable("UserARoles");
+                    b.ToTable("UserRoles");
                 });
 
             modelBuilder.Entity("ClickTab.Core.DAL.Models.NotificationCenter.Notification", b =>
@@ -403,11 +397,15 @@ namespace ClickTab.Core.Migrations.MSSQL
                 {
                     b.HasOne("ClickTab.Core.DAL.Models.Generics.Role", "Role")
                         .WithMany("RoleRules")
-                        .HasForeignKey("RoleID");
+                        .HasForeignKey("FK_Role")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("ClickTab.Core.DAL.Models.Generics.Rule", "Rule")
                         .WithMany("RoleRules")
-                        .HasForeignKey("RuleID");
+                        .HasForeignKey("FK_Rule")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Role");
 
