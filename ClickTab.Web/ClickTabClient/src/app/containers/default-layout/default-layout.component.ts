@@ -17,6 +17,8 @@ import { MenuService } from "../../services/generics/menu.service";
 import { RoleDTO } from "../../models/generics/role.model";
 import { RoleService } from "../../services/generics/role.services";
 import { INavData } from "@eqproject/eqp-ui";
+import { RoleRuleDTO } from "../../models/generics/rolerule.model";
+import { UserService } from "../../services/user.service";
 
 @Component({
   selector: "app-dashboard",
@@ -30,6 +32,10 @@ export class DefaultLayoutComponent {
   notificationList: Array<NotificationDetailDTO> = new Array<NotificationDetailDTO>();
   notificationReadSubscription!: Subscription;
   socketReloadCounter: number = 0;
+  manageableRoles:Array<RoleDTO>=new Array<RoleDTO>();
+  hashedRoles: Array<string> = new Array<string>();
+  currentRole:RoleDTO=new RoleDTO();
+  loaded:boolean=false;
   private hubConnection!: signalR.HubConnection;
   @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
 
@@ -52,7 +58,8 @@ export class DefaultLayoutComponent {
     private dialog: MatDialog,
     private notificationService: NotificationService,
     private activatedRoute: ActivatedRoute,
-    private roleService:RoleService
+    private roleService:RoleService,
+    private userService:UserService
   ) {
     this.resetRouteReuseStrategy();
   }
@@ -69,7 +76,9 @@ export class DefaultLayoutComponent {
     this.router.onSameUrlNavigation = "ignore";
   }
 
-  ngOnInit() {
+ async  ngOnInit() {
+    this.currentUser=this.authService.getCurrentUser();
+    this.currentRole=this.authService.getCurrentRole();
     console.log("User",this.authService.getCurrentUser());
     //Se si vuole avviare il sistema di notifiche ed è presente l'utente autenticato
     //allora avvia i servizi per la ricezione delle notifiche push
@@ -81,10 +90,75 @@ export class DefaultLayoutComponent {
       //TODO: Decommentare a fine refactoring
       // this.initializeSocketNotificationConnection();
     }
+    await this.getRoles();
     this.getMenu();
   }
 
+   async getRoles(){
+    this.loaded=false;
+       await this.userService.getAllRolesUserFacilityHashed(this.currentUser.ID).then((hashedRoles) => {
+      this.hashedRoles = hashedRoles;
+      // Check del Ruolo
+      var roleRules: Array<RoleRuleDTO> = new Array<RoleRuleDTO>();
+      // res = res.filter(x => x.RoleDTO.FK_Facilitie == this.currentFacilitieId || x.RoleDTO.FK_Facilitie == null);
+          this.hashedRoles.forEach((role) => {
+            let decodedrole = this.authService.decodeToken(role);
+            //todo tagliare l'oggetto user
+            decodedrole.Role.RoleRules.forEach((roleRule) => {
+              roleRules.push(roleRule);
+            });
+            this.manageableRoles.push(decodedrole.Role);
+          });
+
+          // this.currentRoleTypes = this.authService.getCurrentRoleTypes(roleRules);
+          this.currentRole = this.authService.getCurrentRole();
+          console.log("Ho preso il ruolo",this.currentRole);
+
+          // se non trova il currentRole lo imposta
+          if (this.currentRole == null && this.manageableRoles.length > 0) {
+            this.currentRole = this.manageableRoles[0];
+            this.authService.setCurrentRole(this.hashedRoles[0]);
+          } else if (this.manageableRoles.length > 0) {
+            let roleIndex = this.manageableRoles.findIndex((x) => x.ID == this.currentRole.ID);
+            this.currentRole = this.manageableRoles[roleIndex];
+            this.authService.setCurrentRole(this.hashedRoles[roleIndex]);
+          }
+          this.loaded=true;
+      });   
+  }
  
+  onSelectedRole(ev:RoleDTO){
+    console.log("onSelectedRole",ev);
+      this.router.navigate(["/dashboard"]).then(() => {
+          this.currentRole=ev;
+          let roleiindex = this.manageableRoles.findIndex((x) => x.ID == ev.ID);
+          this.authService.setCurrentRole(this.hashedRoles[roleiindex]);
+          this.reloadComponent();
+      });
+  }
+
+     reloadComponent() {
+        let dashBoardUrl: string = "/dashboard";
+        if (window.innerWidth >= 992) {
+          this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+          this.router.onSameUrlNavigation = "reload";
+          this.router.navigate([dashBoardUrl], { relativeTo: this.activatedRoute });
+        } else {
+          location.reload();
+        }
+  }
+
+  getMenu(){
+    let currentRole:RoleDTO=this.authService.getCurrentRole();
+    this.menuService.getMenuByRole(this.currentRole.ID).then((res=>{
+        this.navItems=res;
+        console.log("menu",res);
+    })).catch((err)=>{
+        DialogService.Error(err.message);
+        console.log("getMenu",err);
+
+    })
+  }
 
 
   //#region Gestione Hub notifiche SignalR
@@ -244,15 +318,5 @@ export class DefaultLayoutComponent {
 
   //#endregion
 
-  getMenu(){
-    let currentRole:RoleDTO=this.authService.getCurrentRole();
-    this.menuService.getMenuByRole(currentRole.ID).then((res=>{
-        this.navItems=res;
-        console.log("menu",res);
-    })).catch((err)=>{
-        DialogService.Error(err.message);
-        console.log("getMenu",err);
-
-    })
-  }
+  
 }

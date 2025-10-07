@@ -24,9 +24,12 @@
    
   <!--app-header-->
   <!-- Workaround Andrea: Di Default, il tema ha impostato lo z-index a 1029, abbasso a 999 così che non vada in conflitto con Material(default 1000) -->
-  <app-default-header  class="mb-4 d-print-none header header-sticky" position="sticky" sidebarId="sidebar"
+  <app-default-header *ngIf="loaded" class="mb-4 d-print-none header header-sticky" position="sticky" sidebarId="sidebar"
+    [manageableRoles]="manageableRoles"
+    [hashedRoles]="hashedRoles"
     [currentUser]="currentUser" [notificationList]="notificationList" [notificationCount]="notificationCount"
-    (readNotificationEvent)="readNotification($event)" (goToNotificationListEvent)="goToNotificationList()">
+    (readNotificationEvent)="readNotification($event)" (goToNotificationListEvent)="goToNotificationList()"
+    (selectedRoleEvent)="onSelectedRole($event)">
   </app-default-header>
   <!--app-body-->
   <div class="body flex-grow-1 px-3">

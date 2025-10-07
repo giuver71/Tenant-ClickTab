@@ -67,7 +67,7 @@ namespace ClickTab.Web.Controllers.Generics
         public async Task<IActionResult> GetMenuByRole(SystemRole systemRole, int? roleId = null)
         {
             List<Menu> menu = _menuService.GetMenuHierarchy(roleId);
-            List<MenuDTO> menuDTO = _autoMappingService.CurrentMapper.Map<List<MenuDTO>>(menu);
+            //List<MenuDTO> menuDTO = _autoMappingService.CurrentMapper.Map<List<MenuDTO>>(menu);
             List<NavItem> navitems = _autoMappingService.CurrentMapper.Map<List<NavItem>>(menu);
 
             return Ok(navitems);

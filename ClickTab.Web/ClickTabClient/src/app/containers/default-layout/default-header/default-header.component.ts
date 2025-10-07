@@ -17,7 +17,8 @@ import { RoleRuleDTO } from '../../../models/generics/rolerule.model';
   styleUrls: ['./default-header.component.scss']
 })
 export class DefaultHeaderComponent extends HeaderComponent implements OnInit {
-
+  @Input() manageableRoles:Array<RoleDTO>=new Array<RoleDTO>();
+  @Input()hashedRoles:Array<string>=new Array<string>();
   @Input() sidebarId: string = "sidebar";
   @Input() currentUser: UserDTO;
   @Input() selectedNotification: NotificationDetailDTO;
@@ -25,10 +26,13 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit {
   @Input() notificationCount: number;
   @Output() readNotificationEvent: EventEmitter<any> = new EventEmitter<any>();
   @Output() goToNotificationListEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Output() selectedRoleEvent: EventEmitter<RoleDTO> = new EventEmitter<RoleDTO>();
 
-  manageableRoles:Array<RoleDTO>=new Array<RoleDTO>();
-  currentRole:RoleDTO=new RoleDTO();
-  hashedRoles: Array<string> = new Array<string>();
+  
+  selectedRole:RoleDTO=new RoleDTO();
+  loaded:boolean=false;
+  selectedRoleId!:number;
+
   constructor(
     private classToggler: ClassToggleService, 
     private activatedRoute: ActivatedRoute, 
@@ -39,8 +43,16 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit {
     super();
   }
   ngOnInit(): void {
-    this.currentUser=this.authService.getCurrentUser();
-   this.getRoles();
+    this.loaded=false;
+    if(this.currentUser==null){
+      this.currentUser=this.authService.getCurrentUser();
+    }
+    this.selectedRoleId=this.authService.getCurrentRole().ID;
+    setTimeout(() => {
+      this.loaded=true;
+    }, 50);
+    
+   
   }
 
   //#region Gestione emitter notifiche
@@ -64,59 +76,14 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit {
   }
   //#endregion
 
-   async getRoles(){
-       await this.userService.getAllRolesUserFacilityHashed(this.currentUser.ID).then((hashedRoles) => {
-      this.hashedRoles = hashedRoles;
-      // Check del Ruolo
-      var roleRules: Array<RoleRuleDTO> = new Array<RoleRuleDTO>();
-      // res = res.filter(x => x.RoleDTO.FK_Facilitie == this.currentFacilitieId || x.RoleDTO.FK_Facilitie == null);
-          this.hashedRoles.forEach((role) => {
-            let decodedrole = this.authService.decodeToken(role);
-            //todo tagliare l'oggetto user
-            decodedrole.Role.RoleRules.forEach((roleRule) => {
-              roleRules.push(roleRule);
-            });
-            this.manageableRoles.push(decodedrole.Role);
-          });
-
-          // this.currentRoleTypes = this.authService.getCurrentRoleTypes(roleRules);
-          this.currentRole = this.authService.getCurrentRole();
-
-          // se non trova il currentRole lo imposta
-          if (this.currentRole == null && this.manageableRoles.length > 0) {
-            this.currentRole = this.manageableRoles[0];
-            this.authService.setCurrentRole(this.hashedRoles[0]);
-          } else if (this.manageableRoles.length > 0) {
-            let roleIndex = this.manageableRoles.findIndex((x) => x.ID == this.currentRole.ID);
-            this.currentRole = this.manageableRoles[roleIndex];
-            this.authService.setCurrentRole(this.hashedRoles[roleIndex]);
-          }
-      });   
-  }
+  
 
 
-      changeRole(ev:RoleDTO){
-        this.router.navigate(["/dashboard"]).then(() => {
-        this.currentRole = ev;
-        let roleiindex = this.manageableRoles.findIndex((x) => x.ID == ev.ID);
-        this.authService.setCurrentRole(this.hashedRoles[roleiindex]);
-        this.reloadComponent();
-      });
+    changeRole(id:number){
+        this.selectedRoleId = id;
+        this.selectedRole = this.manageableRoles.find(r => r.ID === id);
+        this.selectedRoleEvent.emit(this.selectedRole);
+       
       
     }
-
-     reloadComponent() {
-        let dashBoardUrl: string = "/dashboard";
-        if (window.innerWidth >= 992) {
-          this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-          this.router.onSameUrlNavigation = "reload";
-          this.router.navigate([dashBoardUrl], { relativeTo: this.activatedRoute });
-        } else {
-          location.reload();
-        }
-  }
-
-   
-
-
 }

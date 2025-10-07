@@ -39,13 +39,13 @@
     <!-- Contenitore con label e select -->
     <div class="d-flex flex-column role-wrapper">
       <label class="role-label">Ruolo</label>
-      <mat-select
+      <mat-select *ngIf="loaded"
         class="role-inline-select"
-        [(value)]="currentRole"
+        [(value)]="selectedRoleId"
         (selectionChange)="changeRole($event.value)"
-        *ngIf="manageableRoles?.length > 0"
+        
       >
-        <mat-option *ngFor="let role of manageableRoles" [value]="role">
+        <mat-option *ngFor="let role of manageableRoles" [value]="role.ID">
           {{ role.Description }}
         </mat-option>
       </mat-select>
