@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
+import { RouterModule, RouterStateSnapshot, Routes } from "@angular/router";
 import { ChangePasswordComponent } from "./components/change-password/change-password.component";
 import { ErrorComponent } from "./components/error/error.component";
 import { ForgotComponent } from "./components/forgot/forgot.component";
@@ -11,6 +11,8 @@ import { ListNotificationsComponent } from "./components/notifications/list-noti
 import { ProfileComponent } from "./components/profile/profile.component";
 import { TestComponent } from "./components/test-component/test-component";
 import { DefaultLayoutComponent } from "./containers";
+import { AuthGuard } from "./helpers/auth.guard";
+import { PermissionGuard } from "./helpers/permission.guard";
 
 const routes: Routes = [
   {
@@ -96,6 +98,14 @@ const routes: Routes = [
       }
     ]
   },
+     {
+        path: 'registry',
+        canActivate: [AuthGuard, PermissionGuard],
+        data: {
+          state: RouterStateSnapshot
+        },
+        loadChildren: () => import('./components/registry/registry.module').then(m => m.RegistryModule)
+      },
   { path: "**", component: ErrorComponent }
 ];
 

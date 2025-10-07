@@ -40,11 +40,12 @@ registerLocaleData(localeIt, 'it-IT');
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Injector } from '@angular/core';
-import { SharedModule } from 'src/modules/shared.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EqpUiModule } from '@eqproject/eqp-ui';
 import { ChangeForgotPasswordComponent } from './components/change-forgot-password/change-forgot-password.component';
 import { TenantInterceptor } from './interceptors/tenant.interceptor';
+import { SharedModule } from '../modules/shared.module';
+import { RegistryModule } from './components/registry/registry.module';
 
 //TODO: usare npm i ngx-scrollbar con suppressScrollX come per il DEFAULT_PERFECT_SCROLLBAR_CONFIG (deprecato)
 // const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -77,7 +78,8 @@ const APP_CONTAINERS = [
     SharedModule.forRoot(),
     FontAwesomeModule,
     ToastrModule.forRoot(),
-    EqpUiModule
+    EqpUiModule,
+    RegistryModule
   ],
   providers: [
     {
