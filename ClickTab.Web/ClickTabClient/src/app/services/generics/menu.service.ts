@@ -4,7 +4,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../auth.service';
 import { MenuDTO } from '../../models/generics/menu.model';
 import { environment } from '../../../environments/environment';
-import { SystemRole } from '../../models/generics/user.model';
 import { INavData } from '@eqproject/eqp-ui';
 // import { RoleDimensionEnum } from '../models/enums/roleDimensioEnum';
 

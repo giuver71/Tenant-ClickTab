@@ -4,7 +4,7 @@ import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
 import * as signalR from "@microsoft/signalr";
 import { Subscription } from "rxjs";
 import { environment } from "./../../../environments/environment";
-import { SystemRole, UserDTO } from "./../../models/generics/user.model";
+import { UserDTO } from "./../../models/generics/user.model";
 import { NotificationDetailDTO } from "./../../models/notification-center/notificationDetail.model";
 import { AuthService } from "./../../services/auth.service";
 import { DialogService } from "./../../services/dialog.service";

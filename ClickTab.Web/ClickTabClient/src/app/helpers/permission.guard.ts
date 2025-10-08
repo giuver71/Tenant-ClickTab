@@ -4,7 +4,7 @@ import { TranslateService } from "@ngx-translate/core";
 // import { RoleDimensionEnum } from "../models/enums/roleDimensioEnum";
 import { MenuDTO } from "../models/generics/menu.model";
 import { RoleDTO } from "../models/generics/role.model";
-import { SystemRole, UserDTO } from "../models/generics/user.model";
+import { UserDTO } from "../models/generics/user.model";
 import { AuthService } from '../services/auth.service';
 import { DialogService } from "../services/dialog.service";
 // import { isNumeric } from 'rxjs/internal/utils';

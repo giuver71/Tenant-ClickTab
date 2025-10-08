@@ -34,7 +34,10 @@ namespace ClickTab.Web.Controllers
         public async Task<IActionResult> Login([FromBody] dynamic loginData)
         {
             User loginUser = _authService.Login(loginData.Email.ToString(), loginData.Password.ToString());
-
+            if (loginUser.Status==UserStatusEnum.Disabilitato)
+            {
+                throw new Exception("Utente non abilitato all'accesso");
+            }
             Dictionary<string, object> payload = new Dictionary<string, object>();
             payload.Add(AuthService.PAYLOAD_USER_KEY, _mappingService.CurrentMapper.Map<User>(loginUser));
 

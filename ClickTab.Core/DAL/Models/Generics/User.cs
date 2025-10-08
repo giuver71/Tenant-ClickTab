@@ -21,6 +21,7 @@ namespace ClickTab.Core.DAL.Models.Generics
 
         public bool ChangedPassword { get; set; }
 
+        public UserStatusEnum Status { get; set; }
         public DateTime SubscriptionDate { get; set; }
 
         public List<UserRole> UserRoles { get; set; }
@@ -32,5 +33,11 @@ namespace ClickTab.Core.DAL.Models.Generics
         // <ewz:enum area>
 
     }
+    public enum UserStatusEnum
+    {
+        Abilitato = 1,
+        Disabilitato = 2
+    }
 
 }
+

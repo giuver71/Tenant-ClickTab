@@ -19,6 +19,8 @@ namespace ClickTab.Web.Mappings.ModelsDTO
         public string Password { get; set; }
         public bool ChangedPassword { get; set; }
         public DateTime SubscriptionDate { get; set; }
+        public UserStatusEnum Status { get; set; }
+
 
     }
 }

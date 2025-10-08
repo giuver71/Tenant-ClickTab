@@ -4,6 +4,7 @@ using ClickTab.Core.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClickTab.Core.Migrations.MSSQL
 {
     [DbContext(typeof(MSSQL_DbContext))]
-    partial class MSSQL_DbContextModelSnapshot : ModelSnapshot
+    [Migration("20251008144237_Update_Users_ADD_Status")]
+    partial class Update_Users_ADD_Status
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

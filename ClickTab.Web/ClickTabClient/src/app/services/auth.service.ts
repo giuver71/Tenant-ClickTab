@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { UserDTO } from '../models/generics/user.model';
+import { UserDTO, UserStatusEnum } from '../models/generics/user.model';
 import { environment } from './../../environments/environment';
 import { RoleDTO } from '../models/generics/role.model';
 import { LS_CURRENT_ROLE_ID } from '../helpers/global-consts';
@@ -77,6 +77,9 @@ export class AuthService {
    */
   getCurrentUser(): UserDTO {
     let decodedToken = helper.decodeToken(this.getCurrentToken())
+    console.log("decodetoken",decodedToken);
+    let user:UserDTO=decodedToken.User as UserDTO;
+   
     return decodedToken != undefined ? decodedToken.User : null;
   }
 

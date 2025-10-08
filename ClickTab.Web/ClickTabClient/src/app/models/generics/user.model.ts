@@ -9,11 +9,18 @@ export class UserDTO {
   Password: string;
   ChangedPassword: boolean;
   SubscriptionDate: Date;
+  Status:UserStatusEnum;
 }
 
-export enum SystemRole {
+export enum SystemRoleEnum {
   ADMIN = 1,
   USER = 2
+}
+
+export enum UserStatusEnum
+{
+    Abilitato=1,
+    Disabilitato=2
 }
 
 

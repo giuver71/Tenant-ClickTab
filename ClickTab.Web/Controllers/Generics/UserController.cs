@@ -47,7 +47,6 @@ namespace ClickTab.Web.Controllers
 
 
         [HttpGet, Route("/api/[controller]/GetAllUsers")]
-        [AllowAnonymous]
         public async Task<IActionResult> GetAllUsers()
         {
             List<User> users = _userService.GetAll().ToList();
@@ -82,7 +81,6 @@ namespace ClickTab.Web.Controllers
 
 
         [HttpPost, Route("/api/[controller]")]
-        [AllowAnonymous]
         public async Task<IActionResult> SaveUser([FromBody] UserDTO userDto)
         {
             User userToSave = _autoMappingService.CurrentMapper.Map<User>(userDto);
@@ -273,6 +271,14 @@ namespace ClickTab.Web.Controllers
             return Ok(hashedUserRoleList);
         }
 
-
+        [HttpGet("/api/[controller]/ChangeStatus/{status}/{id}")]
+        public async Task<IActionResult> ChangeStatus(UserStatusEnum status,int id)
+        {
+            User user =new User();
+            user.ID = id;
+            user.Status = status;
+            _userService.UpdateEntityProperties(user, true, new string[] { "Status" });
+            return Ok();
+        }
     }
 }

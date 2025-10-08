@@ -17,7 +17,7 @@ namespace ClickTab.Core.DAL.Context.EntityConfigurations.Generics
             builder.Property(u => u.Surname).IsRequired().HasMaxLength(80);
             builder.Property(u => u.Email).IsRequired().HasMaxLength(50);
             builder.Property(u => u.Password).IsRequired().HasMaxLength(256);
-            
+            builder.Property(u => u.Status).IsRequired().HasDefaultValue(UserStatusEnum.Abilitato);
             //Definisce l'indice univoco per il campo email dello User
             builder.HasIndex(u => u.Email).IsUnique();
             // <ewz:CandidateKeyAndIndexes>
