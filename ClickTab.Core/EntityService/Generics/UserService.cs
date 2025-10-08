@@ -62,17 +62,7 @@ namespace ClickTab.Core.EntityService.Generics
         // *********************************************************************************************************
         // Cancellare questo metodo per avere i dati veri dal DB
         // *********************************************************************************************************
-        public override List<User> GetAll(params Expression<Func<User, object>>[] includes)
-        {
-            List<User> dummy = new List<User>
-                {
-                    new User { Name = "Fabio", Surname = "Faieta", Email = "fabio.faieta@eqproject.it", ID = 1, SubscriptionDate = DateTime.Now, ChangedPassword=true },
-                    new User { Name = "Andrea", Surname = "Cipollone", Email = "cipoci@eqproject.it", ID = 2, SubscriptionDate = DateTime.Now, ChangedPassword=false },
-                    new User { Name = "Mario", Surname = "Rossi", Email = "mario.rossi@eqproject.it", ID = 3, SubscriptionDate = DateTime.Now, ChangedPassword=true }
-                };
-
-            return dummy;
-        }
+      
 
 
 
@@ -111,8 +101,8 @@ namespace ClickTab.Core.EntityService.Generics
 
                 int userSavedID = base.Save(entity, saveChanges);
 
-                if (sendMail == true)
-                    _emailService.CreateNewCredentialEmail(entity, clearPassword);
+                //if (sendMail == true)
+                //    _emailService.CreateNewCredentialEmail(entity, clearPassword);
 
                 return userSavedID;
             }

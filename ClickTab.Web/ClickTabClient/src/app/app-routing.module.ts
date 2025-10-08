@@ -76,6 +76,15 @@ const routes: Routes = [
         loadChildren: () => import("./components/core/core.module").then((m) => m.CoreModule)
       },
       {
+        path: "registry",   
+        canActivate: [AuthGuard, PermissionGuard],
+        data: { 
+          title:"Anagrafiche",
+          state: RouterStateSnapshot },
+        loadChildren: () =>
+          import("./components/registry/registry.module").then((m) => m.RegistryModule)
+      },
+      {
         path: "profile",
         component: ProfileComponent,
         data: {
@@ -98,14 +107,7 @@ const routes: Routes = [
       }
     ]
   },
-     {
-        path: 'registry',
-        canActivate: [AuthGuard, PermissionGuard],
-        data: {
-          state: RouterStateSnapshot
-        },
-        loadChildren: () => import('./components/registry/registry.module').then(m => m.RegistryModule)
-      },
+     
   { path: "**", component: ErrorComponent }
 ];
 

@@ -1,65 +1,34 @@
 import { INavData } from "@eqproject/eqp-ui";
 
-/**
- * Voci della sidebar
- */
+function abs(u: string | undefined): string | undefined {
+  if (!u) return u;
+  return u.startsWith('/') ? u : '/' + u;
+}
+
+// Menu di navigazione
 export const navItems: INavData[] = [
   {
     name: 'Dashboard',
-    url: '/dashboard',
+    url: abs('/dashboard'),
     icon: 'fa fa-home'
   },
   {
     name: 'Anagrafica',
-    url: 'anagrafica',
+    url: '/registry',            // il modulo principale
     icon: 'fa fa-user',
     children: [
       {
-        name: 'Dipendenti',
-        url: '/employees',
-        icon: '#'
+        name: 'Clienti',
+        url: 'list-users'        // ❌ niente slash davanti → è relativo al path "registry"
       },
       {
-        name: 'Mansioni',
-        url: '/tasks',
-        icon: '#'
+        name: 'Ruoli',
+        url: 'list-roles'
       },
       {
-        name: 'Incarichi',
-        url: '/assignments',
-        icon: '#'
-      },
+        name: 'Prodotti',
+        url: 'list-products'
+      }
     ]
-  },
-  {
-    name: 'Test',
-    url: 'test',
-    icon: 'fa fa-pie-chart',
-  },
-
+  }
 ];
-
-  // {
-  //   name: 'Pages',
-  //   url: '/login',
-  //   iconComponent: { name: 'cil-star' },
-  //   children: [
-  //     {
-  //       name: 'Login',
-  //       url: '/login'
-  //     },
-  //     {
-  //       name: 'Register',
-  //       url: '/register'
-  //     },
-  //     {
-  //       name: 'Error 404',
-  //       url: '/404'
-  //     },
-  //     {
-  //       name: 'Error 500',
-  //       url: '/500'
-  //     }
-  //   ]
-  // },
-

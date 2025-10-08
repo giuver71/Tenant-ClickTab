@@ -1,6 +1,6 @@
 import { Component, TemplateRef, ViewChild } from "@angular/core";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
 import * as signalR from "@microsoft/signalr";
 import { Subscription } from "rxjs";
 import { environment } from "./../../../environments/environment";
@@ -48,7 +48,7 @@ export class DefaultLayoutComponent {
     suppressScrollX: true
   };
 
- 
+  navitems!:INavData[];
 
   constructor(
     private menuService:MenuService,
@@ -77,6 +77,10 @@ export class DefaultLayoutComponent {
   }
 
  async  ngOnInit() {
+
+  
+
+  // this.navItems=navItems;
     this.currentUser=this.authService.getCurrentUser();
     this.currentRole=this.authService.getCurrentRole();
     console.log("User",this.authService.getCurrentUser());
@@ -93,6 +97,8 @@ export class DefaultLayoutComponent {
     await this.getRoles();
     this.getMenu();
   }
+
+  
 
    async getRoles(){
     this.loaded=false;

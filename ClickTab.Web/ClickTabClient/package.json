@@ -2,7 +2,7 @@
   "name": "eqp-angular-admin-template",
   "version": "1.0.0",
   "scripts": {
-    "4401": "node --max_old_space_size=8048 ./node_modules/@angular/cli/bin/ng serve --port 4401",
+    "4402": "node --max_old_space_size=8048 ./node_modules/@angular/cli/bin/ng serve --port 4402",
     "ng": "ng",
     "start": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng serve",
     "build": "ng build",
