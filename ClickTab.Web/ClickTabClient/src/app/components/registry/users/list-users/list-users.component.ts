@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { UserDTO, UserStatusEnum } from '../../../models/generics/user.model';
+import { UserDTO, UserStatusEnum } from '../../../../models/generics/user.model';
 import { CellAlignmentEnum, ConfigColumn, TypeColumn } from '@eqproject/eqp-common';
-import { UserService } from '../../../services/user.service';
-import { DialogService } from '../../../services/dialog.service';
-import { AuthService } from '../../../services/auth.service';
+import { UserService } from '../../../../services/user.service';
+import { DialogService } from '../../../../services/dialog.service';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-list-users',

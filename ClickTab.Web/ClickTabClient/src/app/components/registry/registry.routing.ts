@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, RouterStateSnapshot } from '@angular/router';
-import { ListUsersComponent } from './list-users/list-users.component';
+import { ListUsersComponent } from './users/list-users/list-users.component';
 import { AuthGuard } from '../../helpers/auth.guard';
 import { PermissionGuard } from '../../helpers/permission.guard';
+import { AddUserComponent } from './users/add-user/add-user.component';
 const routes: Routes = [
   // {
   //   path: 'list-roles',
@@ -36,34 +37,31 @@ const routes: Routes = [
   {
     path: 'list-users',
     component: ListUsersComponent,
-    canActivate: [AuthGuard,PermissionGuard],
+    canActivate: [PermissionGuard],
     data: {
       breadcrumbs: 'Lista Utenti',
       state: RouterStateSnapshot
     },
   },
-  // {
-  //   path: 'add-users',
-  //   component: AddUsersComponent,
-  //   canActivate: [PermissionGuard],
-  //   canDeactivate: [FormGuard],
-  //   data: {
-  //     breadcrumbs: 'BREADCRUMB.USERS',
-  //     state: RouterStateSnapshot,
-  //     isAdminRoute: true
-  //   },
-  // },
-  // {
-  //   path: 'add-users/:id',
-  //   component: AddUsersComponent,
-  //   canActivate: [PermissionGuard],
-  //   canDeactivate: [FormGuard],
-  //   data: {
-  //     breadcrumbs: 'BREADCRUMB.USERS',
-  //     state: RouterStateSnapshot,
-  //     isAdminRoute: true
-  //   },
-  // },
+  {
+    path: 'add-users',
+    component: AddUserComponent,
+    canActivate: [PermissionGuard],
+    data: {
+      breadcrumbs: 'Aggiungi Utente',
+      state: RouterStateSnapshot,
+      isAdminRoute: true
+    },
+  },
+  {
+    path: 'add-users/:id',
+    component: AddUserComponent,
+    canActivate: [PermissionGuard],
+    data: {
+      breadcrumbs: 'Modifica Utente',
+      state: RouterStateSnapshot,
+    },
+  },
 
 ];
 

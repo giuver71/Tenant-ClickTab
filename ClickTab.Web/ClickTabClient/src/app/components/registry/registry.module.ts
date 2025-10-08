@@ -5,7 +5,8 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { SharedModule } from '../../../modules/shared.module';
  
 import { RegistryRoutingModule } from './registry.routing';
-import { ListUsersComponent } from './list-users/list-users.component';
+import { ListUsersComponent } from './users/list-users/list-users.component';
+import { AddUserComponent } from './users/add-user/add-user.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { ListUsersComponent } from './list-users/list-users.component';
     SharedModule
   ],
   declarations: [
-    ListUsersComponent
+    ListUsersComponent,
+    AddUserComponent
   ],
   exports: [
   ],
