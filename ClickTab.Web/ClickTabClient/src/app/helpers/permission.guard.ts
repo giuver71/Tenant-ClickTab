@@ -51,7 +51,7 @@ export class PermissionGuard implements CanActivate {
     let currentRole: RoleDTO = this.authService.getCurrentRole();
 
     if(!currentRole) {
-      DialogService.Error("Non hai i pemessi per accedere a questa pagina!","permission-guard canActivate() 1");
+      DialogService.Error("Non hai i pemessi per accedere a questa pagina!","Controllo Autorizzazioni");
       return false;
     }
 
@@ -70,7 +70,6 @@ export class PermissionGuard implements CanActivate {
     //   roleRules = this.authService.getCurrentTutoredPermissions().RoleRules;
     // }
 
-    console.log("permission.guard.ts", roleRules);
 
     roleRules.filter(x => x.RuleUrlRoutes != null).forEach((rr) => {
     //console.log("RoleRulkes",roleRules);
@@ -86,7 +85,7 @@ export class PermissionGuard implements CanActivate {
     });
 
     if (!allowed) {
-      DialogService.Error(this.translate.instant("Non hai i permessi per accedere a questa sezione!"),"permission-guard canActivate() 2");
+      DialogService.Error(this.translate.instant("Non hai i permessi per accedere a questa sezione!"),"Controllo Accessi");
       this.router.navigate(['/dashboard']);
       return false;
     }
