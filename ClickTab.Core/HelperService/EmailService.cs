@@ -16,8 +16,8 @@ namespace ClickTab.Core.HelperService
         private FileService _fileService;
         private const string _TEMPLATE_MAIL_NEW_USER = "NewUserTemplate.html";
         private const string _TEMPLATE_MAIL_RESET_PASSWORD = "ResetPasswordTemplate.html";
-        private const string _TEMPLATE_MAIL_NEW_USER_WELCOME_IMAGE = "Logo-bianco.png";
-        private const string _TEMPLATE_MAIL_RESET_PASSWORD_IMAGE = "Logo-bianco.png";
+        private const string _TEMPLATE_MAIL_NEW_USER_WELCOME_IMAGE = "LogoClickTab.png";
+        private const string _TEMPLATE_MAIL_RESET_PASSWORD_IMAGE = "LogoClickTab.png";
         public const string _TEMPLATE_MAIL_SYSTEM_NOTIFICATION = "SystemNotificationTemplate.html";
         private const string _TEMPLATE_MAIL_RESET_PASSWORD_URLTOKEN = "ResetPasswordUrlToken.html";
         private const string _TEMPLATE_MAIL_CHANGED_PASSWORD = "ChangedPassword.html";
