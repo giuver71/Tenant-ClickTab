@@ -1,0 +1,29 @@
+<div class="page-header">
+  <!-- Sezione sinistra: titolo + back -->
+  <div class="page-header-left">
+    <h2 class="page-title">{{ title }}</h2>
+    <button
+      type="button"
+      class="btn-back"
+      matTooltip="Torna indietro"
+      (click)="goBack()"
+    >
+      <i class="fa fa-arrow-left"></i>
+    </button>
+  </div>
+
+  <!-- Sezione destra: bottoni azione -->
+  <div class="page-header-actions">
+    <button
+      *ngFor="let btn of buttons"
+      type="button"
+      class="btn btn-sm"
+      [ngClass]="btn.color || 'btn-outline-secondary'"
+      [matTooltip]="btn.label"
+      [disabled]="btn.isDisabled"
+      (click)="handleAction(btn.action)"
+    >
+      <i [class]="btn.icon"></i>
+    </button>
+  </div>
+</div>

@@ -1,4 +1,10 @@
+<app-page-header
+  [title]="'Utenti'"
+  [buttons]="buttons"
+  backRoute="/dashboard">
+</app-page-header>
+
 <eqp-table 
-    [headerTitle]="'Lista Utenti'" [columns]="columns" 
+    [columns]="columns" 
     [data]="users">
 </eqp-table>

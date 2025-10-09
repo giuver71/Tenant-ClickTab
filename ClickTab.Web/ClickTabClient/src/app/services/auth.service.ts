@@ -77,7 +77,6 @@ export class AuthService {
    */
   getCurrentUser(): UserDTO {
     let decodedToken = helper.decodeToken(this.getCurrentToken())
-    console.log("decodetoken",decodedToken);
     let user:UserDTO=decodedToken.User as UserDTO;
    
     return decodedToken != undefined ? decodedToken.User : null;
@@ -123,7 +122,6 @@ export class AuthService {
       return currentRoleUnhashed.Role;
       // return JSON.parse(currentRoleID).Role;
     }else {
-        console.log("getCurrentRole null")
         return null;
     }
   }

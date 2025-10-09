@@ -66,8 +66,9 @@ const routes: Routes = [
     children: [
       {
         path: "dashboard",
-        data: {
-          title: "Dashboard"
+         data: {
+          title: "Dashboard",
+          breadcrumb: "Dashboard"
         },
         loadChildren: () => import("./components/dashboard/dashboard.module").then((m) => m.DashboardModule)
       },
@@ -79,7 +80,7 @@ const routes: Routes = [
         path: "registry",   
         canActivate: [AuthGuard, PermissionGuard],
         data: { 
-          title:"Anagrafiche",
+          breadcrumb: "Anagrafica",
           state: RouterStateSnapshot },
         loadChildren: () =>
           import("./components/registry/registry.module").then((m) => m.RegistryModule)

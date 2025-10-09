@@ -25,6 +25,8 @@ import localeIT from '@angular/common/locales/it';
 import { EqpFiltersModule } from '@eqproject/eqp-filters';
 import { EqpNumericInputMode, EqpNumericModule, NumericMaskConfig } from "@eqproject/eqp-numeric";
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { PageHeaderComponent } from '../app/elements/page-header/page-header.component';
+ 
 
 export const customNumericMaskConfig: NumericMaskConfig = {
   align: "right",
@@ -65,7 +67,8 @@ export const customNumericMaskConfig: NumericMaskConfig = {
     }),
     EqpFiltersModule,
     EqpNumericModule.forRoot(customNumericMaskConfig),
-    NgxMaterialTimepickerModule
+    NgxMaterialTimepickerModule,
+   
   ],
   exports: [
     FormsModule,
@@ -89,14 +92,16 @@ export const customNumericMaskConfig: NumericMaskConfig = {
     EqpTimePickerComponent,
     EqpFiltersModule,
     EqpNumericModule,
-    NgxMaterialTimepickerModule
+    NgxMaterialTimepickerModule,
+    PageHeaderComponent,
   ],
   declarations: [
     DynamicLoaderDirective,
     EqpTranslateEntityComponent,
     EqpMultiLanguageFieldComponent,
     CsvImportExportComponent,
-    EqpTimePickerComponent
+    EqpTimePickerComponent,
+    PageHeaderComponent,
   ]
 })
 

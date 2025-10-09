@@ -1,0 +1,14 @@
+<div class="message-bar" [ngClass]="colorClass">
+  <div class="message-content">
+    <i [class]="icon"></i>
+    <span class="message-text">{{ data.message }}</span>
+  </div>
+
+  <button
+    *ngIf="data.actionLabel"
+    class="close-btn"
+    (click)="close()"
+  >
+    {{ data.actionLabel }}
+  </button>
+</div>

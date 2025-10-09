@@ -4,6 +4,8 @@ import { CellAlignmentEnum, ConfigColumn, TypeColumn } from '@eqproject/eqp-comm
 import { UserService } from '../../../../services/user.service';
 import { DialogService } from '../../../../services/dialog.service';
 import { AuthService } from '../../../../services/auth.service';
+import { HeaderButton } from '../../../../elements/page-header/page-header.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-users',
@@ -14,10 +16,11 @@ export class ListUsersComponent implements OnInit{
   currentUser!:UserDTO;
   users:Array<UserDTO>=new Array<UserDTO>();
   columns:Array<ConfigColumn>=new Array<ConfigColumn>();
-
+  buttons:Array<HeaderButton>=new Array<HeaderButton>();
   constructor(
     private userService:UserService,
-    private authService:AuthService
+    private authService:AuthService,
+    private router:Router
 
   ) {
     
@@ -25,9 +28,24 @@ export class ListUsersComponent implements OnInit{
 
   ngOnInit(): void {
     this.currentUser=this.authService.getCurrentUser();
+    this.configureHeaderButtons();
     this.configureColumns();
     this.reloadUsers();
   }
+
+  configureHeaderButtons(){
+    this.buttons = [
+      {
+        label: 'Aggiungi Nuovo Utente',
+        icon: 'fa fa-plus',
+        color: 'btn-secondary',
+        action: () => this.addUser()
+      },
+     
+    ];
+  }
+
+
   configureColumns(){
     this.columns=[
        {
@@ -63,7 +81,7 @@ export class ListUsersComponent implements OnInit{
   }
 
   editRow(el:UserDTO){
-
+    this.router.navigate(['registry/add-users/', el.ID]);
   }
 
 
@@ -76,6 +94,14 @@ export class ListUsersComponent implements OnInit{
         return { padding:"5px", color: "white", background: "red"  };
      
     }
+  }
+
+  addUser(){
+   this.router.navigate(["registry/add-users"]);
+  }
+
+  refresh(){
+
   }
 
   enableUser(el:UserDTO){

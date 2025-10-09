@@ -20,8 +20,8 @@ export class UserService {
     return this.http.get<Array<UserDTO>>(environment.apiFullUrl + "/User/GetAllUsers").toPromise();
   }
 
-  getUserByID(id: number): Promise<UserDTO> {
-    return this.http.get<UserDTO>(environment.apiFullUrl + "/User/" + id).toPromise();
+  getFull(id: number): Promise<UserDTO> {
+    return this.http.get<UserDTO>(environment.apiFullUrl + "/User/GetFull/" + id).toPromise();
   }
 
   saveUser(user: UserDTO): Promise<any> {

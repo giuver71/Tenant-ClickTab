@@ -101,8 +101,8 @@ namespace ClickTab.Core.EntityService.Generics
 
                 int userSavedID = base.Save(entity, saveChanges);
 
-                //if (sendMail == true)
-                //    _emailService.CreateNewCredentialEmail(entity, clearPassword);
+                if (sendMail == true)
+                    _emailService.CreateNewCredentialEmail(entity, clearPassword);
 
                 return userSavedID;
             }
@@ -185,7 +185,7 @@ namespace ClickTab.Core.EntityService.Generics
             return _repository.GetAllFull();
         }
 
-        public User GetIDFull(int ID)
+        public User GetFull(int ID)
         {
             return _repository.GetFull(ID);
         }

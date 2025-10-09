@@ -83,7 +83,6 @@ export class DefaultLayoutComponent {
   // this.navItems=navItems;
     this.currentUser=this.authService.getCurrentUser();
     this.currentRole=this.authService.getCurrentRole();
-    console.log("User",this.authService.getCurrentUser());
     //Se si vuole avviare il sistema di notifiche ed è presente l'utente autenticato
     //allora avvia i servizi per la ricezione delle notifiche push
     if (
@@ -118,7 +117,6 @@ export class DefaultLayoutComponent {
 
           // this.currentRoleTypes = this.authService.getCurrentRoleTypes(roleRules);
           this.currentRole = this.authService.getCurrentRole();
-          console.log("Ho preso il ruolo",this.currentRole);
 
           // se non trova il currentRole lo imposta
           if (this.currentRole == null && this.manageableRoles.length > 0) {
@@ -134,7 +132,6 @@ export class DefaultLayoutComponent {
   }
  
   onSelectedRole(ev:RoleDTO){
-    console.log("onSelectedRole",ev);
       this.router.navigate(["/dashboard"]).then(() => {
           this.currentRole=ev;
           let roleiindex = this.manageableRoles.findIndex((x) => x.ID == ev.ID);
@@ -158,10 +155,9 @@ export class DefaultLayoutComponent {
     let currentRole:RoleDTO=this.authService.getCurrentRole();
     this.menuService.getMenuByRole(this.currentRole.ID).then((res=>{
         this.navItems=res;
-        console.log("menu",res);
     })).catch((err)=>{
         DialogService.Error(err.message);
-        console.log("getMenu",err);
+        console.error("default-layout.getMenu",err);
 
     })
   }
@@ -191,7 +187,7 @@ export class DefaultLayoutComponent {
 
     this.hubConnection.onclose((error: Error) => {
       if (error) {
-        console.log(error);
+        console.error(error);
         this.retrySocketConnection();
       }
     });

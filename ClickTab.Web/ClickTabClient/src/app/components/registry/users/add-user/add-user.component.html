@@ -1,1 +1,44 @@
-<p>add-user works!</p>
+<app-page-header [title]="'Aggiungi/Modfica Utente'" [buttons]="buttons" backRoute="/registry/list-users">
+</app-page-header>
+<form [formGroup]="userForm" *ngIf="userForm">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-6">
+                <mat-form-field appearance="outline">
+                    <mat-label>Nome</mat-label>
+                    <input matInput required formControlName="name" [(ngModel)]="user.Name" />
+                </mat-form-field>
+            </div>
+
+            <div class="col-6">
+                <mat-form-field appearance="outline">
+                    <mat-label>Cognome</mat-label>
+                    <input matInput required formControlName="surname" [(ngModel)]="user.Surname" />
+                </mat-form-field>
+            </div>
+
+            <div class="col-6">
+                <mat-form-field appearance="outline">
+                    <mat-label>E-Mail</mat-label>
+                    <input matInput required formControlName="email" [(ngModel)]="user.Email"
+                        pattern="^[A-Za-z0-9_\-\.]+\@[A-Za-z0-9_\-\.]+\.[A-Za-z]{2,4}$" />
+                </mat-form-field>
+            </div>
+        </div>
+        <eqp-table  *ngIf="loaded"
+                [columns]="columns" 
+                [data]="user.UserRoles">
+        </eqp-table>
+    </div>
+</form>
+
+<ng-template #permissionTemplate let-row="row" let-col="col">
+  <mat-slide-toggle
+   [color]="
+    !row.IsChecked ? '' :  row.IsChecked ? 'primary' : 'warn'
+  "
+    [(ngModel)]="row.IsChecked"
+  >
+  </mat-slide-toggle>
+</ng-template>

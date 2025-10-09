@@ -105,14 +105,15 @@ namespace ClickTab.Web.Mappings
 
                 #region Importazione profili di mapping
 
-                cfg.AddProfile<UserProfile>();
 
 
                 #region GENERICS
+                cfg.AddProfile<UserProfile>();
                 cfg.AddProfile<MenuProfile>();
                 cfg.AddProfile<RoleProfile>();
                 cfg.AddProfile<RuleProfile>();
                 cfg.AddProfile<RoleRuleProfile>();
+                cfg.AddProfile<UserRoleProfile>();
                 #endregion
 
                 #endregion

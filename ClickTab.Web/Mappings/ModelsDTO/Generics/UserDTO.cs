@@ -1,4 +1,5 @@
 using ClickTab.Core.DAL.Models.Generics;
+using ClickTab.Web.Mappings.ModelsDTO.Generics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,7 @@ namespace ClickTab.Web.Mappings.ModelsDTO
         public bool ChangedPassword { get; set; }
         public DateTime SubscriptionDate { get; set; }
         public UserStatusEnum Status { get; set; }
+        public List<UserRoleDTO> UserRoles { get; set; }
 
 
     }

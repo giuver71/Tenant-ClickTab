@@ -39,7 +39,9 @@ const routes: Routes = [
     component: ListUsersComponent,
     canActivate: [PermissionGuard],
     data: {
+      title:'Lista Utenti',
       breadcrumbs: 'Lista Utenti',
+
       state: RouterStateSnapshot
     },
   },

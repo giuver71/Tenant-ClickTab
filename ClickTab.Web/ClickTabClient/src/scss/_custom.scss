@@ -10,6 +10,9 @@
 @import "bootstrap/scss/_mixins";
 @import "ngx-toastr/toastr-bs5-alert";
 
+
+
+
 .notificationBadge {
   background-color: red;
   color: white;
@@ -46,6 +49,10 @@ ngx-masonry .grid-item {
 
 .full-width {
   width: 100%;
+}
+
+.width50{
+   width: 40%;
 }
 
 // Per Hyperlink breadcrumb

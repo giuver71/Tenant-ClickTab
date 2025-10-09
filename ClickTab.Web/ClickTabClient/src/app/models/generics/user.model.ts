@@ -1,3 +1,5 @@
+import { UserRoleDTO } from "./userRole.model";
+
 /**
  * Modello per memorizzare i dati dell'utente
  */
@@ -10,6 +12,7 @@ export class UserDTO {
   ChangedPassword: boolean;
   SubscriptionDate: Date;
   Status:UserStatusEnum;
+  UserRoles:Array<UserRoleDTO>;
 }
 
 export enum SystemRoleEnum {

@@ -71,12 +71,12 @@ namespace ClickTab.Web.Controllers
             return Ok(dtoUser);
         }
 
-        [HttpGet, Route("/api/[controller]/full/{id}")]
-        public async Task<IActionResult> GetIDFullUser(int id)
+        [HttpGet, Route("/api/[controller]/GetFull/{id}")]
+        public async Task<IActionResult> GetFull(int id)
         {
-            var userToSave = _userService.GetIDFull(id);
-            var userSavedID = _autoMappingService.CurrentMapper.Map<UserDTO>(userToSave);
-            return Ok(userSavedID);
+            User user = _userService.GetFull(id);
+            UserDTO dto = _autoMappingService.CurrentMapper.Map<UserDTO>(user);
+            return Ok(dto);
         }
 
 

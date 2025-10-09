@@ -21,6 +21,8 @@ namespace ClickTab.Core.DAL.Repository.Generics
         public override void Save(User entity, bool checkConcurrency = true)
         {
             // <ewz:manageRelationships>
+            ManageOneToManyRelationEntityState(entity.UserRoles, p => p.FK_User == entity.ID);
+
             base.Save(entity);
         }
 
@@ -28,7 +30,7 @@ namespace ClickTab.Core.DAL.Repository.Generics
 
         public User GetFull(int id)
         {
-            IQueryable<User> _data = _DatabaseContext.Users.Where(a => a.ID == id);
+            IQueryable<User> _data = _DatabaseContext.Users.Where(a => a.ID == id).Include(p=>p.UserRoles).ThenInclude(p=>p.Role);
 
             return _data.FirstOrDefault();
         }
