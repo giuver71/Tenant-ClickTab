@@ -48,6 +48,10 @@ export class LoginComponent implements OnInit {
    * Se le credenziali risultano memorizzate nel local storage allora le recupera e popola i controlli per la login
    */
   reloadCredentialIfExists() {
+    var localTenant=localStorage.getItem("tenant");
+    if(localTenant){
+      this.f.tenant.setValue(localTenant);
+    }
     var credentialEncoded = localStorage.getItem(LOCAL_STORAGE_CREDENTIAL);
     if (credentialEncoded != null) {
       var credentialDecoded = JSON.parse(atob(credentialEncoded));
@@ -80,8 +84,9 @@ export class LoginComponent implements OnInit {
       var credentialEncoded = btoa(JSON.stringify(credential));
       localStorage.setItem(LOCAL_STORAGE_CREDENTIAL, credentialEncoded);
     }
-    else
+    else{
       localStorage.removeItem(LOCAL_STORAGE_CREDENTIAL);
+    }
 
     localStorage.setItem('tenant',this.f.tenant.value)
     
