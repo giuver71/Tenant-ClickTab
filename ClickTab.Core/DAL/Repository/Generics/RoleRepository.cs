@@ -56,5 +56,12 @@ namespace ClickTab.Core.DAL.Repository.Generics
             return role;
 
         }
+
+        public Role GetFull(int id)
+        {
+            IQueryable<Role> _data = _context.Roles.Where(a => a.ID == id).Include(p => p.RoleRules).ThenInclude(p=>p.Rule);
+
+            return _data.FirstOrDefault();
+        }
     }
 }

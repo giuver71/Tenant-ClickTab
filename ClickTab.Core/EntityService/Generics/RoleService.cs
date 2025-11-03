@@ -87,6 +87,9 @@ namespace ClickTab.Core.EntityService.Generics
             return roleRules.OrderByDescending(p=>p.IsSelected).ToList();
         }
 
-        
+        public Role GetFull(int ID)
+        {
+            return _repository.GetFull(ID);
+        }
     }
 }

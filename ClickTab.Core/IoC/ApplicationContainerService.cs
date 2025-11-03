@@ -109,6 +109,7 @@ namespace ClickTab.Core.IoC
             #region Generics
             builder.RegisterType<MenuService>().AsSelf();
             builder.RegisterType<RoleService>().AsSelf();
+            builder.RegisterType<RuleService>().AsSelf();
             builder.RegisterType<UserRoleService>().AsSelf();
             #endregion
 

@@ -8,8 +8,8 @@ namespace ClickTab.Web.Mappings.ModelsDTO.Generics
     {
         public int ID { get; set; }
         public int FK_Rule { get; set; }
+        public string RuleDescription {  get; set; }
         public int FK_Role {  get; set; }
-        public RuleDTO Rule { get; set; }
         public string RuleUrlRoutes { get; set; }
         public bool CanCreate { get; set; }
         public bool CanEdit { get; set; }

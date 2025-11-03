@@ -3,9 +3,10 @@ import { Injectable } from "@angular/core";
 import { AuthService } from "../auth.service";
 import { RoleDTO } from "../../models/generics/role.model";
 import { environment } from "../../../environments/environment";
+import { RuleDTO } from "../../models/generics/rule.model";
 
 @Injectable({ providedIn: 'root' })
-export class RoleService{
+export class RuleService{
 
     constructor(
         private http: HttpClient,
@@ -14,15 +15,9 @@ export class RoleService{
     }
 
     getAll(){
-         return this.http.get<Array<RoleDTO>>(environment.apiFullUrl + '/Role/GetAll/').toPromise();
+         return this.http.get<Array<RuleDTO>>(environment.apiFullUrl + '/Rule/GetAll/').toPromise();
     }
 
-   getFull(id: number): Promise<RoleDTO> {
-       return this.http.get<RoleDTO>(environment.apiFullUrl + "/Role/GetFull/" + id).toPromise();
-    }
 
-    saveRole(role: RoleDTO): Promise<any> {
-        return this.http.post<any>(environment.apiFullUrl + "/Role", role).toPromise();
-      }
 
 }

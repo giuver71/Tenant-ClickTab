@@ -1,6 +1,6 @@
 export class RuleDTO {
   public ID: number;
-  public DescriptionEnum: RulesDescriptionEnum;
+  public Description: string;
   public UrlRoutes: string;
 }
 ​

@@ -15,14 +15,14 @@ namespace ClickTab.Web.Controllers.Generics
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RoleController : ControllerBase
+    public class RuleController : ControllerBase
     {
-        private RoleService _roleService;
+        private RuleService _ruleService;
         private DatabaseContext _dbContext;
         private AutoMappingService _autoMappingService;
-        public RoleController(RoleService roleService, DatabaseContext dbContext, AutoMappingService autoMappingService)
+        public RuleController(RuleService ruleService, DatabaseContext dbContext, AutoMappingService autoMappingService)
         {
-            _roleService = roleService;
+            _ruleService = ruleService;
             _dbContext = dbContext;
             _autoMappingService = autoMappingService;
         }
@@ -34,26 +34,14 @@ namespace ClickTab.Web.Controllers.Generics
         [HttpGet, Route("/api/[controller]/GetAll")]
         public async Task<IActionResult> GetAll()
         {
-            List<Role> roles = _roleService.GetAll();
-            List<RoleDTO> dtos = _autoMappingService.CurrentMapper.Map<List<RoleDTO>>(roles);
+            List<Rule> rules = _ruleService.GetAll();
+            List<RuleDTO> dtos = _autoMappingService.CurrentMapper.Map<List<RuleDTO>>(rules);
             return Ok(dtos);
         }
 
-        [HttpGet, Route("/api/[controller]/GetFull/{id}")]
-        public async Task<IActionResult> GetFull(int id)
-        {
-            Role model = _roleService.GetFull(id);
-            RoleDTO dto = _autoMappingService.CurrentMapper.Map<RoleDTO>(model);
-            return Ok(dto);
-        }
+       
 
-        [HttpPost, Route("/api/[controller]")]
-        public async Task<IActionResult> SaveRole([FromBody] RoleDTO dto)
-        {
-            Role model = _autoMappingService.CurrentMapper.Map<Role>(dto);
-            int ID = _roleService.Save(model);
-            return Ok(ID);
-        }
+
 
 
 

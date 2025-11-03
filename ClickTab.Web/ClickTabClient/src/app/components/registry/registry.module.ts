@@ -7,6 +7,8 @@ import { SharedModule } from '../../../modules/shared.module';
 import { RegistryRoutingModule } from './registry.routing';
 import { ListUsersComponent } from './users/list-users/list-users.component';
 import { AddUserComponent } from './users/add-user/add-user.component';
+import { ListRolesComponent } from './roles/list-roles/list-roles.component';
+import { AddRolesComponent } from './roles/add-roles/add-roles.component';
 
 @NgModule({
   imports: [
@@ -18,7 +20,9 @@ import { AddUserComponent } from './users/add-user/add-user.component';
   ],
   declarations: [
     ListUsersComponent,
-    AddUserComponent
+    AddUserComponent,
+    ListRolesComponent,
+    AddRolesComponent
   ],
   exports: [
   ],

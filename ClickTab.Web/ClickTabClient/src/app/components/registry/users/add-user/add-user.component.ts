@@ -120,7 +120,7 @@ export class AddUserComponent implements OnInit {
         duration: 4000,
         actionLabel: 'Chiudi',
         onClose: () => this.router.navigate(['/registry/list-users'])
-  });
+      });
     }).catch((err) => {
       console.error("addUser.Save", err);
       DialogService.Error(err.message);

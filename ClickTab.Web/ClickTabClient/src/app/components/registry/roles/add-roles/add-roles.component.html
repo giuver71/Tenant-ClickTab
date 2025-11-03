@@ -1,0 +1,19 @@
+<app-page-header [title]="'Aggiungi/Modfica Ruolo'" [buttons]="buttons" backRoute="/registry/list-roles">
+</app-page-header>
+<form [formGroup]="roleForm" *ngIf="roleForm">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-6">
+                <mat-form-field appearance="outline">
+                    <mat-label>Descrizione</mat-label>
+                    <input matInput required formControlName="description" [(ngModel)]="role.Description" />
+                </mat-form-field>
+            </div>
+        </div>
+        <eqp-table  *ngIf="loaded"
+                [columns]="columns" 
+                [data]="role.RoleRules">
+        </eqp-table>
+    </div>
+</form>

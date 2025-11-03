@@ -4,36 +4,38 @@ import { ListUsersComponent } from './users/list-users/list-users.component';
 import { AuthGuard } from '../../helpers/auth.guard';
 import { PermissionGuard } from '../../helpers/permission.guard';
 import { AddUserComponent } from './users/add-user/add-user.component';
+import { ListRolesComponent } from './roles/list-roles/list-roles.component';
+import { AddRolesComponent } from './roles/add-roles/add-roles.component';
 const routes: Routes = [
-  // {
-  //   path: 'list-roles',
-  //   component: ListRolesComponent,
-  //   canActivate: [PermissionGuard],
-  //   data: {
-  //     breadcrumbs: 'BREADCRUMB.ROLES',
-  //     state: RouterStateSnapshot
-  //   },
-  // }, 
-  // {
-  //   path: 'add-roles',
-  //   component: AddRolesComponent,
-  //   canActivate: [PermissionGuard],
-  //   canDeactivate: [FormGuard],
-  //   data: {
-  //     breadcrumbs: 'BREADCRUMB.ROLES',
-  //     state: RouterStateSnapshot
-  //   },
-  // },
-  // {
-  //   path: 'add-roles/:id',
-  //   component: AddRolesComponent,
-  //   canActivate: [PermissionGuard],
-  //   canDeactivate: [FormGuard],
-  //   data: {
-  //     breadcrumbs: 'BREADCRUMB.ROLES',
-  //     state: RouterStateSnapshot
-  //   },
-  // },
+  {
+    path: 'list-roles',
+    component: ListRolesComponent,
+    canActivate: [PermissionGuard],
+    data: {
+      breadcrumbs: 'BREADCRUMB.ROLES',
+      state: RouterStateSnapshot
+    },
+  }, 
+  {
+    path: 'add-roles',
+    component: AddRolesComponent,
+    canActivate: [PermissionGuard],
+    canDeactivate: [],
+    data: {
+      breadcrumbs: 'BREADCRUMB.ROLES',
+      state: RouterStateSnapshot
+    },
+  },
+  {
+    path: 'add-roles/:id',
+    component: AddRolesComponent,
+    canActivate: [PermissionGuard],
+    canDeactivate: [],
+    data: {
+      breadcrumbs: 'BREADCRUMB.ROLES',
+      state: RouterStateSnapshot
+    },
+  },
   {
     path: 'list-users',
     component: ListUsersComponent,
