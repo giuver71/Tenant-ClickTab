@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ClickTab.Web.Mappings.Profiles.Generics;
+using ClickTab.Web.Mappings.Profiles.Tables;
 
 namespace ClickTab.Web.Mappings
 {
@@ -115,6 +116,13 @@ namespace ClickTab.Web.Mappings
                 cfg.AddProfile<RoleRuleProfile>();
                 cfg.AddProfile<UserRoleProfile>();
                 #endregion
+
+                #region TABLES
+                cfg.AddProfile<CategoryProfile>();
+                #endregion
+
+
+
 
                 #endregion
             });

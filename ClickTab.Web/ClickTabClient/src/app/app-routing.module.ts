@@ -85,6 +85,15 @@ const routes: Routes = [
         loadChildren: () =>
           import("./components/registry/registry.module").then((m) => m.RegistryModule)
       },
+       {
+        path: "tables",   
+        canActivate: [AuthGuard, PermissionGuard],
+        data: { 
+          breadcrumb: "Tabelle",
+          state: RouterStateSnapshot },
+        loadChildren: () =>
+          import("./components/tables/tables.module").then((m)=>m.TablesModule)
+      },
       {
         path: "profile",
         component: ProfileComponent,
