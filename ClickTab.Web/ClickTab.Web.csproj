@@ -78,6 +78,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ClickTab.Core\ClickTab.Core.csproj" />
+    <ProjectReference Include="..\ClickTab.DataTransfer\ClickTab.DataTransfer.csproj" />
   </ItemGroup>
 
   <ItemGroup>
