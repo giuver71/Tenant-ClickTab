@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using ClickTab.Core.DAL.Context.EntityConfigurations.Tables;
+using ClickTab.Core.DAL.Models.Tables;
 
 namespace ClickTab.Core.DAL.Context
 {
@@ -75,7 +76,7 @@ namespace ClickTab.Core.DAL.Context
         #endregion
 
         #region TABLES
-        public DbSet<Group> Groups { get; set; }
+        public DbSet<Category> Categories { get; set; }
         #endregion
 
         #region NotificationCenter
@@ -146,7 +147,7 @@ namespace ClickTab.Core.DAL.Context
             #endregion
 
             #region TABLES
-            modelBuilder.ApplyConfiguration(new GroupConfigurations());
+            modelBuilder.ApplyConfiguration(new CategoryConfigurations());
             #endregion
 
             #region FluentAPI per entità NotificationCenter

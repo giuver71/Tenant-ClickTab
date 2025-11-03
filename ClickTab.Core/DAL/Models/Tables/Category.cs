@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ClickTab.Core.DAL.Models.Tables
 {
-    public class Group : IBaseEntity, IAuditEntity<int>
+    public class Category : IBaseEntity, IAuditEntity<int>
     {
         public int ID { get ; set ; }
         public string Description { get; set; }

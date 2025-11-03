@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ClickTab.Core.DAL.Context.EntityConfigurations.Tables
 {
-    public class GroupConfigurations : IEntityTypeConfiguration<Group>
+    public class CategoryConfigurations : IEntityTypeConfiguration<Category>
     {
-        public void Configure(EntityTypeBuilder<Group> builder)
+        public void Configure(EntityTypeBuilder<Category> builder)
         {
             //REQUIRED
             builder.Property(u => u.Description).IsRequired();
