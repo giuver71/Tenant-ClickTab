@@ -1,11 +1,12 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30503.244
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35521.163 d17.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClickTab.Web", "ClickTab.Web\ClickTab.Web.csproj", "{DD2E9FDC-D1A5-49D3-8EF5-F351DB2D8F22}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClickTab.Core", "ClickTab.Core\ClickTab.Core.csproj", "{45F9BF67-8A16-4E24-B8D1-068BCFF08A73}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClickTab.DataTransfer", "ClickTab.DataTransfer\ClickTab.DataTransfer.csproj", "{13748AD8-27FA-4A9A-BF54-9FC46522D53B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +22,10 @@ Global
 		{45F9BF67-8A16-4E24-B8D1-068BCFF08A73}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45F9BF67-8A16-4E24-B8D1-068BCFF08A73}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45F9BF67-8A16-4E24-B8D1-068BCFF08A73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13748AD8-27FA-4A9A-BF54-9FC46522D53B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13748AD8-27FA-4A9A-BF54-9FC46522D53B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13748AD8-27FA-4A9A-BF54-9FC46522D53B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13748AD8-27FA-4A9A-BF54-9FC46522D53B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

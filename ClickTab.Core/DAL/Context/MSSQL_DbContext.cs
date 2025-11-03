@@ -2,6 +2,7 @@ using ClickTab.Core.HelperService;
 using ClickTab.Core.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -33,5 +34,19 @@ namespace ClickTab.Core.DAL.Context
                       httpContextAccessor.HttpContext?.Items["Tenant"]?.ToString() ?? string.Empty
                   ))
         { }
+
+       
+    }
+
+    public class MSSQL_DbContextFactory : IDesignTimeDbContextFactory<MSSQL_DbContext>
+    {
+        public MSSQL_DbContext CreateDbContext(string[] args)
+        {
+            // ?? Connection string fittizia o di default per generare le migration
+            var connectionString = "Server=localhost;Database=ClickTabDesignTime;Trusted_Connection=True;";
+            var provider = DbProvider.SQLServer;
+
+            return new MSSQL_DbContext(connectionString, provider);
+        }
     }
 }

@@ -10,6 +10,8 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
+using ClickTab.Core.DAL.Context.EntityConfigurations.Tables;
 
 namespace ClickTab.Core.DAL.Context
 {
@@ -70,6 +72,10 @@ namespace ClickTab.Core.DAL.Context
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<Rule> Rules { get; set; }
         public DbSet<RoleRule> RoleRules { get; set; }
+        #endregion
+
+        #region TABLES
+        public DbSet<Group> Groups { get; set; }
         #endregion
 
         #region NotificationCenter
@@ -137,6 +143,10 @@ namespace ClickTab.Core.DAL.Context
             modelBuilder.ApplyConfiguration(new RoleConfigurations());
             modelBuilder.ApplyConfiguration(new RoleRuleConfigurations());
             modelBuilder.ApplyConfiguration(new UserRoleConfigurations());
+            #endregion
+
+            #region TABLES
+            modelBuilder.ApplyConfiguration(new GroupConfigurations());
             #endregion
 
             #region FluentAPI per entità NotificationCenter
