@@ -20,41 +20,47 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit {
   @Input() manageableRoles: Array<RoleDTO> = new Array<RoleDTO>();
   @Input() hashedRoles: Array<string> = new Array<string>();
   @Input() sidebarId: string = "sidebar";
-  @Input() currentUser!: UserDTO;
-  @Input() selectedNotification!: NotificationDetailDTO;
+  @Input() currentUser: UserDTO;
+  @Input() selectedNotification: NotificationDetailDTO;
   @Input() notificationList: Array<NotificationDetailDTO> = new Array<NotificationDetailDTO>();
-  @Input() notificationCount!: number;
-  @Output() readNotificationEvent = new EventEmitter<any>();
-  @Output() goToNotificationListEvent = new EventEmitter<any>();
-  @Output() selectedRoleEvent = new EventEmitter<RoleDTO>();
+  @Input() notificationCount: number;
+  @Output() readNotificationEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Output() goToNotificationListEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Output() selectedRoleEvent: EventEmitter<RoleDTO> = new EventEmitter<RoleDTO>();
 
   selectedRole: RoleDTO = new RoleDTO();
-  loaded = false;
+  loaded: boolean = false;
   selectedRoleId!: number;
 
-  /** Stato di collasso dell'header */
-  isCollapsed = false;
-
+  collapsed: boolean = true; 
   constructor(
     private classToggler: ClassToggleService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private userService: UserService,
     private roleService: RoleService,
-    private authService: AuthService
+    public authService: AuthService
   ) {
     super();
   }
 
   ngOnInit(): void {
     this.loaded = false;
-    if (!this.currentUser) {
+    if (this.currentUser == null) {
       this.currentUser = this.authService.getCurrentUser();
     }
     this.selectedRoleId = this.authService.getCurrentRole().ID;
-    setTimeout(() => (this.loaded = true), 50);
+    setTimeout(() => {
+      this.loaded = true;
+    }, 50);
   }
 
+  // 👉 toggle del collasso header
+  toggleHeader(): void {
+    this.collapsed = !this.collapsed;
+  }
+
+  //#region Gestione notifiche
   readNotification(notification: NotificationDetailDTO) {
     this.readNotificationEvent.emit(notification);
   }
@@ -62,6 +68,7 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit {
   goToNotificationList() {
     this.goToNotificationListEvent.emit();
   }
+  //#endregion
 
   viewProfile() {
     this.router.navigate(['/profile'], { relativeTo: this.activatedRoute });
@@ -76,10 +83,4 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit {
     this.selectedRole = this.manageableRoles.find(r => r.ID === id);
     this.selectedRoleEvent.emit(this.selectedRole);
   }
-
-  /** Toggle header collapse */
-  toggleCollapse(): void {
-    this.isCollapsed = !this.isCollapsed;
-  }
-
 }

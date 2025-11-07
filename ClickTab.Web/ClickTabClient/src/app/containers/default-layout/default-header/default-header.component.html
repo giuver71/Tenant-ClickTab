@@ -1,16 +1,20 @@
-<div class="default-header-container" [class.collapsed]="isCollapsed">
-  <eqp-container [fluid]="true" *ngIf="!isCollapsed">
-    <button toggle="visible" class="ps-1 header-toggler" [eqpSidebarToggle]="sidebarId">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-        class="bi bi-list" viewBox="0 0 16 16">
-        <path fill-rule="evenodd"
-          d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
-      </svg>
-    </button>
+<eqp-container [fluid]="true"
+  class="header-container"
+  [ngClass]="{ 'collapsed': collapsed, 'expanded': !collapsed }">
 
+  <!-- Bottone per collassare/espandere -->
+  <button class="header-collapse-btn" (click)="toggleHeader()">
+    <mat-icon>{{ collapsed ? 'expand_more' : 'expand_less' }}</mat-icon>
+  </button>
+
+  <!-- Stato COLLASSATO: solo icona utente -->
+  <div *ngIf="collapsed" class="collapsed-header-content">
+    <mat-icon class="user-icon">account_circle</mat-icon>
+  </div>
+
+  <!-- Stato ESPANSO: header completo -->
+  <ng-container *ngIf="!collapsed">
     <div class="d-none d-lg-flex me-auto"></div>
-
-    <div class="d-flex"></div>
 
     <div class="d-lg-flex">
       <ng-container *ngTemplateOutlet="notificationDropdown"></ng-container>
@@ -19,60 +23,36 @@
     <div class="ms-3">
       <ng-container *ngTemplateOutlet="userDropdown"></ng-container>
     </div>
-  </eqp-container>
+  </ng-container>
+</eqp-container>
 
-  <!-- Barra compatta visibile quando collassato -->
-  <div class="collapsed-bar" *ngIf="isCollapsed">
-    <span class="collapsed-title">Header nascosto</span>
-  </div>
 
-  <!-- Pulsante toggle sempre visibile -->
-  <button
-    class="collapse-toggle-btn"
-    matTooltip="{{ isCollapsed ? 'Espandi header' : 'Comprimi header' }}"
-    (click)="toggleCollapse()"
-  >
-    <i class="fa" [ngClass]="isCollapsed ? 'fa-chevron-down' : 'fa-chevron-up'"></i>
-  </button>
-
-  <!-- Template dropdown -->
-  <ng-template [ngTemplateOutlet]="userDropdown"></ng-template>
-  <ng-template [ngTemplateOutlet]="notificationDropdown"></ng-template>
-</div>
-
-<!--  -->
-
+<!-- User Dropdown -->
 <ng-template #userDropdown>
   <div class="d-flex align-items-center gap-2">
-    
-    <!-- Contenitore con label e select -->
     <div class="d-flex flex-column role-wrapper">
       <label class="role-label">Ruolo</label>
       <mat-select *ngIf="loaded"
         class="role-inline-select"
         [(value)]="selectedRoleId"
-        (selectionChange)="changeRole($event.value)"
-        
-      >
+        (selectionChange)="changeRole($event.value)">
         <mat-option *ngFor="let role of manageableRoles" [value]="role.ID">
           {{ role.Description }}
         </mat-option>
       </mat-select>
     </div>
 
-    <!-- Avatar utente -->
     <a style="text-decoration:none" matMenuTrigger [matMenuTriggerFor]="userMenu">
       <ngx-avatars
         class="my-avatar pointer"
         [size]="32"
         [name]="currentUser?.Name + ' ' + currentUser?.Surname"
         [round]="true"
-        cornerRadius="30"
-      ></ngx-avatars>
+        cornerRadius="30">
+      </ngx-avatars>
     </a>
   </div>
 
-  <!-- Menu utente -->
   <mat-menu #userMenu="matMenu">
     <div class="dropdown-header text-center"><strong>Impostazioni</strong></div>
     <button mat-menu-item (click)="viewProfile()">
@@ -83,11 +63,10 @@
       <mat-icon>lock</mat-icon>
       Logout
     </button>
-   
   </mat-menu>
 </ng-template>
 
-
+<!-- Notifiche -->
 <ng-template #notificationDropdown>
   <a style="cursor: pointer;" matMenuTrigger [matMenuTriggerFor]="notificationMenu">
     <i style="font-size: 25px;" class="far fa-bell"></i>
@@ -96,51 +75,14 @@
   <mat-menu class="notification-dropdown" #notificationMenu="matMenu">
     <button class="text-center" mat-menu-item disabled>
       <strong>Elenco notifiche</strong>
-      <!-- <strong>{{ 'MAIN.NOTIFICATIONS' | translate }}</strong> -->
     </button>
     <button mat-menu-item *ngFor="let notification of notificationList"
       (click)="$event.stopPropagation(); readNotification(notification)">
       <mat-icon class="notification-icon" *ngIf="!notification.ReadDate">lens</mat-icon>
-      <span>
-        {{ notification.Notification.Title }}
-        <!-- {{ notification.Notification.TitleTranslationKey | translate }} -->
-      </span>
+      <span>{{ notification.Notification.Title }}</span>
     </button>
     <button class="text-center" mat-menu-item (click)="goToNotificationList()">
       <strong>Mostra tutto...</strong>
-      <!-- <strong>{{ 'GENERIC_LABEL.SHOW_ALL' | translate }}</strong> -->
     </button>
   </mat-menu>
-</ng-template>
-
-<!-- DIALOG VISUALIZZAZIONE NOTIFICA -->
-<ng-template #dialogViewNotification>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-sm-12 col-md-8">
-        <div class="header-title-standard">
-          {{ selectedNotification.Notification.Title }}
-        </div>
-      </div>
-      <div class="col-sm-12 col-md-4 text-right">
-        {{ selectedNotification.SendDate | date:'dd/MM/yyyy'}}
-      </div>
-    </div>
-
-    <div class="row mt-4">
-      <div class="col-sm-12">
-        <div
-          [innerHTML]="selectedNotification.Notification.CompleteMessage || selectedNotification.Notification.Message">
-        </div>
-      </div>
-    </div>
-
-    <div class="row mt-2">
-      <div class="col-sm-12 text-right">
-        <button class="btn btn-primary mat-raised-button" mat-dialog-close>
-          Esci
-        </button>
-      </div>
-    </div>
-  </div>
 </ng-template>

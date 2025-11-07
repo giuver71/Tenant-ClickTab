@@ -1,90 +1,68 @@
-.default-header-container {
-  position: relative;
-  background-color: #fff;
-  border-bottom: 1px solid #dee2e6;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  transition: height 0.3s ease, opacity 0.3s ease;
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 0.5rem 1rem;
+  transition: all 0.25s ease-in-out;
+  height: auto;
+  min-height: 64px;
 
   &.collapsed {
-    height: 40px;
+    min-height: 32px;
+    padding: 0.15rem 0.75rem;
     overflow: hidden;
-    opacity: 0.95;
+    border-bottom: 1px solid #dcdcdc;
   }
 }
 
-.collapse-toggle-btn {
-  position: absolute;
-  right: 10px;
-  bottom: -12px;
-  background: #f7f9fb;
-  border: 1px solid #ddd;
-  border-radius: 50%;
-  width: 28px;
-  height: 28px;
+/* --- Bottone per collassare --- */
+.header-collapse-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  z-index: 50;
+  color: #666;
+  transition: color 0.2s ease;
+  margin-right: 0.5rem;
 
-  i {
-    font-size: 0.9rem;
-    color: #555;
+  mat-icon {
+    font-size: 20px;
   }
 
   &:hover {
-    background-color: #e9ecef;
+    color: #1976d2;
   }
 }
 
-.collapsed-bar {
+/* --- Stato COLLASSATO --- */
+.collapsed-header-content {
   display: flex;
   align-items: center;
-  justify-content: center;
-  height: 100%;
-  color: #666;
-  font-size: 0.9rem;
-  font-weight: 500;
+  justify-content: flex-end;
+  flex-grow: 1;
+
+  .user-icon {
+    font-size: 22px;
+    color: #555;
+  }
 }
 
-.role-wrapper {
-  line-height: 1;
+/* --- Stato ESPANSO --- */
+.expanded {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .d-lg-flex {
+    display: flex;
+    align-items: center;
+  }
 }
 
-.role-label {
-  font-size: 11px;
-  font-weight: 400;
-  color: #6c757d; /* grigio discreto */
-  margin-bottom: 2px;
-}
-
-.role-inline-select {
-  font-weight: 500;
-  font-size: 13px;
-  min-width: 180px;
-  max-width: 200px;
-  color: #1e2a55;
-  line-height: 28px;
-  height: 28px;
-  padding: 0 4px;
-}
-
-.role-inline-select .mat-mdc-select-trigger {
-  padding: 0 4px;
-}
-
-.role-inline-select .mat-mdc-select-arrow {
-  color: #1e2a55;
-}
-
-.role-inline-select.mat-mdc-select {
-  border: none !important;
-  background: transparent !important;
-  box-shadow: none !important;
-}
-
-.my-avatar {
-  vertical-align: middle;
-  cursor: pointer;
+.header-container,
+.header-container * {
+  transition: all 0.25s ease-in-out;
 }
