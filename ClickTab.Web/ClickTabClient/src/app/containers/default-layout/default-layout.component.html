@@ -1,5 +1,4 @@
-<!--sidebar-->
-<eqp-sidebar #sidebar="eqpSidebar" class="d-print-none sidebar sidebar-fixed" id="sidebar" visible>
+<!-- <eqp-sidebar #sidebar="eqpSidebar" class="d-print-none sidebar sidebar-fixed" id="sidebar" visible>
   <eqp-sidebar-brand [brandFull]="{
       src: 'assets/img/brand/logo-white.png',
       width: 200,
@@ -12,29 +11,38 @@
       alt: 'Icona Logo'
     }" routerLink="./">
   </eqp-sidebar-brand>
-  <!-- <perfect-scrollbar [config]="perfectScrollbarConfig"> -->
+  
   <eqp-sidebar-nav [navItems]="navItems" >
   </eqp-sidebar-nav>
-  <!-- </perfect-scrollbar> -->
+
   <eqp-sidebar-toggler *ngIf="!sidebar.narrow" toggle="unfoldable" eqpSidebarToggle="sidebar"></eqp-sidebar-toggler>
-</eqp-sidebar>
+</eqp-sidebar> -->
 
 <!--main-->
 <div class="wrapper d-flex flex-column min-vh-100 bg-light dark:bg-transparent">
    
   <!--app-header-->
   <!-- Workaround Andrea: Di Default, il tema ha impostato lo z-index a 1029, abbasso a 999 così che non vada in conflitto con Material(default 1000) -->
-  <app-default-header *ngIf="loaded" class="mb-4 d-print-none header header-sticky" position="sticky" sidebarId="sidebar"
+
+
+  <div class="header-wrapper">
+   <app-default-header *ngIf="loaded" class="mb-4 d-print-none header header-sticky" position="sticky" sidebarId="sidebar"
     [manageableRoles]="manageableRoles"
     [hashedRoles]="hashedRoles"
     [currentUser]="currentUser" [notificationList]="notificationList" [notificationCount]="notificationCount"
     (readNotificationEvent)="readNotification($event)" (goToNotificationListEvent)="goToNotificationList()"
     (selectedRoleEvent)="onSelectedRole($event)">
   </app-default-header>
+ <app-topbar *ngIf="loadedMenu"
+  [navItems]="navItems"
+  [activeItem]="activeItem"
+  (itemSelected)="navigate($event)">
+</app-topbar>
+</div>
+ 
   <!--app-body-->
 
 
-  
   <div class="body flex-grow-1 px-3">
     <eqp-container class="h-auto" [fluid]="true">
       <router-outlet></router-outlet>

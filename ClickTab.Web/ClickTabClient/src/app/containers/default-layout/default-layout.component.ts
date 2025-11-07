@@ -36,6 +36,7 @@ export class DefaultLayoutComponent {
   hashedRoles: Array<string> = new Array<string>();
   currentRole:RoleDTO=new RoleDTO();
   loaded:boolean=false;
+  loadedMenu:boolean=false;
   private hubConnection!: signalR.HubConnection;
   @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
 
@@ -43,12 +44,13 @@ export class DefaultLayoutComponent {
   dialogViewNotificationRef!: MatDialogRef<TemplateRef<any>>;
   @ViewChild("dialogViewNotification", { static: false }) dialogViewNotification!: TemplateRef<any>;
   selectedNotification!: NotificationDetailDTO;
+  activeItem: any = null;
   
   public perfectScrollbarConfig = {
     suppressScrollX: true
   };
 
-  navitems!:INavData[];
+  navitems!:INavData[];  
 
   constructor(
     private menuService:MenuService,
@@ -152,9 +154,11 @@ export class DefaultLayoutComponent {
   }
 
   getMenu(){
+    this.loadedMenu=false;
     let currentRole:RoleDTO=this.authService.getCurrentRole();
     this.menuService.getMenuByRole(this.currentRole.ID).then((res=>{
         this.navItems=res;
+        this.loadedMenu=true;
     })).catch((err)=>{
         DialogService.Error(err.message);
         console.error("default-layout.getMenu",err);
@@ -319,6 +323,14 @@ export class DefaultLayoutComponent {
   }
 
   //#endregion
+
+  navigate(item: any): void {
+    debugger;
+    this.activeItem = item;
+    if (item.url) {
+      this.router.navigate([item.url]);
+    }
+  }
 
   
 }

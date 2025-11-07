@@ -17,45 +17,44 @@ import { RoleRuleDTO } from '../../../models/generics/rolerule.model';
   styleUrls: ['./default-header.component.scss']
 })
 export class DefaultHeaderComponent extends HeaderComponent implements OnInit {
-  @Input() manageableRoles:Array<RoleDTO>=new Array<RoleDTO>();
-  @Input()hashedRoles:Array<string>=new Array<string>();
+  @Input() manageableRoles: Array<RoleDTO> = new Array<RoleDTO>();
+  @Input() hashedRoles: Array<string> = new Array<string>();
   @Input() sidebarId: string = "sidebar";
-  @Input() currentUser: UserDTO;
-  @Input() selectedNotification: NotificationDetailDTO;
+  @Input() currentUser!: UserDTO;
+  @Input() selectedNotification!: NotificationDetailDTO;
   @Input() notificationList: Array<NotificationDetailDTO> = new Array<NotificationDetailDTO>();
-  @Input() notificationCount: number;
-  @Output() readNotificationEvent: EventEmitter<any> = new EventEmitter<any>();
-  @Output() goToNotificationListEvent: EventEmitter<any> = new EventEmitter<any>();
-  @Output() selectedRoleEvent: EventEmitter<RoleDTO> = new EventEmitter<RoleDTO>();
+  @Input() notificationCount!: number;
+  @Output() readNotificationEvent = new EventEmitter<any>();
+  @Output() goToNotificationListEvent = new EventEmitter<any>();
+  @Output() selectedRoleEvent = new EventEmitter<RoleDTO>();
 
-  
-  selectedRole:RoleDTO=new RoleDTO();
-  loaded:boolean=false;
-  selectedRoleId!:number;
+  selectedRole: RoleDTO = new RoleDTO();
+  loaded = false;
+  selectedRoleId!: number;
+
+  /** Stato di collasso dell'header */
+  isCollapsed = false;
 
   constructor(
-    private classToggler: ClassToggleService, 
-    private activatedRoute: ActivatedRoute, 
-    private router: Router, 
-    private userService:UserService,
-    private roleService:RoleService,
-    private authService: AuthService) {
+    private classToggler: ClassToggleService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private userService: UserService,
+    private roleService: RoleService,
+    private authService: AuthService
+  ) {
     super();
   }
+
   ngOnInit(): void {
-    this.loaded=false;
-    if(this.currentUser==null){
-      this.currentUser=this.authService.getCurrentUser();
+    this.loaded = false;
+    if (!this.currentUser) {
+      this.currentUser = this.authService.getCurrentUser();
     }
-    this.selectedRoleId=this.authService.getCurrentRole().ID;
-    setTimeout(() => {
-      this.loaded=true;
-    }, 50);
-    
-   
+    this.selectedRoleId = this.authService.getCurrentRole().ID;
+    setTimeout(() => (this.loaded = true), 50);
   }
 
-  //#region Gestione emitter notifiche
   readNotification(notification: NotificationDetailDTO) {
     this.readNotificationEvent.emit(notification);
   }
@@ -64,9 +63,6 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit {
     this.goToNotificationListEvent.emit();
   }
 
-  /**
-   * Apre la sezione profilo utente
-   */
   viewProfile() {
     this.router.navigate(['/profile'], { relativeTo: this.activatedRoute });
   }
@@ -74,16 +70,16 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit {
   logout() {
     this.authService.logout();
   }
-  //#endregion
 
-  
+  changeRole(id: number) {
+    this.selectedRoleId = id;
+    this.selectedRole = this.manageableRoles.find(r => r.ID === id);
+    this.selectedRoleEvent.emit(this.selectedRole);
+  }
 
+  /** Toggle header collapse */
+  toggleCollapse(): void {
+    this.isCollapsed = !this.isCollapsed;
+  }
 
-    changeRole(id:number){
-        this.selectedRoleId = id;
-        this.selectedRole = this.manageableRoles.find(r => r.ID === id);
-        this.selectedRoleEvent.emit(this.selectedRole);
-       
-      
-    }
 }

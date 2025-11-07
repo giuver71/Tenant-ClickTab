@@ -1,0 +1,22 @@
+<nav class="topbar">
+  <ul class="menu">
+    <li *ngFor="let item of navItems"
+        class="nav-item"
+        (mouseenter)="showChildren(item)"
+        (mouseleave)="hideChildren(item)">
+
+      <div class="nav-link" (click)="onSelect(item)">
+        <i *ngIf="item.icon" [class]="item.icon"></i>
+        {{ item.name }}
+      </div>
+
+      <ul *ngIf="item.children?.length && isOpen(item)"
+          class="submenu">
+        <li *ngFor="let child of item.children"
+            (click)="onSelect(child)">
+          {{ child.name }}
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>

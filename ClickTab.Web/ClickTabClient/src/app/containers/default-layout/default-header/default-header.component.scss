@@ -1,3 +1,53 @@
+.default-header-container {
+  position: relative;
+  background-color: #fff;
+  border-bottom: 1px solid #dee2e6;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: height 0.3s ease, opacity 0.3s ease;
+
+  &.collapsed {
+    height: 40px;
+    overflow: hidden;
+    opacity: 0.95;
+  }
+}
+
+.collapse-toggle-btn {
+  position: absolute;
+  right: 10px;
+  bottom: -12px;
+  background: #f7f9fb;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  z-index: 50;
+
+  i {
+    font-size: 0.9rem;
+    color: #555;
+  }
+
+  &:hover {
+    background-color: #e9ecef;
+  }
+}
+
+.collapsed-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #666;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
 .role-wrapper {
   line-height: 1;
 }

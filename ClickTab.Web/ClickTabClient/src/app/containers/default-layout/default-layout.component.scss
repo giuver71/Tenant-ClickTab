@@ -1,0 +1,37 @@
+.top-menu {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #ddd;
+  padding: 0 1rem;
+  height: auto;
+
+  app-default-sidebar {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.app-body {
+  display: block !important;
+}
+
+.header-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  > * {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+app-default-header,
+app-topbar {
+  width: 100%;
+  display: block;
+}

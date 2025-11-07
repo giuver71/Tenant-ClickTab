@@ -48,7 +48,7 @@ import { SharedModule } from '../modules/shared.module';
 import { RegistryModule } from './components/registry/registry.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MessageBarComponent } from './elements/message-bar/message-bar-component';
-
+import {TopbarComponent}  from './components/topbar-component/topbar.component'
 //TODO: usare npm i ngx-scrollbar con suppressScrollX come per il DEFAULT_PERFECT_SCROLLBAR_CONFIG (deprecato)
 // const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 //   suppressScrollX: true,
@@ -71,7 +71,7 @@ const APP_CONTAINERS = [
     ChangePasswordComponent,
     TestComponent,
     MessageBarComponent,
-    ListNotificationsComponent, ...APP_CONTAINERS, ChangeForgotPasswordComponent],
+    ListNotificationsComponent, ...APP_CONTAINERS, ChangeForgotPasswordComponent,TopbarComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

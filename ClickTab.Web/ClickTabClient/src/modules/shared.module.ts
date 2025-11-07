@@ -27,7 +27,6 @@ import { EqpNumericInputMode, EqpNumericModule, NumericMaskConfig } from "@eqpro
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { PageHeaderComponent } from '../app/elements/page-header/page-header.component';
  
-
 export const customNumericMaskConfig: NumericMaskConfig = {
   align: "right",
   allowNegative: true,
@@ -94,6 +93,7 @@ export const customNumericMaskConfig: NumericMaskConfig = {
     EqpNumericModule,
     NgxMaterialTimepickerModule,
     PageHeaderComponent,
+    
   ],
   declarations: [
     DynamicLoaderDirective,
