@@ -1,5 +1,5 @@
 <eqp-container [fluid]="true"
-  class="header-container"
+  class="header-container no-padding"
   [ngClass]="{ 'collapsed': collapsed, 'expanded': !collapsed }">
 
   <!-- Bottone per collassare/espandere -->
@@ -32,14 +32,15 @@
   <div class="d-flex align-items-center gap-2">
     <div class="d-flex flex-column role-wrapper">
       <label class="role-label">Ruolo</label>
-      <mat-select *ngIf="loaded"
-        class="role-inline-select"
-        [(value)]="selectedRoleId"
-        (selectionChange)="changeRole($event.value)">
-        <mat-option *ngFor="let role of manageableRoles" [value]="role.ID">
-          {{ role.Description }}
-        </mat-option>
-      </mat-select>
+     <mat-select
+        [panelClass]="'user-role-panel'"
+        [(value)]="selectedRole"
+        (selectionChange)="changeRole($event.value)"
+          >
+      <mat-option *ngFor="let role of manageableRoles" [value]="role">
+        {{ role.Description }}
+      </mat-option>
+    </mat-select>
     </div>
 
     <a style="text-decoration:none" matMenuTrigger [matMenuTriggerFor]="userMenu">

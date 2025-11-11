@@ -25,18 +25,12 @@ $enable-rtl: true;
 
 html,
 body {
+   margin: 0;
   height: 100%;
-}
-
-body {
-  margin: 0;
-  // font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 :root {
   --header-height: 400px;
 }
 
-
-
-
+ 

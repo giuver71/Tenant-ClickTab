@@ -4,16 +4,17 @@
   justify-content: space-between;
   background: #fff;
   border-bottom: 1px solid #e0e0e0;
-  padding: 0.5rem 1rem;
+  padding: 0.4rem 0.75rem;
   transition: all 0.25s ease-in-out;
   height: auto;
-  min-height: 64px;
+  min-height: 58px;
 
   &.collapsed {
-    min-height: 32px;
-    padding: 0.15rem 0.75rem;
+    min-height: 28px; /* ancora più compatto */
+    padding: 0.15rem 0.5rem;
     overflow: hidden;
-    border-bottom: 1px solid #dcdcdc;
+    border-bottom: none; /* rimuove doppia linea */
+    background: #f9f9f9; /* leggero contrasto */
   }
 }
 
@@ -26,10 +27,9 @@
   align-items: center;
   color: #666;
   transition: color 0.2s ease;
-  margin-right: 0.5rem;
 
   mat-icon {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   &:hover {
@@ -38,31 +38,58 @@
 }
 
 /* --- Stato COLLASSATO --- */
-.collapsed-header-content {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  flex-grow: 1;
-
-  .user-icon {
-    font-size: 22px;
-    color: #555;
-  }
+.collapsed-role {
+  display: none; /* tolta la label */
 }
 
 /* --- Stato ESPANSO --- */
+
+
+
 .expanded {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  .d-lg-flex {
-    display: flex;
-    align-items: center;
-  }
 }
 
+/* --- Transizioni fluide --- */
 .header-container,
 .header-container * {
   transition: all 0.25s ease-in-out;
+}
+
+
+:host {
+  display: block;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.header-container {
+  margin: 0 !important;
+  padding: 0.25rem 0.75rem !important;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.header-container.collapsed {
+  padding: 0.1rem 0.5rem !important;
+  border-bottom: none !important;
+  margin-bottom: 0 !important;
+}
+
+/* forza aderenza col topbar */
+:host ::ng-deep app-topbar,
+:host ::ng-deep .topbar {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+:host ::ng-deep .user-role-panel {
+  z-index: 3000 !important;
+}
+
+:host ::ng-deep .user-role-panel .mat-mdc-select-panel {
+  width: auto !important;
+  min-width: 220px;
+  max-width: 280px;
 }
