@@ -61,9 +61,9 @@ constructor(
   }
 
   reloadRoles(){
-       this.roleService.getAll().then((res)=>{
+       this.roleService.getAll().then((res:Array<RoleDTO>)=>{
           this.roles=res;
-        }).catch((err)=>{
+        }).catch((err:any)=>{
           console.error("list-roles.reloadRoles",err);
           DialogService.Error(err.message);
         })

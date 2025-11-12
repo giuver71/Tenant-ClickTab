@@ -4,23 +4,51 @@ import { Component, OnInit } from '@angular/core';
 import { TestService } from '../../services/test.service';
 import { BarChartOption, EqpDashboardService, GaugeChartData, GaugeChartOption, LineChartOption, PieChartOption, PieSeriesValue, RadarChartOption, RadarIndicatorData, RadarSeriesData, WidgetConfig, WidgetSizeEnum, WidgetTypeEnum } from '@eqproject/eqp-dashboard';
 import { TestComponent } from '../test-component/test-component';
+import { RoleDTO } from '../../models/generics/role.model';
+import { AuthService } from '../../services/auth.service';
+import { MenuService } from '../../services/generics/menu.service';
+import { DialogService } from '../../services/dialog.service';
+import { MenuDTO } from '../../models/generics/menu.model';
 
 @Component({
   templateUrl: 'dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  currentRole:RoleDTO=new RoleDTO();
+  menu:Array<MenuDTO>=new Array<MenuDTO>();
+  loaded:boolean=false;
 
   chartConfigs: Array<WidgetConfig> = new Array<WidgetConfig>();
   filters: Array<FilterConfig> = new Array<FilterConfig>();
   testComponent = TestComponent;
 
-  constructor(private http: HttpClient, private testService: TestService, private eqpDashboardService: EqpDashboardService) {
+  constructor(
+    private http: HttpClient, private testService: TestService, 
+    private eqpDashboardService: EqpDashboardService,
+    private authService:AuthService,
+    private menuService:MenuService
+  
+  ) {
   }
 
   ngOnInit() {
+    this.currentRole=this.authService.getCurrentRole();
+    this.getMenu();
     this.configureFilters();
     this.configureDashboard();
+  }
+
+  getMenu(){
+    let currentRole:RoleDTO=this.authService.getCurrentRole();
+    this.menuService.getMenuByRole(this.currentRole.ID).then((res=>{
+        this.menu=res;
+        this.loaded=true;
+    })).catch((err)=>{
+        DialogService.Error(err.message);
+        console.error("default-layout.getMenu",err);
+
+    })
   }
 
   //#region Funzioni demo per direttiva eqp-dashboard

@@ -9,6 +9,7 @@ export class MenuDTO {
   Order: string;
   isExternalPage: boolean;
   children: Array<MenuDTO>;
+  expanded?: boolean; 
 }
 
 export class MenuConfig {

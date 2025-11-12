@@ -5,6 +5,7 @@ import { CategoryDTO } from '../../../models/tables/category.model';
 import { HeaderButton } from '../../../elements/page-header/page-header.component';
 import { CategoryService } from '../../../services/tables/category.services';
 import { DialogService } from 'src/app/services/dialog.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-list-categories',
   templateUrl: './list-categories.component.html',
@@ -17,7 +18,8 @@ export class ListCategoriesComponent implements OnInit{
     categories:Array<CategoryDTO>=new Array<CategoryDTO>();
 
   constructor(
-    private categoryService:CategoryService
+    private categoryService:CategoryService,
+    private router:Router
 
   ) {
     
@@ -49,7 +51,7 @@ export class ListCategoriesComponent implements OnInit{
      configureHeaderButtons(){
       this.buttons = [
         {
-          label: 'Aggiungi Nuovo Ruolo',
+          label: 'Aggiungi Nuovo Gruppo',
           icon: 'fa fa-plus',
           color: 'btn-secondary',
           action: () => this.addCategory()
@@ -59,11 +61,11 @@ export class ListCategoriesComponent implements OnInit{
     }
 
     editRow(el:CategoryDTO){
-
+       this.router.navigate(['tables/add-categories/', el.ID]);
     }
 
     addCategory(){
-
+       this.router.navigate(["tables/add-categories"]);
     }
     reloadCategories(){
       this.categoryService.getAll().then((res)=>{

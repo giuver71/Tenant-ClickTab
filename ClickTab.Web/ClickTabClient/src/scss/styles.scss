@@ -23,6 +23,7 @@ $enable-rtl: true;
 // If you want to add something do it here
 @import "custom";
 
+
 html,
 body {
   height: 100%;
@@ -34,7 +35,17 @@ body {
 }
 
 
+ 
+ mat-mdc-slide-toggle {
+  --mdc-switch-selected-track-color: #4caf50 !important;     /* Verde ON */
+  --mdc-switch-selected-handle-color: #4caf50 !important;
+  --mdc-switch-unselected-track-color: #f44336 !important;   /* Rosso OFF */
+  --mdc-switch-unselected-handle-color: #f44336 !important;
+  transition: all 0.3s ease; /* Aggiunge una transizione morbida */
+}
 
-
+.mat-mdc-slide-toggle .mdc-switch__track {
+  transition: background-color 0.3s ease;
+}
 
 

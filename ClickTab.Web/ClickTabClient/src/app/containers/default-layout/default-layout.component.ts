@@ -153,7 +153,7 @@ export class DefaultLayoutComponent {
 
   getMenu(){
     let currentRole:RoleDTO=this.authService.getCurrentRole();
-    this.menuService.getMenuByRole(this.currentRole.ID).then((res=>{
+    this.menuService.getMenuNavItemsByRole(this.currentRole.ID).then((res=>{
         this.navItems=res;
     })).catch((err)=>{
         DialogService.Error(err.message);

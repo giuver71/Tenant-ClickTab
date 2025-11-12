@@ -19,7 +19,7 @@ export class CategoryService{
     }
 
    get(id: number): Promise<CategoryDTO> {
-       return this.http.get<CategoryDTO>(environment.apiFullUrl + "/Category" + id).toPromise();
+       return this.http.get<CategoryDTO>(environment.apiFullUrl + "/Category/" + id).toPromise();
     }
 
     save(role: CategoryDTO): Promise<any> {

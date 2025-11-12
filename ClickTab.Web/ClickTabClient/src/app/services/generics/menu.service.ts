@@ -28,10 +28,12 @@ export class MenuService {
     return this.http.get<Array<MenuDTO>>(environment.apiFullUrl + '/Menu/GetAll/').toPromise();
   }
 
-  getMenuByRole(roleId: number): Promise<Array<any>> {
-      return this.http.get<Array<any>>(environment.apiFullUrl + '/Menu/GetMenuByRole/' + roleId).toPromise();
+  getMenuByRole(roleId: number): Promise<Array<MenuDTO>> {
+      return this.http.get<Array<MenuDTO>>(environment.apiFullUrl + '/Menu/GetMenuByRole/' + roleId).toPromise();
   }
 
-
+  getMenuNavItemsByRole(roleId: number):Promise<Array<any>>{
+    return this.http.get<Array<any>>(environment.apiFullUrl + '/Menu/getMenuNavItemsByRole/' + roleId).toPromise();
+  }
 
 }

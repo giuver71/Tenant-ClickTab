@@ -26,6 +26,7 @@ import { EqpFiltersModule } from '@eqproject/eqp-filters';
 import { EqpNumericInputMode, EqpNumericModule, NumericMaskConfig } from "@eqproject/eqp-numeric";
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { PageHeaderComponent } from '../app/elements/page-header/page-header.component';
+import { MenuButtonComponent } from '../app/elements/menu-button/menu-button.component';
  
 
 export const customNumericMaskConfig: NumericMaskConfig = {
@@ -94,6 +95,7 @@ export const customNumericMaskConfig: NumericMaskConfig = {
     EqpNumericModule,
     NgxMaterialTimepickerModule,
     PageHeaderComponent,
+    MenuButtonComponent
   ],
   declarations: [
     DynamicLoaderDirective,
@@ -102,6 +104,7 @@ export const customNumericMaskConfig: NumericMaskConfig = {
     CsvImportExportComponent,
     EqpTimePickerComponent,
     PageHeaderComponent,
+    MenuButtonComponent
   ]
 })
 
