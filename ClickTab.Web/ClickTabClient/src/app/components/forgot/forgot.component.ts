@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import { DialogService } from "src/app/services/dialog.service";
-import { UserService } from "src/app/services/user.service";
+import { DialogService } from "../../services/dialog.service";
+import { UserService } from "../../services/user.service";
 
 @Component({
   selector: "app-forgot",

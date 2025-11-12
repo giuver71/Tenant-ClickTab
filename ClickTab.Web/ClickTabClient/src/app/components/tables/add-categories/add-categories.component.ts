@@ -5,9 +5,9 @@ import { ConfigColumn } from '@eqproject/eqp-common';
 import { HeaderButton } from '../../../elements/page-header/page-header.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
-import { MessageBarService } from 'src/app/services/messagebar.service';
+import { MessageBarService } from '../../../services/messagebar.service';
 import { CategoryService } from '../../../services/tables/category.services';
-import { DialogService } from 'src/app/services/dialog.service';
+import { DialogService } from '../../../services/dialog.service';
 
 @Component({
   selector: 'app-add-categories',
@@ -51,7 +51,9 @@ export class AddCategoriesComponent implements OnInit{
               code: [this.category?.Code, Validators.required],
               fee:[this.category?.Fee],
               department:[this.category?.Department],
-              isFiscal:[this.category.IsFiscal]
+              isFiscal:[this.category.IsFiscal],
+              negative:[this.category.Negative],
+              feeOnPurchasePrice:[this.category.FeeOnPurchasePrice]
             });
         
             this.categoryForm.statusChanges.subscribe(() => {

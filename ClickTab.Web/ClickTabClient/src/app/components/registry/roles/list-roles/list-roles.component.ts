@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CellAlignmentEnum, ConfigColumn, TypeColumn } from '@eqproject/eqp-common';
-import { HeaderButton } from 'src/app/elements/page-header/page-header.component';
-import { RoleDTO } from 'src/app/models/generics/role.model';
-import { UserDTO } from 'src/app/models/generics/user.model';
-import { AuthService } from 'src/app/services/auth.service';
-import { DialogService } from 'src/app/services/dialog.service';
-import { RoleService } from 'src/app/services/generics/role.services';
+import { HeaderButton } from '../../../../elements/page-header/page-header.component';
+import { RoleDTO } from '../../../../models/generics/role.model';
+import { UserDTO } from '../../../../models/generics/user.model';
+import { AuthService } from '../../../../services/auth.service';
+import { DialogService } from '../../../../services/dialog.service';
+import { RoleService } from '../../../../services/generics/role.services';
 
 @Component({
   selector: 'app-list-roles',

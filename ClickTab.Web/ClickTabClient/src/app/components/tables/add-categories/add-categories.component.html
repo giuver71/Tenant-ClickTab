@@ -37,9 +37,25 @@
 
         <div class="row">
             <div class="col-lg-3 col-md-3 col-sm-12">
-                <mat-slide-toggle [(ngModel)]="category.IsFiscal" formControlName="isFiscal" class="fiscal-toggle"
+                <mat-slide-toggle [(ngModel)]="category.IsFiscal" formControlName="isFiscal"  
                 >
                     Reparto Fiscale
+                </mat-slide-toggle>
+
+            </div>
+
+             <div class="col-lg-3 col-md-3 col-sm-12">
+                <mat-slide-toggle [(ngModel)]="category.Negative" formControlName="negative"  
+                >
+                    Gruppo a Segno Negativo
+                </mat-slide-toggle>
+
+            </div>
+
+              <div class="col-lg-3 col-md-3 col-sm-12">
+                <mat-slide-toggle [(ngModel)]="category.FeeOnPurchasePrice" formControlName="feeOnPurchasePrice"  
+                >
+                    Calcola Aggio sul P.zzo di Acquisto
                 </mat-slide-toggle>
 
             </div>

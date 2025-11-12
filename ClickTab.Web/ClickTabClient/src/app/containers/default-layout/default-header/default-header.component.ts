@@ -4,12 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationDetailDTO } from './../../../models/notification-center/notificationDetail.model';
 import { UserDTO } from './../../../models/generics/user.model';
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
 import { RoleService } from '../../../services/generics/role.services';
 import { RoleDTO } from '../../../models/generics/role.model';
 import { DialogService } from '../../../services/dialog.service';
 import { UserService } from '../../../services/user.service';
 import { RoleRuleDTO } from '../../../models/generics/rolerule.model';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-default-header',

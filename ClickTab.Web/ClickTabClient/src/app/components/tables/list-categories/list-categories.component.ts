@@ -4,8 +4,8 @@ import { UserDTO } from '../../../models/generics/user.model';
 import { CategoryDTO } from '../../../models/tables/category.model';
 import { HeaderButton } from '../../../elements/page-header/page-header.component';
 import { CategoryService } from '../../../services/tables/category.services';
-import { DialogService } from 'src/app/services/dialog.service';
 import { Router } from '@angular/router';
+import { DialogService } from '../../../services/dialog.service';
 @Component({
   selector: 'app-list-categories',
   templateUrl: './list-categories.component.html',
