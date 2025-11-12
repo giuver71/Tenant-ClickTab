@@ -21,8 +21,10 @@ namespace ClickTab.Web.Controllers.Generics
     [ApiController]
     public class DataTransferController : ControllerBase
     {
-        public DataTransferController(DatabaseContext ctx)
+        private CategoryService _categoryService;
+        public DataTransferController(DatabaseContext ctx,CategoryService categoryService)
         {
+            _categoryService = categoryService;
         }
 
         /// <summary>
@@ -34,7 +36,8 @@ namespace ClickTab.Web.Controllers.Generics
         public async Task<IActionResult> Gruppi(string keyConnetcion)
         {
             var lista=ImportConfig.ToMappingGruppi(keyConnetcion);
-            return Ok(lista);
+            _categoryService.Save(lista);
+            return Ok(1);
         }
 
 
