@@ -1,0 +1,26 @@
+<app-page-header [title]="'Aggiungi/Modfica Gruppo'" [buttons]="buttons" backRoute="/tables/list-categories">
+</app-page-header>
+<form [formGroup]="subCategoryForm" *ngIf="subCategoryForm">
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-lg-3 col-md-3 col-sm-12">
+                <mat-form-field appearance="outline">
+                    <mat-label>Codice</mat-label>
+                    <input matInput required formControlName="code" [(ngModel)]="subCategory.Code" />
+                </mat-form-field>
+            </div>
+
+            <div class="col-lg-3 col-md-3 col-sm-12">
+                <mat-form-field appearance="outline">
+                    <mat-label>Descrizione</mat-label>
+                    <input matInput required formControlName="description" [(ngModel)]="subCategory.Description" />
+                </mat-form-field>
+            </div>
+        </div>
+        
+
+      
+    </div>
+</form>

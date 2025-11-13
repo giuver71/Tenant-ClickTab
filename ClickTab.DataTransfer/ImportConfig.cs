@@ -58,56 +58,29 @@ namespace ClickTab.DataTransfer
         }
 
 
-        //public static List<Category> ToMappingGruppi(string keyConnection)
-        //{
-        //    if (!Connections.ContainsKey(keyConnection))
-        //        throw new ArgumentException($"Connection key '{keyConnection}' not found.");
+        public static List<SubCategory> ToMappingSottoGruppi(string keyConnection)
+        {
+            if (!Connections.ContainsKey(keyConnection))
+                throw new ArgumentException($"Connection key '{keyConnection}' not found.");
 
-        //    string cnnStr = Connections[keyConnection];
-        //    using (cnn = new SqlConnection(cnnStr))
-        //    {
-        //        cnn.Open();
-        //        SqlCommand cmd = new SqlCommand("SELECT * FROM Gruppi Where len(ltrim(CodGru))>0 ", cnn);
-        //        DataTable dt = new DataTable();
-        //        SqlDataAdapter da = new SqlDataAdapter(cmd);
-        //        da.Fill(dt);
-        //        cnn.Close();
+            string cnnStr = Connections[keyConnection];
 
-        //        Dictionary<string, string> mapGruppi = new Dictionary<string, string>()
-        //    {
-        //        { "CodGru", "Code" },
-        //        { "DesGru", "Description" },
-        //        { "AggioGr", "Fee" },
-        //        { "Fiscale", "IsFiscal" },
-        //        { "Reparto", "Department" },
-        //        { "Negativo", "Negative" },
-        //        { "CalcP", "CalcP" }
-        //    };
+            using (SqlConnection cnn = new SqlConnection(cnnStr))
+            {
+                cnn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM SottoGruppi Where Len(Ltrim(CodSot))>0", cnn);
+                DataTable dt = new DataTable();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
 
-        //        List<Category> categories = new List<Category>();
+                var mapGruppi = new Dictionary<string, string>(){
+                { "CodSot", "Code" },
+                { "DesSot", "Description" },
+            };
 
-        //        foreach (DataRow row in dt.Rows)
-        //        {
-        //            Category category = new Category();
-
-        //            foreach (var kvp in mapGruppi)
-        //            {
-        //                string dbField = kvp.Key;
-        //                string propName = kvp.Value;
-
-        //                var prop = typeof(Category).GetProperty(propName);
-        //                if (prop != null && dt.Columns.Contains(dbField) && row[dbField] != DBNull.Value)
-        //                {
-        //                    object value = Convert.ChangeType(row[dbField], prop.PropertyType);
-        //                    prop.SetValue(category, value);
-        //                }
-        //            }
-
-        //            categories.Add(category);
-        //        }
-        //        return categories;
-        //    }
-        //}
+                return DataMapper.MapTableToList<SubCategory>(dt, mapGruppi);
+            }
+        }
 
 
 
