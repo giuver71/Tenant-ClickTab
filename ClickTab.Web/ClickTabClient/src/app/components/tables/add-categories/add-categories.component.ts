@@ -4,10 +4,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfigColumn } from '@eqproject/eqp-common';
 import { HeaderButton } from '../../../elements/page-header/page-header.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
-import { MessageBarService } from '../../../services/messagebar.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from '../../../services/tables/category.services';
 import { DialogService } from '../../../services/dialog.service';
+import { MessageBarService } from '../../../services/messagebar.service';
 
 @Component({
   selector: 'app-add-categories',
@@ -30,6 +30,7 @@ export class AddCategoriesComponent implements OnInit{
     private activateRoute: ActivatedRoute,
     private messageBar: MessageBarService,
     private categoryService:CategoryService,
+    private router:Router,
 
   ) {
   }
@@ -89,14 +90,21 @@ export class AddCategoriesComponent implements OnInit{
   }
 
   save(){
-
+    this.categoryService.save(this.category).then((res) => {
+        this.messageBar.show({
+            message: 'Gruppo salvato correttamente!',
+            type: 'success',
+            duration: 4000,
+            actionLabel: 'Chiudi',
+            onClose: () => this.router.navigate(['/tables/list-categories'])
+      });
+    }).catch((err) => {
+      console.error("addCategory.Save", err);
+      DialogService.Error(err.message);
+    }) 
   }
   
-  onToggleChange(cat: any) {
-    // Questo triggera il binding per aggiornare colore e messaggio
-    cat.IsFiscal = !cat.IsFiscal;
-  }
-  
+ 
 
 
 } 

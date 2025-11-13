@@ -44,6 +44,7 @@ export class ListCategoriesComponent implements OnInit{
              
             ]
           },
+          { key: "Code", display: 'Codice',styles: { flex: "0 0 20%",cellAlignment:CellAlignmentEnum.LEFT } },
           { key: "Description", display: 'Descrizione',styles: { flex: "0 0 50%",cellAlignment:CellAlignmentEnum.LEFT } },
         ];
       }

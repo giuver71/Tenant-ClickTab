@@ -122,14 +122,14 @@ export class AddRolesComponent implements OnInit{
     }
 
   save(){
-     this.role.RoleRules=this.role.RoleRules.filter(p=>p.IsChecked);
-      this.roleService.saveRole(this.role).then((res) => {
-     this.messageBar.show({
-        message: 'Ruolo salvato correttamente!',
-        type: 'success',
-        duration: 4000,
-        actionLabel: 'Chiudi',
-        onClose: () => this.router.navigate(['/registry/list-roles'])
+    this.role.RoleRules=this.role.RoleRules.filter(p=>p.IsChecked);
+    this.roleService.saveRole(this.role).then((res) => {
+        this.messageBar.show({
+            message: 'Ruolo salvato correttamente!',
+            type: 'success',
+            duration: 4000,
+            actionLabel: 'Chiudi',
+            onClose: () => this.router.navigate(['/registry/list-roles'])
       });
     }).catch((err) => {
       console.error("addRole.Save", err);
