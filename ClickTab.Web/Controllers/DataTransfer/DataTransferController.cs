@@ -22,9 +22,11 @@ namespace ClickTab.Web.Controllers.Generics
     public class DataTransferController : ControllerBase
     {
         private CategoryService _categoryService;
-        public DataTransferController(DatabaseContext ctx,CategoryService categoryService)
+        private SubCategoryService _subCategoryService;
+        public DataTransferController(DatabaseContext ctx, CategoryService categoryService, SubCategoryService subCategoryService)
         {
             _categoryService = categoryService;
+            _subCategoryService = subCategoryService;
         }
 
         /// <summary>
@@ -35,13 +37,33 @@ namespace ClickTab.Web.Controllers.Generics
         [AllowAnonymous]
         public async Task<IActionResult> Gruppi(string keyConnetcion)
         {
-            var lista=ImportConfig.ToMappingGruppi(keyConnetcion);
+            var lista = ImportConfig.ToMappingGruppi(keyConnetcion);
             _categoryService.Save(lista);
             return Ok(1);
         }
 
 
-       
+
+        /// <summary>
+        /// Fuznione che restituisce la lista di tutti i Ruoli
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet, Route("/api/[controller]/SottoGruppi/{keyConnetcion}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> SottoGruppi(string keyConnetcion)
+        {
+            var lista = ImportConfig.ToMappingSottoGruppi(keyConnetcion);
+
+            foreach (var item in lista)
+            {
+                if (string.IsNullOrEmpty(item.Description))
+                {
+                    item.Description = item.Code;
+                }
+            }
+            _subCategoryService.Save(lista);
+            return Ok(1);
+        }
 
     }
 }

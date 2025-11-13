@@ -119,6 +119,7 @@ namespace ClickTab.Web.Mappings
 
                 #region TABLES
                 cfg.AddProfile<CategoryProfile>();
+                cfg.AddProfile<SubCategoryProfile>();
                 #endregion
 
 
