@@ -1,3 +1,4 @@
+/* === HEADER CONTAINER === */
 .header-container {
   display: flex;
   align-items: center;
@@ -10,15 +11,15 @@
   min-height: 58px;
 
   &.collapsed {
-    min-height: 28px; /* ancora più compatto */
+    min-height: 28px;
     padding: 0.15rem 0.5rem;
     overflow: hidden;
-    border-bottom: none; /* rimuove doppia linea */
-    background: #f9f9f9; /* leggero contrasto */
+    border-bottom: none;
+    background: #f9f9f9;
   }
 }
 
-/* --- Bottone per collassare --- */
+/* === BOTTONE COLLASSA === */
 .header-collapse-btn {
   background: transparent;
   border: none;
@@ -37,28 +38,25 @@
   }
 }
 
-/* --- Stato COLLASSATO --- */
+/* === STATO COLLASSATO === */
 .collapsed-role {
-  display: none; /* tolta la label */
+  display: none;
 }
 
-/* --- Stato ESPANSO --- */
-
-
-
+/* === STATO ESPANSO === */
 .expanded {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-/* --- Transizioni fluide --- */
+/* === TRANSIZIONI === */
 .header-container,
 .header-container * {
   transition: all 0.25s ease-in-out;
 }
 
-
+/* === HOST CONTAINER === */
 :host {
   display: block;
   margin: 0 !important;
@@ -77,19 +75,76 @@
   margin-bottom: 0 !important;
 }
 
-/* forza aderenza col topbar */
+/* === ADERENZA CON TOPBAR === */
 :host ::ng-deep app-topbar,
 :host ::ng-deep .topbar {
   margin-top: 0 !important;
   padding-top: 0 !important;
 }
 
+/* === Z-INDEX E OVERLAY === */
+::ng-deep .cdk-overlay-container {
+  z-index: 4000 !important; /* sopra header, topbar e page-header */
+}
+
+/* === PANEL DELLA SELECT RUOLO === */
 :host ::ng-deep .user-role-panel {
-  z-index: 3000 !important;
+  z-index: 3500 !important;
 }
 
 :host ::ng-deep .user-role-panel .mat-mdc-select-panel {
+  min-width: 250px !important;
+  max-width: 320px !important;
   width: auto !important;
-  min-width: 220px;
-  max-width: 280px;
+  padding: 0.25rem 0 !important;
+}
+
+/* === OPZIONI NELLA SELECT === */
+:host ::ng-deep .user-role-panel .mat-mdc-option {
+  font-size: 0.95rem !important;
+  padding: 0.5rem 1rem !important;
+  white-space: nowrap;
+}
+
+/* === AVATAR E LABEL RUOLO === */
+.role-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.role-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 0.2rem;
+}
+
+.my-avatar.pointer {
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.2s;
+
+  &:hover {
+    border-color: #1976d2;
+  }
+}
+
+
+::ng-deep .user-role-panel {
+  z-index: 2000 !important; /* sopra il page-header e altri container */
+  min-width: 220px !important;
+  width: auto !important;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+::ng-deep .user-role-panel .mat-mdc-option {
+  white-space: nowrap;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+}
+
+::ng-deep .user-role-panel .mat-mdc-option:hover {
+  background-color: #f3f3f3;
 }

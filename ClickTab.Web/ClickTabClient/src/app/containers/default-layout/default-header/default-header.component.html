@@ -33,6 +33,7 @@
     <div class="d-flex flex-column role-wrapper">
       <label class="role-label">Ruolo</label>
      <mat-select
+        [disableOptionCentering]="true"
         [panelClass]="'user-role-panel'"
         [(value)]="selectedRole"
         (selectionChange)="changeRole($event.value)"

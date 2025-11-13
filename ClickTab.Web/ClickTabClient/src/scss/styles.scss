@@ -64,3 +64,8 @@ body {
   background-color: var(--mdc-switch-unselected-track-color) !important;
   transition: background-color 0.3s ease;
 }
+
+
+::ng-deep .cdk-overlay-container {
+  z-index: 4000 !important; /* sopra header, topbar e page-header */
+}
