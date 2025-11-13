@@ -75,7 +75,7 @@ namespace ClickTab.DataTransfer
 
                 var mapGruppi = new Dictionary<string, string>(){
                 { "CodSot", "Code" },
-                { "DeSot", "Description" },
+                { "DesSot", "Description" },
             };
 
                 return DataMapper.MapTableToList<SubCategory>(dt, mapGruppi);

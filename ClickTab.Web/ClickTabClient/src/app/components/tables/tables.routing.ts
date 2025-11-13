@@ -3,6 +3,8 @@ import { Routes, RouterModule, RouterStateSnapshot } from '@angular/router';
 import { PermissionGuard } from "../../helpers/permission.guard";
 import { ListCategoriesComponent } from "./list-categories/list-categories.component"
 import { AddCategoriesComponent } from "./add-categories/add-categories.component"
+import { ListSubcategoriesComponent } from './list-subcategories/list-subcategories.component';
+import { AddSubcategoriesComponent } from './add-subcategories/add-subcategories.component';
 const routes: Routes = [
   {
     path: 'list-categories',
@@ -33,7 +35,35 @@ const routes: Routes = [
       state: RouterStateSnapshot
     },
   },
- 
+ {
+    path: 'list-subcategories',
+    component: ListSubcategoriesComponent,
+    canActivate: [PermissionGuard],
+    data: {
+      breadcrumbs: 'BREADCRUMB.ROLES',
+      state: RouterStateSnapshot
+    },
+  }, 
+  {
+    path: 'add-subcategories',
+    component: AddSubcategoriesComponent,
+    canActivate: [PermissionGuard],
+    canDeactivate: [],
+    data: {
+      breadcrumbs: 'BREADCRUMB.ROLES',
+      state: RouterStateSnapshot
+    },
+  },
+  {
+    path: 'add-subcategories/:id',
+    component: AddSubcategoriesComponent,
+    canActivate: [PermissionGuard],
+    canDeactivate: [],
+    data: {
+      breadcrumbs: 'BREADCRUMB.ROLES',
+      state: RouterStateSnapshot
+    },
+  },
 
 ];
 

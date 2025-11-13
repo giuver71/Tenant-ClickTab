@@ -14,6 +14,7 @@ using ClickTab.Core.DAL.Models.Tables;
 using ClickTab.Web.Mappings.ModelsDTO.Tables;
 using Microsoft.AspNetCore.Authorization;
 using ClickTab.DataTransfer;
+using System;
 
 namespace ClickTab.Web.Controllers.Generics
 {
@@ -56,9 +57,13 @@ namespace ClickTab.Web.Controllers.Generics
 
             foreach (var item in lista)
             {
+                if (string.IsNullOrEmpty(item.Code))
+                {
+                    item.Code = Guid.NewGuid().ToString();
+                }
                 if (string.IsNullOrEmpty(item.Description))
                 {
-                    item.Description = item.Code;
+                    item.Description = Guid.NewGuid().ToString();
                 }
             }
             _subCategoryService.Save(lista);

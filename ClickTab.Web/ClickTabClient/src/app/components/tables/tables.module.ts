@@ -6,6 +6,8 @@ import { SharedModule } from '../../../modules/shared.module';
 import { TablesRoutingModule } from './tables.routing';
 import { ListCategoriesComponent } from './list-categories/list-categories.component';
 import { AddCategoriesComponent } from './add-categories/add-categories.component';
+import { ListSubcategoriesComponent } from './list-subcategories/list-subcategories.component';
+import { AddSubcategoriesComponent } from './add-subcategories/add-subcategories.component';
  
  
 @NgModule({
@@ -19,6 +21,8 @@ import { AddCategoriesComponent } from './add-categories/add-categories.componen
   declarations: [
     ListCategoriesComponent,
     AddCategoriesComponent,
+    ListSubcategoriesComponent,
+    AddSubcategoriesComponent
   ],
   exports: [
   ],
