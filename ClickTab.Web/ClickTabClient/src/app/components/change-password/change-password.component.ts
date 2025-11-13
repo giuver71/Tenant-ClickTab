@@ -1,10 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import { UserDTO } from "src/app/models/generics/user.model";
 import { AuthService } from "./../../services/auth.service";
 import { DialogService } from "./../../services/dialog.service";
 import { UserService } from "./../../services/user.service";
+import { UserDTO } from "../../models/generics/user.model";
 
 @Component({
   selector: "app-change-password",
@@ -14,7 +14,7 @@ import { UserService } from "./../../services/user.service";
 export class ChangePasswordComponent implements OnInit {
   changeForm: FormGroup;
   submitted = false;
-  currentUserEmail: UserDTO = this.authenticationService.getCurrentUser();
+  currentUserEmail: UserDTO =new UserDTO(); 
 
   constructor(
     private formBuilder: FormBuilder,
@@ -24,6 +24,7 @@ export class ChangePasswordComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.currentUserEmail=this.authenticationService.getCurrentUser();
     this.changeForm = this.formBuilder.group(
       {
         oldPassword: ["", Validators.required],

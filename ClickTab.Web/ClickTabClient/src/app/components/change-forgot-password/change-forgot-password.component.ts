@@ -1,10 +1,10 @@
 import { Component } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
-import { UserDTO } from "src/app/models/generics/user.model";
 import { AuthService } from "./../../services/auth.service";
 import { DialogService } from "./../../services/dialog.service";
 import { UserService } from "./../../services/user.service";
+import { UserDTO } from "../../models/generics/user.model";
 
 @Component({
   selector: "app-change-forgot-password",

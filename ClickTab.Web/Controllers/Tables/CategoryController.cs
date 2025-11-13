@@ -42,7 +42,7 @@ namespace ClickTab.Web.Controllers.Generics
         }
 
 
-        [HttpGet, Route("/api/[controller]/GetCityById/{id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
             Category model = _categoryService.Get(id);

@@ -1,1 +1,64 @@
-<p>add-categories works!</p>
+<app-page-header [title]="'Aggiungi/Modfica Gruppo'" [buttons]="buttons" backRoute="/tables/list-categories">
+</app-page-header>
+<form [formGroup]="categoryForm" *ngIf="categoryForm">
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-lg-3 col-md-3 col-sm-12">
+                <mat-form-field appearance="outline">
+                    <mat-label>Codice</mat-label>
+                    <input matInput required formControlName="code" [(ngModel)]="category.Code" />
+                </mat-form-field>
+            </div>
+
+            <div class="col-lg-3 col-md-3 col-sm-12">
+                <mat-form-field appearance="outline">
+                    <mat-label>Descrizione</mat-label>
+                    <input matInput required formControlName="description" [(ngModel)]="category.Description" />
+                </mat-form-field>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12">
+                <mat-form-field appearance="outline">
+                    <mat-label>Aggio</mat-label>
+                    <input matInput formControlName="fee" [(ngModel)]="category.Fee" />
+                </mat-form-field>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-12">
+                <mat-form-field appearance="outline">
+                    <mat-label>Reparto</mat-label>
+                    <input matInput formControlName="department" [(ngModel)]="category.Department" />
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-12">
+                <mat-slide-toggle [(ngModel)]="category.IsFiscal" formControlName="isFiscal"  
+                >
+                    Reparto Fiscale
+                </mat-slide-toggle>
+
+            </div>
+
+             <div class="col-lg-3 col-md-3 col-sm-12">
+                <mat-slide-toggle [(ngModel)]="category.Negative" formControlName="negative"  
+                >
+                    Gruppo a Segno Negativo
+                </mat-slide-toggle>
+
+            </div>
+
+              <div class="col-lg-3 col-md-3 col-sm-12">
+                <mat-slide-toggle [(ngModel)]="category.FeeOnPurchasePrice" formControlName="feeOnPurchasePrice"  
+                >
+                    Calcola Aggio sul P.zzo di Acquisto
+                </mat-slide-toggle>
+
+            </div>
+        </div>
+    </div>
+</form>

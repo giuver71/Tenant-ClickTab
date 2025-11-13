@@ -1,0 +1,32 @@
+.fiscal-toggle {
+  /* stato base */
+  --mdc-switch-unselected-track-color: #f44336 !important;
+  --mdc-switch-unselected-handle-color: #f44336 !important;
+  --mdc-switch-selected-track-color: #4caf50 !important;
+  --mdc-switch-selected-handle-color: #4caf50 !important;
+
+  /* hover (verde/rosso) */
+  --mdc-switch-selected-hover-track-color: #4caf50 !important;
+  --mdc-switch-selected-hover-handle-color: #4caf50 !important;
+  --mdc-switch-unselected-hover-track-color: #f44336 !important;
+  --mdc-switch-unselected-hover-handle-color: #f44336 !important;
+
+  /* focus */
+  --mdc-switch-selected-focus-track-color: #4caf50 !important;
+  --mdc-switch-selected-focus-handle-color: #4caf50 !important;
+  --mdc-switch-unselected-focus-track-color: #f44336 !important;
+  --mdc-switch-unselected-focus-handle-color: #f44336 !important;
+
+  /* pressed */
+  --mdc-switch-selected-pressed-track-color: #4caf50 !important;
+  --mdc-switch-selected-pressed-handle-color: #4caf50 !important;
+  --mdc-switch-unselected-pressed-track-color: #f44336 !important;
+  --mdc-switch-unselected-pressed-handle-color: #f44336 !important;
+
+  transition: all 0.3s ease;
+}
+
+.fiscal-toggle .mdc-switch__track {
+  background-color: var(--mdc-switch-unselected-track-color) !important;
+  transition: background-color 0.3s ease;
+}

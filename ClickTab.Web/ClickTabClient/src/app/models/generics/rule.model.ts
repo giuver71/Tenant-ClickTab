@@ -1,7 +1,7 @@
 export class RuleDTO {
-  public ID: number;
-  public Description: string;
-  public UrlRoutes: string;
+  public ID: number=0;
+  public Description: string='';
+  public UrlRoutes: string='';
 }
 ​
 export enum RulesDescriptionEnum {

@@ -1,1 +1,10 @@
-<p>list-categories works!</p>
+<app-page-header
+  [title]="'Gruppi'"
+  [buttons]="buttons"
+  backRoute="/dashboard">
+</app-page-header>
+
+<eqp-table 
+    [columns]="columns" 
+    [data]="categories">
+</eqp-table>

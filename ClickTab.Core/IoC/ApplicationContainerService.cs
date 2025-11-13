@@ -113,6 +113,11 @@ namespace ClickTab.Core.IoC
             builder.RegisterType<UserRoleService>().AsSelf();
             #endregion
 
+
+            #region TABLES
+            builder.RegisterType<CategoryService>().AsSelf();
+            #endregion
+
             #region Servizi per entità NotificationCenter
             builder.RegisterType<NotificationService>().AsSelf();
             builder.RegisterType<NotificationDetailService>().AsSelf();

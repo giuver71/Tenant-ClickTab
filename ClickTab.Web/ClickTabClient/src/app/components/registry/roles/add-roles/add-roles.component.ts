@@ -3,15 +3,15 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CellAlignmentEnum, ConfigColumn, TypeColumn } from '@eqproject/eqp-common';
-import { HeaderButton } from 'src/app/elements/page-header/page-header.component';
-import { RoleDTO } from 'src/app/models/generics/role.model';
-import { RoleRuleDTO } from 'src/app/models/generics/rolerule.model';
-import { RuleDTO } from 'src/app/models/generics/rule.model';
-import { DialogService } from 'src/app/services/dialog.service';
-import { RoleService } from 'src/app/services/generics/role.services';
-import { RuleService } from 'src/app/services/generics/rule.services';
-import { MessageBarService } from 'src/app/services/messagebar.service';
-
+import { HeaderButton } from '../../../../elements/page-header/page-header.component';
+import { RoleDTO } from '../../../../models/generics/role.model';
+import { RoleRuleDTO } from '../../../../models/generics/rolerule.model';
+import { RuleDTO } from '../../../../models/generics/rule.model';
+import { DialogService } from '../../../../services/dialog.service';
+import { RoleService } from '../../../../services/generics/role.services';
+import { MessageBarService } from '../../../../services/messagebar.service';
+import {RuleService} from '../../../../services/generics/rule.services';
+ 
 @Component({
   selector: 'app-add-roles',
   templateUrl: './add-roles.component.html',
@@ -122,14 +122,14 @@ export class AddRolesComponent implements OnInit{
     }
 
   save(){
-     this.role.RoleRules=this.role.RoleRules.filter(p=>p.IsChecked);
-      this.roleService.saveRole(this.role).then((res) => {
-     this.messageBar.show({
-        message: 'Ruolo salvato correttamente!',
-        type: 'success',
-        duration: 4000,
-        actionLabel: 'Chiudi',
-        onClose: () => this.router.navigate(['/registry/list-roles'])
+    this.role.RoleRules=this.role.RoleRules.filter(p=>p.IsChecked);
+    this.roleService.saveRole(this.role).then((res) => {
+        this.messageBar.show({
+            message: 'Ruolo salvato correttamente!',
+            type: 'success',
+            duration: 4000,
+            actionLabel: 'Chiudi',
+            onClose: () => this.router.navigate(['/registry/list-roles'])
       });
     }).catch((err) => {
       console.error("addRole.Save", err);

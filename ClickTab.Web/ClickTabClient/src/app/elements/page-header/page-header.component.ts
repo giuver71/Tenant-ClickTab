@@ -2,13 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
-export class HeaderButton {
-  icon!: string;
-  label!: string;
-  isDisabled?:boolean=false;
-  action!: () => void;
-  color?: string; // es. 'btn-primary', 'btn-secondary', 'btn-outline-dark'
-}
+
 
 @Component({
   selector: 'app-page-header',
@@ -38,4 +32,12 @@ export class PageHeaderComponent {
   handleAction(action: () => void): void {
     if (action) action();
   }
+}
+
+export class HeaderButton {
+  icon!: string;
+  label!: string;
+  isDisabled?:boolean=false;
+  action!: () => void;
+  color?: string; // es. 'btn-primary', 'btn-secondary', 'btn-outline-dark'
 }
