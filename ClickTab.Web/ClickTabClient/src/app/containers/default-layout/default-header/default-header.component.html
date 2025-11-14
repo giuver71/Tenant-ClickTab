@@ -23,7 +23,7 @@
     <div class="ms-3">
       <ng-container *ngTemplateOutlet="userDropdown"></ng-container>
     </div>
-  </ng-container>
+  </ng-container> 
 </eqp-container>
 
 
@@ -32,13 +32,11 @@
   <div class="d-flex align-items-center gap-2">
     <div class="d-flex flex-column role-wrapper">
       <label class="role-label">Ruolo</label>
-     <mat-select   #roleSelect="matSelect"
-        #roleTrigger
-        [disableOptionCentering]="true"
+     <mat-select   
         panelClass="user-role-panel"
         [(value)]="selectedRole"
-        (openedChange)="onRoleOpened($event)"
         (selectionChange)="changeRole($event.value)"
+         [compareWith]="compareRoles"
           >
       <mat-option *ngFor="let role of manageableRoles" [value]="role">
         {{ role.Description }}

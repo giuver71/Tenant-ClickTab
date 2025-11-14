@@ -49,49 +49,14 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit {
     super();
   }
 
-//   ngAfterViewInit() {
-//   this.roleSelect.openedChange.subscribe(open => {
-//     if (open) {
-//       const trigger = this.roleSelect._elementRef.nativeElement;
-//       const panel = document.querySelector('.user-role-panel') as HTMLElement;
 
-//       if (panel && trigger) {
-//         const width = trigger.getBoundingClientRect().width + 'px';
-//         debugger;
-//         panel.style.width = width;
-//         panel.style.minWidth = width;
-//         panel.style.maxWidth = width;
-//       }
-//     }
-//   });
-// }
-
-    onRoleOpened(open: boolean) {
-    if (!open) return;
-
-    // attendi microtask per essere sicuro che il panel sia stato inserito nel DOM
-    setTimeout(() => {
-      try {
-        const panel = document.querySelector('.user-role-panel') as HTMLElement | null;
-        const triggerEl = this.roleTrigger?.nativeElement as HTMLElement | undefined;
-
-        if (panel && triggerEl) {
-          const width = Math.max(triggerEl.getBoundingClientRect().width, 220); // larghezza minima 220
-          panel.style.width = width + 'px';
-          panel.style.minWidth = width + 'px';
-          panel.style.maxWidth = width + 'px';
-        }
-      } catch (e) {
-        console.warn('Impossibile dimensionare il pannello user-role-panel', e);
-      }
-    }, 0);
-  }
   ngOnInit(): void {
     this.loaded = false;
     if (this.currentUser == null) {
       this.currentUser = this.authService.getCurrentUser();
     }
     this.selectedRoleId = this.authService.getCurrentRole().ID;
+    this.selectedRole=this.authService.getCurrentRole();
     setTimeout(() => {
       this.loaded = true;
     }, 50);
@@ -120,9 +85,13 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit {
     this.authService.logout();
   }
 
-  changeRole(id: number) {
-    this.selectedRoleId = id;
-    this.selectedRole = this.manageableRoles.find(r => r.ID === id);
+  changeRole(role: RoleDTO) {
+    debugger;
+    this.selectedRole = role;
+    this.selectedRoleId = role.ID;
     this.selectedRoleEvent.emit(this.selectedRole);
+  }
+  compareRoles(r1: RoleDTO, r2: RoleDTO): boolean {
+    return r1 && r2 ? r1.ID === r2.ID : r1 === r2;
   }
 }
