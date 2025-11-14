@@ -7,6 +7,7 @@ import { UserDTO, UserStatusEnum } from '../models/generics/user.model';
 import { environment } from './../../environments/environment';
 import { RoleDTO } from '../models/generics/role.model';
 import { LS_CURRENT_ROLE_ID } from '../helpers/global-consts';
+import { RoleRuleDTO } from '../models/generics/rolerule.model';
 
 const helper = new JwtHelperService();
 const CURRENT_TOKEN_NAME: string = "eqpToken";
@@ -137,5 +138,35 @@ export class AuthService {
 
    decodeToken(item){
     return helper.decodeToken(item);
+  }
+
+  getSpecificRule(specificRule:string, roleRules: Array<RoleRuleDTO>|null=null) {
+
+    var currentRole;
+    if (roleRules == null) {
+      if (this.getCurrentRole() == null) {
+
+        currentRole = this.getCurrentRole();
+        if (currentRole != null){
+          roleRules = currentRole.RoleRules;
+        } else {
+          roleRules = null;
+        }
+
+      } else {
+
+        currentRole = this.getCurrentRole();
+        if (currentRole != null){
+          roleRules = currentRole.RoleRules;
+        } else {
+          roleRules = null;
+        }
+
+      }
+    }
+    if (roleRules == null) { return null; }
+    var therule = roleRules.filter(x => x.RuleDescription == specificRule);
+    if (therule.length > 0) { return therule[0]; }
+    return null;
   }
 }

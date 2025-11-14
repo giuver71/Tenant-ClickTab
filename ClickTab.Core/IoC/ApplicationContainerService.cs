@@ -117,6 +117,7 @@ namespace ClickTab.Core.IoC
             #region TABLES
             builder.RegisterType<CategoryService>().AsSelf();
             builder.RegisterType<SubCategoryService>().AsSelf();
+            builder.RegisterType<VatService>().AsSelf();
             #endregion
 
             #region Servizi per entità NotificationCenter

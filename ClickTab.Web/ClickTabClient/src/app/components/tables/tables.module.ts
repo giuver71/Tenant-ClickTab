@@ -8,6 +8,8 @@ import { ListCategoriesComponent } from './list-categories/list-categories.compo
 import { AddCategoriesComponent } from './add-categories/add-categories.component';
 import { ListSubcategoriesComponent } from './list-subcategories/list-subcategories.component';
 import { AddSubcategoriesComponent } from './add-subcategories/add-subcategories.component';
+import { AddVatsComponent } from './vat/add-vats/add-vats.component';
+import { ListVatsComponent } from './vat/list-vats/list-vats.component';
  
  
 @NgModule({
@@ -22,7 +24,9 @@ import { AddSubcategoriesComponent } from './add-subcategories/add-subcategories
     ListCategoriesComponent,
     AddCategoriesComponent,
     ListSubcategoriesComponent,
-    AddSubcategoriesComponent
+    AddSubcategoriesComponent,
+    ListVatsComponent,
+    AddVatsComponent,
   ],
   exports: [
   ],
