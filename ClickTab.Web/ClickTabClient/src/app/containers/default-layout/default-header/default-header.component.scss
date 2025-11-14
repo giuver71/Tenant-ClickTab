@@ -92,24 +92,23 @@
   z-index: 3500 !important;
 }
 
-:host ::ng-deep .user-role-panel .mat-mdc-select-panel {
-  min-width: 250px !important;
-  max-width: 320px !important;
-  width: auto !important;
-  padding: 0.25rem 0 !important;
-}
+// :host ::ng-deep .user-role-panel .mat-mdc-select-panel {
+//   min-width: 250px !important;
+//   max-width: 320px !important;
+//   width: auto !important;
+//   padding: 0.25rem 0 !important;
+// }
 
 /* === OPZIONI NELLA SELECT === */
-:host ::ng-deep .user-role-panel .mat-mdc-option {
-  font-size: 0.95rem !important;
-  padding: 0.5rem 1rem !important;
-  white-space: nowrap;
-}
+// :host ::ng-deep .user-role-panel .mat-mdc-option {
+//   font-size: 0.95rem !important;
+//   padding: 0.5rem 1rem !important;
+//   white-space: nowrap;
+// }
 
 /* === AVATAR E LABEL RUOLO === */
 .role-wrapper {
-  display: flex;
-  flex-direction: column;
+  width:150px !important;
 }
 
 .role-label {
@@ -130,21 +129,56 @@
 }
 
 
+/* Mantiene la larghezza del pannello uguale al trigger */
 ::ng-deep .user-role-panel {
-  z-index: 2000 !important; /* sopra il page-header e altri container */
-  min-width: 220px !important;
-  width: auto !important;
-  background: #fff;
-  border-radius: 6px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  min-width: var(--mat-select-trigger-width) !important;
+  width: var(--mat-select-trigger-width) !important;
+  max-width: var(--mat-select-trigger-width) !important;
+
+  z-index: 2000 !important; /* assicura che stia sopra header */
 }
 
-::ng-deep .user-role-panel .mat-mdc-option {
-  white-space: nowrap;
-  padding: 0.5rem 1rem;
-  font-size: 0.9rem;
-}
 
-::ng-deep .user-role-panel .mat-mdc-option:hover {
-  background-color: #f3f3f3;
-}
+// /* panel generale: poco shadow, arrotondato */
+// :host ::ng-deep .user-role-panel {
+//   z-index: 3000 !important;
+//   box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+//   border-radius: 6px;
+//   overflow: visible;
+// }
+
+// /* migliori opzioni */
+// :host ::ng-deep .user-role-panel .mat-mdc-option,
+// :host ::ng-deep .user-role-panel .mat-option {
+//   padding: 10px 16px;
+//   white-space: nowrap;
+//   font-size: 0.95rem;
+// }
+
+
+
+// ::ng-deep .user-role-panel {
+//   max-height: 300px;
+//   overflow-y: auto;
+//   border-radius: 6px;
+//   box-shadow: 0px 3px 12px rgba(0,0,0,0.18);
+// }
+
+// // /* Migliora leggibilità e spacing */
+// ::ng-deep .user-role-panel .mat-mdc-option {
+//   padding: 10px 18px;
+//   white-space: nowrap;
+//   font-size: 14px;
+// }
+
+// // /* Quando un’opzione è selezionata */
+// ::ng-deep .user-role-panel .mat-mdc-option.mdc-list-item--selected {
+//   font-weight: 600;
+// }
+
+
+// ::ng-deep .user-role-panel .mat-mdc-option:hover {
+//   background-color: #f3f3f3;
+// }
+
+

@@ -3,13 +3,14 @@ import { HeaderComponent } from '@eqproject/eqp-ui';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationDetailDTO } from './../../../models/notification-center/notificationDetail.model';
 import { UserDTO } from './../../../models/generics/user.model';
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { RoleService } from '../../../services/generics/role.services';
 import { RoleDTO } from '../../../models/generics/role.model';
 import { DialogService } from '../../../services/dialog.service';
 import { UserService } from '../../../services/user.service';
 import { RoleRuleDTO } from '../../../models/generics/rolerule.model';
 import { AuthService } from '../../../services/auth.service';
+import { MatSelect } from '@angular/material/select';
 
 @Component({
   selector: 'app-default-header',
@@ -33,6 +34,10 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit {
   selectedRoleId!: number;
 
   collapsed: boolean = true; 
+
+@ViewChild('roleSelect') roleSelect?: MatSelect;
+@ViewChild('roleTrigger', { read: ElementRef }) roleTrigger?: ElementRef;
+
   constructor(
     private classToggler: ClassToggleService,
     private activatedRoute: ActivatedRoute,
@@ -44,6 +49,43 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit {
     super();
   }
 
+//   ngAfterViewInit() {
+//   this.roleSelect.openedChange.subscribe(open => {
+//     if (open) {
+//       const trigger = this.roleSelect._elementRef.nativeElement;
+//       const panel = document.querySelector('.user-role-panel') as HTMLElement;
+
+//       if (panel && trigger) {
+//         const width = trigger.getBoundingClientRect().width + 'px';
+//         debugger;
+//         panel.style.width = width;
+//         panel.style.minWidth = width;
+//         panel.style.maxWidth = width;
+//       }
+//     }
+//   });
+// }
+
+    onRoleOpened(open: boolean) {
+    if (!open) return;
+
+    // attendi microtask per essere sicuro che il panel sia stato inserito nel DOM
+    setTimeout(() => {
+      try {
+        const panel = document.querySelector('.user-role-panel') as HTMLElement | null;
+        const triggerEl = this.roleTrigger?.nativeElement as HTMLElement | undefined;
+
+        if (panel && triggerEl) {
+          const width = Math.max(triggerEl.getBoundingClientRect().width, 220); // larghezza minima 220
+          panel.style.width = width + 'px';
+          panel.style.minWidth = width + 'px';
+          panel.style.maxWidth = width + 'px';
+        }
+      } catch (e) {
+        console.warn('Impossibile dimensionare il pannello user-role-panel', e);
+      }
+    }, 0);
+  }
   ngOnInit(): void {
     this.loaded = false;
     if (this.currentUser == null) {

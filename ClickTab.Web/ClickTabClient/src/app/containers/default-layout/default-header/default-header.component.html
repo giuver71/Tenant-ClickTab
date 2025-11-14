@@ -32,10 +32,12 @@
   <div class="d-flex align-items-center gap-2">
     <div class="d-flex flex-column role-wrapper">
       <label class="role-label">Ruolo</label>
-     <mat-select
+     <mat-select   #roleSelect="matSelect"
+        #roleTrigger
         [disableOptionCentering]="true"
-        [panelClass]="'user-role-panel'"
+        panelClass="user-role-panel"
         [(value)]="selectedRole"
+        (openedChange)="onRoleOpened($event)"
         (selectionChange)="changeRole($event.value)"
           >
       <mat-option *ngFor="let role of manageableRoles" [value]="role">
