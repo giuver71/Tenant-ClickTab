@@ -78,6 +78,7 @@ namespace ClickTab.Core.DAL.Context
         #region TABLES
         public DbSet<Category> Categories { get; set; }
         public DbSet<SubCategory> SubCategories { get; set; }
+        public DbSet<Vat> Vats { get; set; }
         #endregion
 
         #region NotificationCenter
@@ -150,6 +151,7 @@ namespace ClickTab.Core.DAL.Context
             #region TABLES
             modelBuilder.ApplyConfiguration(new CategoryConfigurations());
             modelBuilder.ApplyConfiguration(new SubCategoryConfigurations());
+            modelBuilder.ApplyConfiguration(new VatConfigurations());
             #endregion
 
             #region FluentAPI per entità NotificationCenter

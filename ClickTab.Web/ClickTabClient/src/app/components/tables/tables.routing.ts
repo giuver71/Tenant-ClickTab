@@ -5,6 +5,8 @@ import { ListCategoriesComponent } from "./list-categories/list-categories.compo
 import { AddCategoriesComponent } from "./add-categories/add-categories.component"
 import { ListSubcategoriesComponent } from './list-subcategories/list-subcategories.component';
 import { AddSubcategoriesComponent } from './add-subcategories/add-subcategories.component';
+import { ListVatsComponent } from './vat/list-vats/list-vats.component';
+import { AddVatsComponent } from './vat/add-vats/add-vats.component';
 const routes: Routes = [
   {
     path: 'list-categories',
@@ -64,7 +66,35 @@ const routes: Routes = [
       state: RouterStateSnapshot
     },
   },
-
+  {
+    path: 'list-vats',
+    component: ListVatsComponent,
+    canActivate: [PermissionGuard],
+    data: {
+      breadcrumbs: 'BREADCRUMB.ROLES',
+      state: RouterStateSnapshot
+    },
+  }, 
+  {
+    path: 'add-vats',
+    component: AddVatsComponent,
+    canActivate: [PermissionGuard],
+    canDeactivate: [],
+    data: {
+      breadcrumbs: 'BREADCRUMB.ROLES',
+      state: RouterStateSnapshot
+    },
+  },
+  {
+    path: 'add-vats/:id',
+    component: AddVatsComponent,
+    canActivate: [PermissionGuard],
+    canDeactivate: [],
+    data: {
+      breadcrumbs: 'BREADCRUMB.ROLES',
+      state: RouterStateSnapshot
+    },
+  },
 ];
 
 @NgModule({

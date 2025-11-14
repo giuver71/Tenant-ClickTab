@@ -57,7 +57,10 @@ namespace ClickTab.DataTransfer
             }
         }
 
-
+        /// <summary>
+        /// Inizializza la connessione e carica i Sotto gruppi
+        /// </summary>
+        /// 
         public static List<SubCategory> ToMappingSottoGruppi(string keyConnection)
         {
             if (!Connections.ContainsKey(keyConnection))
@@ -76,14 +79,40 @@ namespace ClickTab.DataTransfer
                 var mapGruppi = new Dictionary<string, string>(){
                 { "CodSot", "Code" },
                 { "DesSot", "Description" },
-            };
+                };
 
                 return DataMapper.MapTableToList<SubCategory>(dt, mapGruppi);
             }
         }
 
+        /// <summary>
+        /// Inizializza la connessione e carica i gruppi
+        /// </summary>
+        /// 
+        public static List<Vat> ToMappingTabIva(string keyConnection)
+        {
+            if (!Connections.ContainsKey(keyConnection))
+                throw new ArgumentException($"Connection key '{keyConnection}' not found.");
 
+            string cnnStr = Connections[keyConnection];
 
+            using (SqlConnection cnn = new SqlConnection(cnnStr))
+            {
+                cnn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM TabIva", cnn);
+                DataTable dt = new DataTable();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+
+                var maps = new Dictionary<string, string>(){
+                { "CodIva", "Code" },
+                { "DesIva", "Description" },
+                { "Aliquota", "Percentage" },
+                };
+
+                return DataMapper.MapTableToList<Vat>(dt, maps);
+            }
+        }
         public static class DataMapper
         {
             /// <summary>
