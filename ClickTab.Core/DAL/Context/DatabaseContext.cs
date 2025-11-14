@@ -13,6 +13,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using ClickTab.Core.DAL.Context.EntityConfigurations.Tables;
 using ClickTab.Core.DAL.Models.Tables;
+using ClickTab.Core.DAL.Context.EntityConfigurations.Registry;
+using ClickTab.Core.DAL.Models.Registry;
 
 namespace ClickTab.Core.DAL.Context
 {
@@ -79,6 +81,10 @@ namespace ClickTab.Core.DAL.Context
         public DbSet<Category> Categories { get; set; }
         public DbSet<SubCategory> SubCategories { get; set; }
         public DbSet<Vat> Vats { get; set; }
+        #endregion
+
+        #region REGISTRY
+        public DbSet<Distributor> Distributors { get; set; }
         #endregion
 
         #region NotificationCenter
@@ -152,6 +158,10 @@ namespace ClickTab.Core.DAL.Context
             modelBuilder.ApplyConfiguration(new CategoryConfigurations());
             modelBuilder.ApplyConfiguration(new SubCategoryConfigurations());
             modelBuilder.ApplyConfiguration(new VatConfigurations());
+            #endregion
+
+            #region REGISTRY
+            modelBuilder.ApplyConfiguration(new DistributorConfigurations());
             #endregion
 
             #region FluentAPI per entità NotificationCenter
