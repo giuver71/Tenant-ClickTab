@@ -34,9 +34,8 @@ export class DefaultHeaderComponent extends HeaderComponent implements OnInit {
   selectedRoleId!: number;
 
   collapsed: boolean = true; 
-
-@ViewChild('roleSelect') roleSelect?: MatSelect;
-@ViewChild('roleTrigger', { read: ElementRef }) roleTrigger?: ElementRef;
+  @ViewChild('roleSelect') roleSelect?: MatSelect;
+  @ViewChild('roleTrigger', { read: ElementRef }) roleTrigger?: ElementRef;
 
   constructor(
     private classToggler: ClassToggleService,

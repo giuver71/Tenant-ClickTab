@@ -325,7 +325,7 @@ export class DefaultLayoutComponent {
   //#endregion
 
   navigate(item: any): void {
-    debugger;
+    if(item.children?.length>0) return;
     this.activeItem = item;
     if (item.url) {
       this.router.navigate([item.url]);

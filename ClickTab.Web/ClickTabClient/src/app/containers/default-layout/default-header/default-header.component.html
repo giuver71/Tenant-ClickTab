@@ -2,6 +2,7 @@
   class="header-container no-padding"
   [ngClass]="{ 'collapsed': collapsed, 'expanded': !collapsed }">
 
+  
   <!-- Bottone per collassare/espandere -->
   <button class="header-collapse-btn" (click)="toggleHeader()">
     <mat-icon>{{ collapsed ? 'expand_more' : 'expand_less' }}</mat-icon>
@@ -9,6 +10,7 @@
 
   <!-- Stato COLLASSATO: solo icona utente -->
   <div *ngIf="collapsed" class="collapsed-header-content">
+    <span class="user-info">Utente connesso:{{currentUser.Name}} {{currentUser.Surname}} </span> 
     <mat-icon class="user-icon">account_circle</mat-icon>
   </div>
 
