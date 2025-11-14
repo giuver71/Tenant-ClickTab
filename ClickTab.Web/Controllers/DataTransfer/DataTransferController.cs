@@ -24,10 +24,12 @@ namespace ClickTab.Web.Controllers.Generics
     {
         private CategoryService _categoryService;
         private SubCategoryService _subCategoryService;
-        public DataTransferController(DatabaseContext ctx, CategoryService categoryService, SubCategoryService subCategoryService)
+        private VatService _vatService;
+        public DataTransferController(DatabaseContext ctx, CategoryService categoryService, SubCategoryService subCategoryService,VatService vatService)
         {
             _categoryService = categoryService;
             _subCategoryService = subCategoryService;
+            _vatService = vatService;
         }
 
         /// <summary>
@@ -69,6 +71,21 @@ namespace ClickTab.Web.Controllers.Generics
             _subCategoryService.Save(lista);
             return Ok(1);
         }
+
+        /// <summary>
+        /// Fuznione che restituisce la lista di tutti i Ruoli
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet, Route("/api/[controller]/TabIva/{keyConnetcion}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> TabIva(string keyConnetcion)
+        {
+            var lista = ImportConfig.ToMappingTabIva(keyConnetcion);
+
+            _vatService.Save(lista);
+            return Ok(1);
+        }
+
 
     }
 }
