@@ -15,6 +15,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ClickTab.Web.Mappings.Profiles.Generics;
 using ClickTab.Web.Mappings.Profiles.Tables;
+using ClickTab.Web.Mappings.Profiles.Registry;
 
 namespace ClickTab.Web.Mappings
 {
@@ -121,6 +122,10 @@ namespace ClickTab.Web.Mappings
                 cfg.AddProfile<CategoryProfile>();
                 cfg.AddProfile<SubCategoryProfile>();
                 cfg.AddProfile<VatProfile>();
+                #endregion
+
+                #region REGISTRY
+                cfg.AddProfile<DistributorProfile>();
                 #endregion
 
 

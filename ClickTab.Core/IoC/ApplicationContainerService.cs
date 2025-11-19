@@ -2,6 +2,7 @@ using Autofac;
 using ClickTab.Core.DAL.Context;
 using ClickTab.Core.EntityService.Generics;
 using ClickTab.Core.EntityService.NotificationCenter;
+using ClickTab.Core.EntityService.Registry;
 using ClickTab.Core.HelperService;
 using ClickTab.Core.HelperService.NotificationCenter;
 using ClickTab.Core.Services;
@@ -118,6 +119,10 @@ namespace ClickTab.Core.IoC
             builder.RegisterType<CategoryService>().AsSelf();
             builder.RegisterType<SubCategoryService>().AsSelf();
             builder.RegisterType<VatService>().AsSelf();
+            #endregion
+
+            #region REGISTRY
+            builder.RegisterType<DistributorService>().AsSelf();
             #endregion
 
             #region Servizi per entità NotificationCenter
